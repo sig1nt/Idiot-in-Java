@@ -3,7 +3,7 @@ Idiot-in-Java
 
 Implementation of the "idiot" card game in java for CSC 102
 
-Max Zinkus, Nick Gonella, and Kent Ksomething
+Max Zinkus, Nick Gonella, and Kent Kawahara
 
 Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 
