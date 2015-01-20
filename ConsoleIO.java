@@ -20,7 +20,7 @@ import java.math.*;
 public class ConsoleIO{
 	private String message = "";
 	private int typespeed = 0, length = 0, lineWait = 0;
-  Scanner s = new Scanner(System.in);
+  	Scanner s = new Scanner(System.in);
 	
 	public ConsoleIO(){
 		this("Input does not work!", 125, 80, 2000);
@@ -73,36 +73,36 @@ public class ConsoleIO{
 				return s.nextBigInteger();
 			}else if(o instanceof Boolean && s.hasNextBoolean()){
 				boolean b = (boolean)s.nextBoolean();
-        s.nextLine();
-        return b;
+        			s.nextLine();
+        			return b;
 			}else if(o instanceof Byte && s.hasNextByte()){
-        byte b = (byte)s.nextByte();
-        s.nextLine();
-        return b;
+        			byte b = (byte)s.nextByte();
+        			s.nextLine();
+        			return b;
 			}else if(o instanceof Character){
 				return s.nextLine().charAt(0);
 			}else if(o instanceof Double && s.hasNextDouble()){
-        double d = (double)s.nextDouble();
-        s.nextLine();
-        return d;
+        			double d = (double)s.nextDouble();
+        			s.nextLine();
+        			return d;
 			}else if(o instanceof Float && s.hasNextFloat()){
 				float f = (float)s.nextFloat();
-        s.nextLine();
-        return f;
+        			s.nextLine();
+        			return f;
 			}else if(o instanceof Integer && s.hasNextInt()){
 				int i = (int)s.nextInt();
-        s.nextLine();
-        return i;
+        			s.nextLine();
+        			return i;
 			}else if(o instanceof String){
 				return s.nextLine();
 			}else if(o instanceof Long && s.hasNextLong()){
-        long l = s.nextLong();
-        s.nextLine();
-        return l;
+        			long l = s.nextLong();
+        			s.nextLine();
+        			return l;
 			}else if(o instanceof Short && s.hasNextShort()){
-        short sh = s.nextShort();
-        s.nextLine();
-        return sh;
+        			short sh = s.nextShort();
+        			s.nextLine();
+        			return sh;
 			}else{
 				typeln(s.nextLine() + " is not an instance of " + o.getClass().getSimpleName(), ask);
 			}
