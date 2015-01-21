@@ -33,16 +33,16 @@ public class Player{
         }
     }
     
-    public void move(){
+    public void move(Pile currP){
         String s = "";
         for(Card c: hand){
             s += c.getShortName() + " ";
         }
         cio.typeln(s);
         String c = (String)cio.ask("Which Card would you like to play", "");
-        if(validMove(c)){
-            cio.type
-        }
+        if(!Pile.validMove(c)){
+            cio.typeln("that move is illegal");
+        }else if(
     }
     
     public String toString(){

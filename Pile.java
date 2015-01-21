@@ -1,8 +1,8 @@
 //creates a Pile class to us with played cards
 
 public class Pile{
-    Card [] p;
-    int index;
+    private Card [] p;
+    private int index;
     
     public Pile(){
         p = new Card[52];
@@ -35,5 +35,17 @@ public class Pile{
         Card[] temp = p.clone();
         clear();
         return temp;
+    }
+    
+    public boolean validMove(Card c){
+        if(c.value == 2 || c.value == 10){
+            return true;
+        }else if(p[index].value == 7 && c.value <= 7){
+            return true;
+        }else if(c.value >= p[index].value){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

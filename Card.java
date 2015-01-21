@@ -1,13 +1,9 @@
-public class Card implements Cloneable{
+public class Card{
     protected String suit, faces[] = {"Jack", "Queen", "King", "Ace"};
     protected int value;
   
     public Card(){
         suit = "";
-    }
-  
-    public Card(String s){
-        suit = s;
     }
     
     public Card(String s, int v){
