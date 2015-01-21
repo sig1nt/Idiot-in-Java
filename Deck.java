@@ -7,10 +7,11 @@ public class Deck{
   public Deck(){
     oDeck = new Card[52];
     int cardsInDeck = 0;
-    String types[] = {"C", "D", "H", "S"}, vals[] = {"2", "3", "4", "5", "6", "7", "8", "9", "0", "J", "Q", "K", "A"};
-    for(String val: vals){
+    String types[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    int vals[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+    for(int val: vals){
       for(String type: types){
-        oDeck[cardsInDeck] = new Card(val + type);
+        oDeck[cardsInDeck] = new Card(type, val);
         cardsInDeck++;
       }
     }

@@ -3,31 +3,36 @@ public class Card implements Cloneable{
     protected int value;
   
     public Card(){
-        value = "";
+        suit = "";
     }
   
     public Card(String s){
-        value = s;
+        suit = s;
+    }
+    
+    public Card(String s, int v){
+        suit = s;
+        value = v;
     }
   
     public void setValue(String s){
-        value = s;
+        suit = s;
     }
   
     public Card clone(){
-        return new Card(value);
+        return new Card(suit, value);
     }
   
     public String toString(){
         String s = "";
         if(value > 10){
-            for(itn i = 0; i < 5; i++){
+            for(int i = 0; i < 5; i++){
                 if(i == value - 11){
                     s = faces[i];
                 }
             }
         }else{
-            s += value
+            s += value;
         }
         return s + " of " + suit;
     }
