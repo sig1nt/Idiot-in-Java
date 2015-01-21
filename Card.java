@@ -18,6 +18,18 @@ public class Card implements Cloneable{
     public void setValue(String s){
         suit = s;
     }
+    
+    public String getShortName(){
+        string s = "";
+        if(value < 10){
+            s += "0" + value;
+        }else if(value == 10){
+            s += value;
+        }else{
+            s += faces[value - 11];
+        }
+        s += suit.substring(0, 1);
+    }
   
     public Card clone(){
         return new Card(suit, value);

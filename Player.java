@@ -12,6 +12,7 @@ public class Player{
     private ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
+    private ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
     
     public Player(boolean isHuman, String n, Deck d){
         human = isHuman;
@@ -29,6 +30,18 @@ public class Player{
             facedown.add(d.draw());
             faceup.add(d.draw());
             hand.add(d.draw());
+        }
+    }
+    
+    public void move(){
+        String s = "";
+        for(Card c: hand){
+            s += c.getShortName() + " ";
+        }
+        cio.typeln(s);
+        String c = (String)cio.ask("Which Card would you like to play", "");
+        if(validMove(c)){
+            cio.type
         }
     }
     
