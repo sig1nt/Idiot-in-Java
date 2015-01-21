@@ -20,7 +20,7 @@ public class Card implements Cloneable{
     }
     
     public String getShortName(){
-        string s = "";
+        String s = "";
         if(value < 10){
             s += "0" + value;
         }else if(value == 10){
@@ -29,6 +29,7 @@ public class Card implements Cloneable{
             s += faces[value - 11];
         }
         s += suit.substring(0, 1);
+        return s;
     }
   
     public Card clone(){
