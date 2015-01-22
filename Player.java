@@ -1,7 +1,6 @@
 //Implementation of the Player Class
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Player{
     //static vars
@@ -31,20 +30,25 @@ public class Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
+        sortHand();
     }
     
     public int move(Pile currP, Deck d){
-        String s = "the cards in your hand are:\n";
+        String s = "Cards in the Pile are:\n";
+        s += currP.checkTop().getShortName() + "\n";
+        s += "the cards in your hand are:\n";
         for(int i = 0; i < hand.size(); i++){
-            s += (i + 1) + ") " + c.getShortName() + "\n";
+            s += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
         }
         cio.typeln(s);
         boolean chosen = false;
-        if(canMove(currP){
+        if(canMove(currP)){
+            int numPlay = 1, index;
+            Card c;
             do{
-                int index = (int)cio.ask("enter the index of the card you wish to play", 0);
-                Card c = hand.get(index - 1);
-                if(!Pile.validMove(c)){
+                index = (int)cio.in("enter the index of the card you wish to play", 0);
+                c = hand.get(index - 1);
+                if(!currP.validMove(c)){
                     cio.typeln("that move is illegal");
                 }else{
                     int sameVals = 0;
@@ -53,28 +57,34 @@ public class Player{
                             sameVals++;
                         }
                     }
-                    int numPlay;
                     if(sameVals > 1){
                         do{
-                            numPlay = (int)cio.out("How many Do you want to play? (Up to" + numSame + ")",0);
+                            numPlay = (int)cio.in("How many Do you want to play? (Up to" + sameVals + ")", 0);
                         }while(numPlay < 1 || numPlay > sameVals);
                     }
+                    chosen = true;
                 }
             }while(!chosen);
-            for(int i = index - 1; i < index + numPlay - 1; i++){
-                currP.add(hand.get(i));
-                hand.delete(i);
+            for(int i = 0; i < numPlay; i++){
+                currP.add(hand.get(index - 1));
             }
-            while(hand.size() > 3){
+            for(int i = 0; i < numPlay; i++){
+                hand.remove(index - 1);
+            }
+            while(hand.size() < 3){
                 hand.add(d.draw());
             }
+            sortHand();
+            cio.type("Played");
             if(c.value != 10 && !currP.fourKind()){
                 return 0;
-            }else
+            }else{
                 return 1;
             }
         }else{
-            hand.add(currP.pickup());
+            hand.addAll(currP.pickup());
+            cio.type("Picked up pile");
+            sortHand();
             return 0;
         }
     }
@@ -88,6 +98,34 @@ public class Player{
         return false;
     }
     
+    public void sortHand(){
+        Card[] tempHand = hand.toArray(new Card[1]);
+        hand.clear();
+        int highestFilled = 0;
+        for(int i = 0; i < tempHand.length; i++){
+            if(tempHand[i] == null){
+                break;
+            }
+            highestFilled = i;
+        }
+        for(int i = 0; i < highestFilled + 1; i++){
+            Card currSmallest = tempHand[i];
+            int index = i;
+            for(int j = i + 1; j < highestFilled + 1; j++){
+                if(tempHand[j].value < currSmallest.value){
+                    currSmallest = tempHand[j];
+                    index = j;
+                }
+            }
+            if(i != index){
+                Card temp = tempHand[i];
+                tempHand[i] = currSmallest;
+                tempHand[index] = temp;
+            }
+            hand.add(tempHand[i]);
+        }
+    }
+    
     public String toString(){
         String s = name + "\n";
         for(Card c: hand){
@@ -98,12 +136,12 @@ public class Player{
     
     public static void main(String [] args){
         Random r = new Random();
-        Player[] p = new Player[5];
-        Deck gameD = new Deck();
-        for(int i = 0; i < 5; i++){
-            p[i] = new Player(r.nextBoolean(), "Player" + (i + 1), gameD);
-            System.out.println(p[i]);
-        }
-        System.out.println(p[0].numHuman + " " + p[0].numCPUs + " " + p[0].numPlayers);
+        Deck d = new Deck();
+        Player p = new Player(true, "Kent",d);
+        Pile pi = new Pile();
+        do{
+            pi.add(d.draw());
+            p.move(pi, d);
+        }while(!d.empty());
     }
 }

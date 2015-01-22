@@ -1,65 +1,71 @@
 //creates a Pile class to us with played cards
 
+import java.util.*;
+
 public class Pile{
-    private Card [] p;
-    private int index;
+    private ArrayList<Card> p;
     
     public Pile(){
-        p = new Card[52];
-        index = 0;
-    }
-    
-    public Pile(int i){
-        index = i;
+        p = new ArrayList<Card>();
     }
     
     public void add(Card c){
-        p[index] = c.clone();
-        index++;
+       p.add(c.clone());
     }
     
-    public Card[] seeThree(){
-        Card[] topThree = new Card[3];
-        for(int i = index; i > index - 3; i--){
-            topThree[index - i] = p[i];
+    public ArrayList<Card> seeThree(){
+        if(p.size() <= 3){
+            return p;
+        }else{
+            return (ArrayList<Card>)p.subList(p.size() - 4, p.size() - 1);
         }
-        return topThree;
     }
     
     public void clear(){
-        p = new Card[52];
-        index = 0;
+        p = new ArrayList<Card>();
     }
     
-    public Card[] pickup(){
-        Card[] temp = p.clone();
+    public ArrayList<Card> pickup(){
+        ArrayList<Card> temp = p;
         clear();
         return temp;
     }
     
-    public int checkTop(){
-        return p[index].value;
+    public Card checkTop(){
+        return p.get(p.size() - 1);
     }
     
     public boolean fourKind(){
-        int tVal = checkTop();
-        for(int i = index - 1; i > index - 4; i--){
-            if(tVal != p[i]){
-                return false;
+        if(p.size() < 4){
+            return false;
+        }else{
+            int tVal = checkTop().value;
+            for(int i = p.size() - 2; i > p.size() - 5; i--){
+                if(tVal != p.get(i).value){
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
     }
     
     public boolean validMove(Card c){
         if(c.value == 2 || c.value == 10){
             return true;
-        }else if(p[index].value == 7 && c.value <= 7){
+        }else if(p.get(p.size() - 1).value == 7 && c.value <= 7){
             return true;
-        }else if(c.value >= p[index].value){
+        }else if(c.value >= p.get(p.size() - 1).value){
             return true;
         }else{
             return false;
         }
+    }
+    
+    public String toString(){
+        String s = "";
+        for(int i = 0; i < p.size(); i++){
+            s += p.get(i).getShortName() + "\n";
+        }
+        return s;
     }
 }
