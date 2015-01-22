@@ -1,6 +1,5 @@
 public class Game {
 	
-	// Constructor 
 	public Game() {
 		// Instantiate deck, pile
 		// Create # of human players w/ hand, fu, fd
