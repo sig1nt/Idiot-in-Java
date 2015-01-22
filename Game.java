@@ -11,13 +11,13 @@ public class Game {
 	 * @return Player
 	 */
 	private Player goesFirst(Player[] players) {
-	    Card lowCard = players[0]; // TODO min(players[0].hand)
+		Card lowCard = players[0]; // TODO min(players[0].hand)
 		Player goesFirst;
 		for (Player p : players) { // way to collapse this down?
-		    for (Card c : p.hand) {
-			    if (c.value <= lowCard.value) {
-				    if (c.value == lowCard.value ) {
-					    // TODO if (c.suit < lowCard.suit) {
+			for (Card c : p.hand) {
+				if (c.value <= lowCard.value) {
+					if (c.value == lowCard.value ) {
+						// TODO if (c.suit < lowCard.suit) {
 						lowCard = c;
 						goesFirst = p;
 					}
@@ -26,7 +26,7 @@ public class Game {
 						goesFirst = p;
 					}
 				}
-			}
+		    }
 		}
 		return goesFirst;
 	}
@@ -41,3 +41,4 @@ public class Game {
 			// TODO
 		}
 	}
+}
