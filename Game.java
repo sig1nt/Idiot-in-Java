@@ -16,13 +16,15 @@ public class Game {
 	private Player goesFirst(Player[] players) {
 		Card lowCard = players[0]; // TODO min(players[0].hand)
 		Player goesFirst;
+		String[] suits = {"Clubs", "Diamonds", "Spades", "Hearts"};
 		for (Player p : players) { // way to collapse this down?
 			for (Card c : p.hand) {
 				if (c.value <= lowCard.value) {
 					if (c.value == lowCard.value ) {
-						// TODO if (c.suit < lowCard.suit) {
-						lowCard = c;
-						goesFirst = p;
+						// TODO if (suits.index(c.suit) <  suits.index(lowCard.suit)) {
+							lowCard = c;
+							goesFirst = p;
+						// }
 					}
 					else {
 						lowCard = c;
