@@ -40,7 +40,7 @@ public class Player{
         }
         cio.typeln(s);
         boolean chosen = false;
-        if(canMove(currP)){
+        if(canMove(currP){
             do{
                 int index = (int)cio.ask("enter the index of the card you wish to play", 0);
                 Card c = hand.get(index - 1);
@@ -79,8 +79,13 @@ public class Player{
         }
     }
     
-    public boolean canMove(){
-        
+    public boolean canMove(Pile p){
+        for(Card c: hand){
+            if(p.validMove(c)){
+                return true;
+            }
+        }
+        return false;
     }
     
     public String toString(){
