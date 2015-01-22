@@ -37,6 +37,20 @@ public class Pile{
         return temp;
     }
     
+    public int checkTop(){
+        return p[index].value;
+    }
+    
+    public boolean fourKind(){
+        int tVal = checkTop();
+        for(int i = index - 1; i > index - 4; i--){
+            if(tVal != p[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public boolean validMove(Card c){
         if(c.value == 2 || c.value == 10){
             return true;

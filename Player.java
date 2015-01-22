@@ -33,16 +33,54 @@ public class Player{
         }
     }
     
-    public void move(Pile currP){
-        String s = "";
-        for(Card c: hand){
-            s += c.getShortName() + " ";
+    public int move(Pile currP, Deck d){
+        String s = "the cards in your hand are:\n";
+        for(int i = 0; i < hand.size(); i++){
+            s += (i + 1) + ") " + c.getShortName() + "\n";
         }
         cio.typeln(s);
-        String c = (String)cio.ask("Which Card would you like to play", "");
-        if(!Pile.validMove(c)){
-            cio.typeln("that move is illegal");
-        }else if(
+        boolean chosen = false;
+        if(canMove(currP)){
+            do{
+                int index = (int)cio.ask("enter the index of the card you wish to play", 0);
+                Card c = hand.get(index - 1);
+                if(!Pile.validMove(c)){
+                    cio.typeln("that move is illegal");
+                }else{
+                    int sameVals = 0;
+                    for(Card currC: hand){
+                        if(currC.value == c.value){
+                            sameVals++;
+                        }
+                    }
+                    int numPlay;
+                    if(sameVals > 1){
+                        do{
+                            numPlay = (int)cio.out("How many Do you want to play? (Up to" + numSame + ")",0);
+                        }while(numPlay < 1 || numPlay > sameVals);
+                    }
+                }
+            }while(!chosen);
+            for(int i = index - 1; i < index + numPlay - 1; i++){
+                currP.add(hand.get(i));
+                hand.delete(i);
+            }
+            while(hand.size() > 3){
+                hand.add(d.draw());
+            }
+            if(c.value != 10 && !currP.fourKind()){
+                return 0;
+            }else
+                return 1;
+            }
+        }else{
+            hand.add(currP.pickup());
+            return 0;
+        }
+    }
+    
+    public boolean canMove(){
+        
     }
     
     public String toString(){
