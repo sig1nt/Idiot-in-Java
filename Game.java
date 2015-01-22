@@ -1,9 +1,12 @@
 public class Game {
 	
-	public Game() {
-		// Instantiate deck, pile
+	public Game(int humanCount, int cpuCount) {
+		Deck deck = new Deck();
+		Pile pile = new Pile();
+		Player[humanCount+cpuCount] players;
 		// Create # of human players w/ hand, fu, fd
 		// Create # of cpu players w/ hand, fu, fd
+		// Stuff them all into players array
     }
 
 	/* Takes the list of players and determines who goes first.
