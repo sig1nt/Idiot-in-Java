@@ -5,6 +5,7 @@ import java.util.*;
 public class Player{
     //static vars
     protected static int numHuman = 0, numCPUs = 0, numPlayers = 0;
+    private static String[] suits = {"Clubs", "Diamonds", "Spades", "Hearts"};
     
     //non-static vars
     private boolean human;
@@ -13,6 +14,22 @@ public class Player{
     protected String name;
     private ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
     
+    //For use with the CPU class
+    public Player(){
+       numPlayers++;
+        hand = new ArrayList<Card>();
+        facedown = new ArrayList<Card>();
+        faceup = new ArrayList<Card>();
+        name = n;
+        for(int i = 0; i < 3; i++){
+            facedown.add(d.draw());
+            faceup.add(d.draw());
+            hand.add(d.draw());
+        }
+        sortHand(); 
+    }
+    
+    //For use with human players
     public Player(boolean isHuman, String n, Deck d){
         human = isHuman;
         if(human){
@@ -33,6 +50,12 @@ public class Player{
         sortHand();
     }
     
+    /*Allows a human to choose their their move, given a certain Pile currP, and then populating the hand up to 3 cards from the deck D
+      Return values tell game how to respond to the move:
+      0: go to next player
+      1: clear Pile then go to next player
+      2: end game, current player wins
+    */
     public int move(Pile currP, Deck d){
         String s = "Cards in the Pile are:\n";
         s += currP.checkTop().getShortName() + "\n";
@@ -76,6 +99,9 @@ public class Player{
             }
             sortHand();
             cio.type("Played");
+            if(hand.isEmpty() && facedown.isEmpty()){
+                return 2;
+            }
             if(c.value != 10 && !currP.fourKind()){
                 return 0;
             }else{
@@ -89,6 +115,9 @@ public class Player{
         }
     }
     
+    /*checks the hand to see if a player can move based on their hand and the pile p
+      reutrns true if the player can move and false if they can't
+    */
     public boolean canMove(Pile p){
         for(Card c: hand){
             if(p.validMove(c)){
@@ -98,6 +127,7 @@ public class Player{
         return false;
     }
     
+    //sorts the hand of the player by number and suit
     public void sortHand(){
         Card[] tempHand = hand.toArray(new Card[1]);
         hand.clear();
@@ -112,7 +142,7 @@ public class Player{
             Card currSmallest = tempHand[i];
             int index = i;
             for(int j = i + 1; j < highestFilled + 1; j++){
-                if(tempHand[j].value < currSmallest.value){
+                if(tempHand[j].value < currSmallest.value && suits.indexOf(tempHand[j].suit) < suits.indexOf(currSmall.suit)){
                     currSmallest = tempHand[j];
                     index = j;
                 }
@@ -126,6 +156,7 @@ public class Player{
         }
     }
     
+    //Returns a String with the name and hand of the player
     public String toString(){
         String s = name + "\n";
         for(Card c: hand){
@@ -134,6 +165,7 @@ public class Player{
         return s;
     }
     
+    //FOR TESTING ONLY
     public static void main(String [] args){
         Random r = new Random();
         Deck d = new Deck();
