@@ -4,11 +4,11 @@ public class AI{
 
 	private boolean nextNextWinning;
 
-	AI() {
+	public AI() {
 		nextNextWinning = false;
 	}
 
-	public static boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
+	public boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
 	//checks if the AI can complete a four of a kind
 		if(hand.isEmpty()){return false;}
 		hand.addAll(pile.seeThree());
@@ -25,7 +25,7 @@ public class AI{
 		return false;
 	}
 
-	public static boolean isWinning(int handCount, int fdCount){
+	public boolean isWinning(int handCount, int fdCount){
 	//determines if the opponent is about to win
 		if(handCount==0||fdCount==0){
 			return false;
@@ -42,7 +42,8 @@ public class AI{
 		p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
 		p.add(new Card("diambonds", 3));
-        System.out.println(canCompleteFour(h,p));
+		AI driver = new AI();
+        System.out.println(driver.canCompleteFour(h,p));
 	}
 }
 
