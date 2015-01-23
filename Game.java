@@ -1,12 +1,15 @@
 public class Game {
 	
-	public Game(int humanCount, int cpuCount) {
+	public Game() {
 		Deck deck = new Deck();
 		Pile pile = new Pile();
-		Player[humanCount+cpuCount] players;
-		// Create # of human players w/ hand, fu, fd
-		// Create # of cpu players w/ hand, fu, fd
-		// Stuff them all into players array
+		Player[Player.numPlayers] players;
+		for (int i=0; i < Player.numHuman; i++) {
+			players[i] = new Player(true, getName(), deck);
+		}
+		for (int i=0; i < Player.numCPUs; i++) {
+			players[i] = new Player(false, "CPU-" + i, deck);
+		}
     }
 
 	/* Takes the list of players with sorted hands and determines who goes first.
