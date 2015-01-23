@@ -9,16 +9,17 @@ public class Game {
 		// Stuff them all into players array
     }
 
-	/* Takes the list of players and determines who goes first.
+	/* Takes the list of players with sorted hands and determines who goes first.
 	 * @param Player[]
 	 * @return Player
 	 */
 	private Player goesFirst(Player[] players) {
-		Card lowCard = players[0]; // TODO min(players[0].hand)
+		Card lowCard = players[0].hand[0];
 		Player goesFirst;
-		String[] suits = {"Clubs", "Diamonds", "Spades", "Hearts"};
-		for (Player p : players) { // way to collapse this down?
-			for (Card c : p.hand) {
+		String[] suits_array = {"Clubs", "Diamonds", "Spades", "Hearts"};
+		// How do I ArrayList? (so I can indexOf())
+		for (Player p : players) {
+				c = p.hand[0];
 				if (c.value <= lowCard.value) {
 					if (c.value == lowCard.value ) {
 						// TODO if (suits.index(c.suit) <  suits.index(lowCard.suit)) {
@@ -31,7 +32,6 @@ public class Game {
 						goesFirst = p;
 					}
 				}
-		    }
 		}
 		return goesFirst;
 	}
