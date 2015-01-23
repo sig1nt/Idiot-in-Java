@@ -9,6 +9,7 @@ public class AI{
 	}
 
 	public static boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
+	//checks if the AI can complete a four of a kind
 		if(hand.isEmpty()){
 			return false;
 		}
@@ -24,6 +25,15 @@ public class AI{
 			}
 		}
 		return false;
+	}
+
+	public static boolean isWinning(int handcount, int fdCount){
+	//determines if the opponent is about to win
+		if(handCount==0||fdCount==0){
+			return false;
+		}
+		//ask what the fuck is happening in the python
+		return true;
 	}
 
 	public static void main(String[] args){
