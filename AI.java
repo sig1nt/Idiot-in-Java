@@ -13,24 +13,29 @@ public class AI{
 			return false;
 		}
 		hand.addAll(pile.seeThree());
-		for(int i = 0; i < ; i++){
-			System.out.println(h.get(i).toString());
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		for (Card c : hand){
+			values.add(c.value);
 		}
-		return true;
+		Collections.sort(values);
+		for(int i = 0; i<(values.size()-3); i++){
+			if(values.get(i)==values.get(i+1) && values.get(i)==values.get(i+2)&&values.get(i)==values.get(i+3)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
-        h.add(new Card("hearts", 4));
         h.add(new Card("hearts", 3));
+        h.add(new Card("hearts", 4));
 		Pile p = new Pile();
-		/*Iterator<Card> itor = h.iterator();
-		for(Card i = itor.next(); itor.hasNext();itor.next()){
-			System.out.println(i.toString());
-		}*/
-		System.out.println("----------------------------------------------");
-        canCompleteFour(h,p);
+		p.add(new Card("spades", 3));
+		p.add(new Card("clubs", 3));
+		p.add(new Card("diambonds", 3));
+        System.out.println(canCompleteFour(h,p));
 	}
 }
 
