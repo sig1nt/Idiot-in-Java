@@ -17,15 +17,15 @@ public class Game {
 		Card lowCard = players[0].hand[0];
 		Player goesFirst;
 		String[] suits_array = {"Clubs", "Diamonds", "Spades", "Hearts"};
-		// How do I ArrayList? (so I can indexOf())
+		List<String> suits = Arrays.asList(suits_array); // Is this how I arrayList?
 		for (Player p : players) {
 				c = p.hand[0];
 				if (c.value <= lowCard.value) {
 					if (c.value == lowCard.value ) {
-						// TODO if (suits.index(c.suit) <  suits.index(lowCard.suit)) {
+						if (suits.indexOf(c.suit) <  suits.indexOf(lowCard.suit)) {
 							lowCard = c;
 							goesFirst = p;
-						// }
+						}
 					}
 					else {
 						lowCard = c;
@@ -41,7 +41,8 @@ public class Game {
 	 * finishes when one has no hand and no fd
 	 */
     public static void main() {
-		boolean gameOver = false; // A bool is fine for this, right?
+		boolean gameOver = false;
+		// TODO determine who goes first, and resulting play order clockwise
 		while (not gameOver) {
 			// TODO
 		}
