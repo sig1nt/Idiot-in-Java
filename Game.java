@@ -5,12 +5,19 @@ public class Game {
 		Pile pile = new Pile();
 		Player[Player.numPlayers] players;
 		for (int i=0; i < Player.numHuman; i++) {
-			players[i] = new Player(true, getName(), deck);
+			players[i] = new Player(true, getName(i), deck);
 		}
 		for (int i=0; i < Player.numCPUs; i++) {
 			players[i] = new Player(false, "CPU-" + i, deck);
 		}
     }
+
+	private String getName(int i) {
+		// TODO
+		// Console out "Please input your name: "
+		// name = Console in
+		// Eventually, make it parameterless
+		return "Test-" + i;
 
 	/* Takes the list of players with sorted hands and determines who goes first.
 	 * @param Player[]
