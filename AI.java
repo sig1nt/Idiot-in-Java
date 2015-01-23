@@ -10,9 +10,7 @@ public class AI{
 
 	public static boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
 	//checks if the AI can complete a four of a kind
-		if(hand.isEmpty()){
-			return false;
-		}
+		if(hand.isEmpty()){return false;}
 		hand.addAll(pile.seeThree());
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card c : hand){
@@ -27,13 +25,12 @@ public class AI{
 		return false;
 	}
 
-	public static boolean isWinning(int handcount, int fdCount){
+	public static boolean isWinning(int handCount, int fdCount){
 	//determines if the opponent is about to win
 		if(handCount==0||fdCount==0){
 			return false;
 		}
-		//ask what the fuck is happening in the python
-		return true;
+		return ((handCount+fdCount < 3) && (handCount == 0 || fdCount == 0));
 	}
 
 	public static void main(String[] args){
