@@ -3,12 +3,17 @@ import java.util.*;
 public class AI{
 
 	private boolean nextNextWinning;
+	private Player cpu, opponent;
+	private Pile pile;
 
-	public AI() {
+	public AI(Player cpu, Player opponent, Pile pile) {
 		nextNextWinning = false;
+		this.cpu = cpu;
+		this.opponent = opponent;
+		this.pile = pile;
 	}
 
-	public boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
+	private boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
 	//checks if the AI can complete a four of a kind
 		if(hand.isEmpty()){return false;}
 		hand.addAll(pile.seeThree());
@@ -25,7 +30,7 @@ public class AI{
 		return false;
 	}
 
-	public boolean isWinning(int handCount, int fdCount){
+	private boolean isWinning(int handCount, int fdCount){
 	//determines if the opponent is about to win
 		if(handCount==0||fdCount==0){
 			return false;
@@ -33,17 +38,32 @@ public class AI{
 		return ((handCount+fdCount < 3) && (handCount == 0 || fdCount == 0));
 	}
 
+	public int logical(){
+		ArrayList<Card> reserve = (cpu.hand.isEmpty())?cpu.faceup:cpu.hand;
+		if(canCompleteFour(reserve, pile)){
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
         h.add(new Card("hearts", 3));
         h.add(new Card("hearts", 4));
+        ArrayList<Card> f = new ArrayList<Card>();
+        f.add(new Card("spades", 7));
+        f.add(new Card("hearts", 5));
+        f.add(new Card("hearts", 8));
 		Pile p = new Pile();
 		p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
-		p.add(new Card("diambonds", 3));
-		AI driver = new AI();
-        System.out.println(driver.canCompleteFour(h,p));
+		p.add(new Card("diamonds", 3));
+		//Player me = new Player();
+		//me.hand = h;
+		//me.faceup = f;
+		//AI driver = new AI(me, new Player(), p);
+        //System.out.println(driver.logical());
 	}
 }
-

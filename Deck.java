@@ -4,6 +4,7 @@ public class Deck{
   private Stack<Card> sDeck;
   protected Card oDeck[];
   
+  //creates a standard deck of cards
   public Deck(){
     oDeck = new Card[52];
     int cardsInDeck = 0;
@@ -18,6 +19,7 @@ public class Deck{
     shuffle();
   }
   
+  //Pseudorandomly assigns positions to the cards and places them on the stack
   public void shuffle(){
     Card tDeck[] = oDeck.clone();
     sDeck = new Stack<Card>();
@@ -35,6 +37,7 @@ public class Deck{
     }
   }
   
+  //returns a new card from the stack and removes it from the stack
   public Card draw(){
     if(!sDeck.empty()){
       return sDeck.pop();
@@ -43,10 +46,12 @@ public class Deck{
     }
   }
   
+  //returns true if the stack is empty and false if it is not
   public boolean empty(){
     return sDeck.empty();
   }
   
+  //for testing only
   public static void main(String[]args){
     Deck myDeck = new Deck();
     do{
