@@ -9,7 +9,7 @@ public class Player{
     
     //non-static vars
     private boolean human;
-    protected ArrayList<Card> hand, facedown;
+    private ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
     private ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);

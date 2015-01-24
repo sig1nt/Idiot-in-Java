@@ -3,7 +3,7 @@ import java.util.*;
 public class AI{
 
 	private boolean nextNextWinning;
-	private Player cpu, opponent
+	private Player cpu, opponent;
 	private Pile pile;
 
 	public AI(Player cpu, Player opponent, Pile pile) {
@@ -39,11 +39,11 @@ public class AI{
 	}
 
 	public int logical(){
-		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
+		ArrayList<Card> reserve = (cpu.hand.isEmpty())?cpu.faceup:cpu.hand;
 		if(canCompleteFour(reserve, pile)){
 			return 1;
-		} else if(){
-			
+		} else {
+			return 0;
 		}
 	}
 
@@ -60,7 +60,10 @@ public class AI{
 		p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
 		p.add(new Card("diamonds", 3));
-		AI driver = new AI(h,f, new ArrayList<Card>(), p);
-        System.out.println(driver.logical());
+		//Player me = new Player();
+		//me.hand = h;
+		//me.faceup = f;
+		//AI driver = new AI(me, new Player(), p);
+        //System.out.println(driver.logical());
 	}
 }
