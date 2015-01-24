@@ -82,8 +82,6 @@ public class Game {
 		while (not gameOver) {
 			if (moveExitStatus == 2) {
 				winGame(players[i]);
-			} else if (moveExitStatus == 1) {
-				i--;
 			}
 			for (i=indexFirst; i < Player.numPlayers; i=nextPlayer(i, Player.numPlayers, goAgain)) {
 				goAgain = false;
