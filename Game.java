@@ -69,9 +69,16 @@ public class Game {
 		}
 	}
 
+	private void winGame(Player player) {
+		// TODO
+		// Console out "Player player.name wins!"
+		// Eventually, this should close a thread and return to the game lobby manager
+		System.exit(0);
+	}
+
 	/* Loop that executes the actual game.
 	 * Iterates through players and 
-	 * finishes when one has no hand and no fd
+	 * finishes when one player.move returns 2
 	 */
     public static void main() {
 		boolean gameOver = false;
