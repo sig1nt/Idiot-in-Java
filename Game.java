@@ -87,18 +87,17 @@ public class Game {
 		int moveExitStatus;
 		boolean goAgain = false;
 		while (not gameOver) {
-			if (moveExitStatus == 2) {
-				winGame(players[i]);
-			}
 			for (i=indexFirst; i < Player.numPlayers; i=nextPlayer(i, Player.numPlayers, goAgain)) {
 				goAgain = false;
 				moveExitStatus = players[i].move(Game.pile, Game.deck);
 				if (moveExitStatus == 2) {
+					gameOver = true;
 					break;
 				} else if (moveExitStatus == 1) {
 					goAgain = true;
 				}
 			}
 		}
+		winGame(players[i]);
 	}
 }
