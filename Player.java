@@ -1,4 +1,4 @@
-//Implementation of the Player Class
+ //Implementation of the Player Class
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ public class Player{
     private static String[] suits = {"Clubs", "Diamonds", "Spades", "Hearts"};
     
     //non-static vars
-    private boolean human;
+    protected boolean human;
     private ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
@@ -16,7 +16,7 @@ public class Player{
     
     //For use with the CPU class
     public Player(){
-       numPlayers++;
+        numPlayers++;
         hand = new ArrayList<Card>();
         facedown = new ArrayList<Card>();
         faceup = new ArrayList<Card>();
