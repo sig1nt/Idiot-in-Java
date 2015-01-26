@@ -68,6 +68,7 @@ public class Game {
 	}
 
 	// Lets player iteration wrap around the ArrayList<Player> players
+	// and deals with a player getting to goAgain
 	private int nextPlayer(int i, int numPlayers, boolean goAgain) {
 		if (goAgain) {
 			return i;
