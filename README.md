@@ -24,4 +24,4 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * AI
 
 *Max*
-* Game class: done until other classes are finalized
+* Game class: Needs code review
