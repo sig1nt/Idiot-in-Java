@@ -61,7 +61,15 @@ public class AI{
 		}
 		if(players.size()>1){
 			if(isWinning(players.get(1).getHandCount(),players.get(1).getfdCount())) { 
-				
+				if(!(int)(values.get(0)) == 7 && !(int)(values.get(0))==10 && !(int)(values.get(0))==2){
+					return (int)(values.get(0));
+				} else if((int)(values.get(0)) == 7) {
+					return 7;
+				} else if((int)(values.get(0)) == 2) {
+					return 2;
+				} else {
+					return 10;
+				}
 		}
 	}
 
