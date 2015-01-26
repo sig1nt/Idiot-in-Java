@@ -44,16 +44,17 @@ public class Game {
 		return name;
 	}
 
-	// Takes the list of players with sorted hands and determines who goes first.
+	// Takes the list of players w/ sorted hands and determines who goes first.
 	private Player goesFirst(ArrayList<Player> players) {
 		Card lowCard = players[0].hand[0];
 		Player goesFirst;
-		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
+		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("Clubs",
+				"Diamonds", "Spades", "Hearts"));
 		for (Player p : players) {
 				c = p.hand[0];
 				if (c.value <= lowCard.value) {
-					if (c.value == lowCard.value ) {
-						if (suits.indexOf(c.suit) <  suits.indexOf(lowCard.suit)) {
+					if (c.value == lowCard.value) {
+						if (suits.indexOf(c.suit) < suits.indexOf(lowCard.suit)) {
 							lowCard = c;
 							goesFirst = p;
 						}
@@ -67,46 +68,36 @@ public class Game {
 		return goesFirst;
 	}
 
-	// Lets player iteration wrap around the ArrayList<Player> players
-	// and deals with a player getting to goAgain
-	private int nextPlayer(int i, int numPlayers, boolean goAgain) {
-		if (goAgain) {
-			return i;
-		} else if ( i < numPlayers ) {
-			return i++;
-		} else {
-			return 0;
-		}
-	}
-
-	// Eventually, this should close a thread and return to the game lobby manager
+	// Eventually, this should close a thread and return to the lobby manager
 	private void winGame(Player player) {
 		System.out.println("Game over, " + player.name + " wins!");
 		System.exit(0);
 	}
 
 	/* Loop that executes the actual game.
-	 * Iterates through players and 
-	 * finishes when one player.move returns 2
+	 * Iterates through players, wrapping around, and
+	 * finishes when a player.move() returns 2
 	 */
     public static void main() {
-		boolean gameOver = false;
-		int indexFirst = players.indexOf(goesFirst(players));
-		int i;
+		int i = players.indexOf(goesFirst(players));
 		int moveExitStatus;
-		boolean goAgain = false;
-		while (not gameOver) {
-			for (i=indexFirst; i < Player.numPlayers; i=nextPlayer(i, Player.numPlayers, goAgain)) {
-				goAgain = false;
-				moveExitStatus = players[i].move(Game.pile, Game.deck);
-				if (moveExitStatus == 2) {
-					gameOver = true;
+		while (true) {
+			moveExitStatus = players[i].move();
+			switch (moveExitStatus) {
+				case 2:
+					winGame(players[i]) // no break b/c exit is a black hole
+				case 1:
 					break;
-				} else if (moveExitStatus == 1) {
-					goAgain = true;
-				}
+				case 2:
+					if (i == numPlayers) {
+						i = 0;
+					} else {
+						i++;
+					}
+					break;
+				default:
+					break;
 			}
 		}
-		winGame(players[i]);
 	}
 }
