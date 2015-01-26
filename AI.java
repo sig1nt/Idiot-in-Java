@@ -3,22 +3,32 @@ import java.util.*;
 public class AI{
 
 	private boolean nextNextWinning;
-	private Player cpu, opponent;
+	private ArrayList<Card> hand, faceup, opFaceup;
+	private int opFaceDown, opHand;
 	private Pile pile;
 
-	public AI(Player cpu, Player opponent, Pile pile) {
+	public AI(ArrayList<Card> hand, ArrayList<Card> faceup, ArrayList<Card> opFaceup, int opFaceDown, int opHand, Pile pile) {
 		nextNextWinning = false;
-		this.cpu = cpu;
-		this.opponent = opponent;
+		this.hand = hand;
+		this.faceup = faceup;
+		this.opFaceup = opFaceup;
+		this.opFaceDown = opFaceDown;
+		this.opHand = opHand;
 		this.pile = pile;
+	}
+
+	private void update(opFaceDown, opHand){
+		this.opFaceDown = opFaceDown;
+		this.opHand = opHand;
 	}
 
 	private boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
 	//checks if the AI can complete a four of a kind
 		if(hand.isEmpty()){return false;}
-		hand.addAll(pile.seeThree());
+		ArrayList<Card> temp = new ArrayList<Card>(hand);
+		temp.addAll(pile.seeThree());
 		ArrayList<Integer> values = new ArrayList<Integer>();
-		for (Card c : hand){
+		for (Card c : temp){
 			values.add(c.value);
 		}
 		Collections.sort(values);
@@ -39,11 +49,18 @@ public class AI{
 	}
 
 	public int logical(){
-		ArrayList<Card> reserve = (cpu.hand.isEmpty())?cpu.faceup:cpu.hand;
+		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
-			return 1;
-		} else {
-			return 0;
+			return 100;
+			//100 means complete the four
+		}
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		for (Card card : reserve){
+			values.append(new Integer(card.value));
+		}
+		Collections.sort(values);
+		if(isWinning(opHand,opFaceDown)) {
+
 		}
 	}
 
@@ -60,10 +77,7 @@ public class AI{
 		p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
 		p.add(new Card("diamonds", 3));
-		//Player me = new Player();
-		//me.hand = h;
-		//me.faceup = f;
-		//AI driver = new AI(me, new Player(), p);
-        //System.out.println(driver.logical());
+		AI driver = new AI(h,f,new ArrayList<Card>(),0,0,p);
+        System.out.println(driver.logical());
 	}
 }
