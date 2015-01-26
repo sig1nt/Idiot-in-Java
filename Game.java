@@ -1,7 +1,7 @@
 public class Game {
 	
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
-	private static String[5] takenNames;
+	protected String[5] takenNames;
 
 	// Constructor, builds a Deck deck, a Pile pile, and an ArrayList<Player> players
 	public Game() {
@@ -14,7 +14,7 @@ public class Game {
 			playersArray[i] = new Player(true, getPlayerName(i), deck);
 		}
 		for (int i=0; i < cpuCount; i++) {
-			playersArray[i] = new Player(false, "CPU-" + i, deck);
+			playersArray[i] = new Player(false, "CPU-" + (i+1), deck);
 		}
 		ArrayList<Player> players = new ArrayList().addAll(playersArray);
     }
@@ -82,7 +82,11 @@ public class Game {
 		int i = players.indexOf(goesFirst(players));
 		int moveExitStatus;
 		while (true) {
-			moveExitStatus = players[i].move();
+			if (players[i].human) {
+				moveExitStatus = players[i].move(pile, deck);
+			} else {
+				moveExitStatus = players[i].move(pile, deck, players)
+			}
 			switch (moveExitStatus) {
 				case 2:
 					winGame(players[i]) // no break b/c exit is a black hole
