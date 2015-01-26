@@ -3,29 +3,20 @@ import java.util.*;
 public class AI{
 
 	private boolean nextNextWinning;
-	private ArrayList<Card> hand, faceup, opFaceup;
-	private int opFaceDown, opHand;
-	private Pile pile;
+	private ArrayList<Card> hand, faceup;
+	private ArrayList<Player> players;
 
-	public AI(ArrayList<Card> hand, ArrayList<Card> faceup, ArrayList<Card> opFaceup, int opFaceDown, int opHand, Pile pile) {
+	public AI(ArrayList<Card> hand, ArrayList<Card> faceup, ArrayList<Player> players) {
 		nextNextWinning = false;
 		this.hand = hand;
 		this.faceup = faceup;
-		this.opFaceup = opFaceup;
-		this.opFaceDown = opFaceDown;
-		this.opHand = opHand;
-		this.pile = pile;
+		this.players = players;
 	}
 
-	private void update(opFaceDown, opHand){
-		this.opFaceDown = opFaceDown;
-		this.opHand = opHand;
-	}
-
-	private boolean canCompleteFour(ArrayList<Card> hand, Pile pile) {
+	private boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
 	//checks if the AI can complete a four of a kind
-		if(hand.isEmpty()){return false;}
-		ArrayList<Card> temp = new ArrayList<Card>(hand);
+		if(handy.isEmpty()){return false;}
+		ArrayList<Card> temp = new ArrayList<Card>(handy);
 		temp.addAll(pile.seeThree());
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card c : temp){
@@ -42,13 +33,11 @@ public class AI{
 
 	private boolean isWinning(int handCount, int fdCount){
 	//determines if the opponent is about to win
-		if(handCount==0||fdCount==0){
-			return false;
-		}
 		return ((handCount+fdCount < 3) && (handCount == 0 || fdCount == 0));
 	}
 
-	public int logical(){
+	public int logical(Pile pile, int fdCount){
+	if(hand.isEmpty() && faceup.isEmpty()){return 1000; /* this means use a facedown card */}
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return 100;
@@ -59,8 +48,20 @@ public class AI{
 			values.append(new Integer(card.value));
 		}
 		Collections.sort(values);
-		if(isWinning(opHand,opFaceDown)) {
-
+		if(isWinning(players.get(0).getHandCount(),players.get(0).getfdCount())) {
+			if(values.get(values.size()-1)>10){
+				return(int)(values.get(values.size()-1));
+			} else if(values.contains(7)){
+				return 7;
+			} else if(values.get(values.size()-1) < 10){
+				return(int)(values.get(values.size()-1));
+			} else {
+				return 10;
+			}
+		}
+		if(players.size()>1){
+			if(isWinning(players.get(1).getHandCount(),players.get(1).getfdCount())) { 
+				
 		}
 	}
 
