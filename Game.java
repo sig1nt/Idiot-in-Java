@@ -1,5 +1,8 @@
 public class Game {
 	
+	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
+	private static String[5] takenNames;
+
 	// Constructor, builds a Deck deck, a Pile pile, and an ArrayList<Player> players
 	public Game() {
 		Deck deck = new Deck();
@@ -19,21 +22,27 @@ public class Game {
 	// Determines how many players of each type in Human, CPU to instantiate
 	private int getPlayerCount(boolean isHuman) {
 		if (isHuman) {
-		    // TODO Console out "How many human players? "
-			// return <int> Console in
+			console.in(int p, "How many human players? ");
 		} else {
-			// TODO Console out "How many cpu players? "
-			// return <int> Console in
+			console.in(int p, "How many computer players? ");
 		}
-		return 1;
+		return p;
 
 	// Gets names for human players
 	private String getPlayerName(int i) {
-		// TODO
-		// Console out "Please input your name: "
-		// name = Console in
-		// Eventually, make it parameterless
-		return "Test-" + i;
+		String name = "";
+		while (name.length() == 0) {
+			name = console.in(name, "Please input your name: ");
+			for (int t = i; t >= 0; t--) {
+				if (takenNames[t] == name) {
+					System.out.println("That name is taken.");
+					name = "";
+				}
+			}	
+		}
+		takenNames[i] = name;
+		return name;
+	}
 
 	// Takes the list of players with sorted hands and determines who goes first.
 	private Player goesFirst(ArrayList<Player> players) {
@@ -69,10 +78,9 @@ public class Game {
 		}
 	}
 
+	// Eventually, this should close a thread and return to the game lobby manager
 	private void winGame(Player player) {
-		// TODO
-		// Console out "Player player.name wins!"
-		// Eventually, this should close a thread and return to the game lobby manager
+		System.out.println("Game over, " + player.name + " wins!");
 		System.exit(0);
 	}
 
@@ -82,7 +90,7 @@ public class Game {
 	 */
     public static void main() {
 		boolean gameOver = false;
-		int indexFirst = Game.players.indexOf(goesFirst(Game.players));
+		int indexFirst = players.indexOf(goesFirst(players));
 		int i;
 		int moveExitStatus;
 		boolean goAgain = false;
