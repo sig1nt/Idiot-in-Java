@@ -7,11 +7,14 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 
 Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 
+***Goals***
+* Game works with command line interface
+* Game works with graphics locally
+* Game works on the server
+
 **Tasks**
-* Wrap functions in classes because java
-* Translate classes to java
-* Implement graphics
-* Put it on a server
+* Complete and integrate for goal 1: Possibly Monday 1/26
+* Determine tasks to finish goal 1, or determine tasks for goal 2
 
 *Kent*
 * Player class
@@ -21,4 +24,4 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * AI
 
 *Max*
-* Game class
+* Game class: done until other classes are finalized
