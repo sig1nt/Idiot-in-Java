@@ -78,18 +78,18 @@ public class Game {
 	 * Iterates through players, wrapping around, and
 	 * finishes when a player.move() returns 2
 	 */
-    public static void main() {
+    public play() {
 		int i = players.indexOf(goesFirst(players));
 		int moveExitStatus;
 		while (true) {
 			if (players[i].human) {
 				moveExitStatus = players[i].move(pile, deck);
 			} else {
-				moveExitStatus = players[i].move(pile, deck, players)
+				moveExitStatus = players[i].move(pile, deck, players);
 			}
 			switch (moveExitStatus) {
 				case 2:
-					winGame(players[i]) // no break b/c exit is a black hole
+					winGame(players[i]); // no break b/c exit is a black hole
 				case 1:
 					break;
 				case 2:
@@ -104,4 +104,8 @@ public class Game {
 			}
 		}
 	}
+
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.play();
 }
