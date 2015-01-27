@@ -20,13 +20,6 @@ public class Player{
         hand = new ArrayList<Card>();
         facedown = new ArrayList<Card>();
         faceup = new ArrayList<Card>();
-        name = n;
-        for(int i = 0; i < 3; i++){
-            facedown.add(d.draw());
-            faceup.add(d.draw());
-            hand.add(d.draw());
-        }
-        sortHand(); 
     }
     
     //For use with human players
@@ -163,6 +156,11 @@ public class Player{
             s += c.toString() + " ";
         }
         return s;
+    }
+    
+    //Gets the size of the player's hand
+    public int handsize(){
+        return hand.size();
     }
     
     //FOR TESTING ONLY
