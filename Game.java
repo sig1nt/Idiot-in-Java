@@ -27,6 +27,7 @@ public class Game {
 			console.in(int p, "How many computer players? ");
 		}
 		return p;
+	}
 
 	// Gets names for human players
 	private String getPlayerName(int i) {
