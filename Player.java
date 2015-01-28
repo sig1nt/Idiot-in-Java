@@ -5,14 +5,14 @@ import java.util.*;
 public class Player{
     //static vars
     protected static int numHuman = 0, numCPUs = 0, numPlayers = 0;
-    private static ArrayList<String> suits = (ArrayList<String>)Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts");
+    private static ArrayList<String> suits;
     
     //non-static vars
     protected boolean human;
-    private ArrayList<Card> hand, facedown;
+    protected ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
-    private ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
+    protected ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
     
     //For use with the CPU class
     public Player(){
@@ -20,6 +20,8 @@ public class Player{
         hand = new ArrayList<Card>();
         facedown = new ArrayList<Card>();
         faceup = new ArrayList<Card>();
+        suits = new ArrayList<String>();
+        suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
     }
     
     //For use with human players
@@ -34,6 +36,8 @@ public class Player{
         hand = new ArrayList<Card>();
         facedown = new ArrayList<Card>();
         faceup = new ArrayList<Card>();
+        suits = new ArrayList<String>();
+        suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
         name = n;
         for(int i = 0; i < 3; i++){
             facedown.add(d.draw());
@@ -149,6 +153,16 @@ public class Player{
         }
     }
     
+    //Gets the size of the player's hand
+    public int handsize(){
+        return hand.size();
+    }
+    
+    //Gets number of cards facedown for a player
+    public int numDown(){
+        return facedown.size();
+    }
+    
     //Returns a String with the name and hand of the player
     public String toString(){
         String s = name + "\n";
@@ -156,15 +170,6 @@ public class Player{
             s += c.toString() + " ";
         }
         return s;
-    }
-    
-    //Gets the size of the player's hand
-    public int handsize(){
-        return hand.size();
-    }
-
-    public int numDown(){
-        return facedown.size();
     }
 
     //FOR TESTING ONLY
