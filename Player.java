@@ -5,7 +5,7 @@ import java.util.*;
 public class Player{
     //static vars
     protected static int numHuman = 0, numCPUs = 0, numPlayers = 0;
-    private static String[] suits = {"Clubs", "Diamonds", "Spades", "Hearts"};
+    private static ArrayList<String> suits = (ArrayList<String>)Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts");
     
     //non-static vars
     protected boolean human;
@@ -135,7 +135,7 @@ public class Player{
             Card currSmallest = tempHand[i];
             int index = i;
             for(int j = i + 1; j < highestFilled + 1; j++){
-                if(tempHand[j].value < currSmallest.value && suits.indexOf(tempHand[j].suit) < suits.indexOf(currSmall.suit)){
+                if(tempHand[j].value < currSmallest.value && suits.indexOf(tempHand[j].suit) < suits.indexOf(currSmallest.suit)){
                     currSmallest = tempHand[j];
                     index = j;
                 }
