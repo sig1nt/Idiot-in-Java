@@ -2,18 +2,16 @@ import java.util.*;
 
 public class AI{
 
-	private boolean nextNextWinning;
 	private ArrayList<Card> hand, faceup;
 	private ArrayList<Player> players;
 
 	public AI(ArrayList<Card> hand, ArrayList<Card> faceup, ArrayList<Player> players) {
-		nextNextWinning = false;
 		this.hand = hand;
 		this.faceup = faceup;
 		this.players = players;
 	}
 
-	private boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
+	public boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
 	//checks if the AI can complete a four of a kind
 		if(handy.isEmpty()){return false;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
@@ -31,7 +29,7 @@ public class AI{
 		return false;
 	}
 
-	private boolean isWinning(int handCount, int fdCount){
+	public boolean isWinning(int handCount, int fdCount){
 	//determines if the opponent is about to win
 		return ((handCount+fdCount < 3) && (handCount == 0 || fdCount == 0));
 	}
@@ -72,8 +70,8 @@ public class AI{
 				}
             }
 		}
-		if((int)values.get(0) != 2 && (int)(values.get(0)) != 10){
-			return (int)values.get(0);
+		if((int)(values.get(0)) != 2 && (int)(values.get(0)) != 10){
+			return (int)(values.get(0));
 		} else if((int)(values.get(0))== 2){
 			return 2;
 		} else {
@@ -84,16 +82,16 @@ public class AI{
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
-        h.add(new Card("hearts", 3));
+        h.add(new Card("hearts", 6));
         h.add(new Card("hearts", 4));
         ArrayList<Card> f = new ArrayList<Card>();
         f.add(new Card("spades", 7));
         f.add(new Card("hearts", 5));
         f.add(new Card("hearts", 8));
 		Pile p = new Pile();
-		//p.add(new Card("spades", 3));
-		p.add(new Card("clubs", 3));
-		p.add(new Card("diamonds", 3));
+		p.add(new Card("spades", 6));
+		p.add(new Card("clubs", 6));
+		p.add(new Card("diamonds", 6));
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
