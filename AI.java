@@ -70,6 +70,7 @@ public class AI{
 				} else {
 					return 10;
 				}
+            }
 		}
 		if((int)values.get(0) != 2 && (int)(values.get(0)) != 10){
 			return (int)values.get(0);
