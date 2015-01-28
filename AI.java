@@ -81,7 +81,7 @@ public class AI{
 		}
 	}
 
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
         h.add(new Card("hearts", 3));
@@ -94,10 +94,11 @@ public class AI{
 		//p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
 		p.add(new Card("diamonds", 3));
-		ArrayList<Player> o = new ArrayList<Player>();
+		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
-		o.add(new CPU("test",d));
-		AI driver = new AI(h,f,o);
+		Player player = new Player(true,"test",d);
+		op.add(player);
+		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3));
-	}*/
+	}
 }
