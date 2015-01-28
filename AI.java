@@ -45,10 +45,10 @@ public class AI{
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
-			values.append(new Integer(card.value));
+			values.add(new Integer(card.value));
 		}
 		Collections.sort(values);
-		if(isWinning(players.get(0).getHandCount(),players.get(0).getfdCount())) {
+		if(isWinning(players.get(0).getHandCount(),players.get(0).numDown())) {
 			if(values.get(values.size()-1)>10){
 				return(int)(values.get(values.size()-1));
 			} else if(values.contains(7)){
@@ -60,8 +60,8 @@ public class AI{
 			}
 		}
 		if(players.size()>1){
-			if(isWinning(players.get(1).getHandCount(),players.get(1).getfdCount())) { 
-				if(!(int)(values.get(0)) == 7 && !(int)(values.get(0))==10 && !(int)(values.get(0))==2){
+			if(isWinning(players.get(1).handsize(),players.get(1).getfdCount())) { 
+				if((int)(values.get(0)) != 7 && (int)(values.get(0))!=10 && (int)(values.get(0))!=2){
 					return (int)(values.get(0));
 				} else if((int)(values.get(0)) == 7) {
 					return 7;
@@ -70,7 +70,13 @@ public class AI{
 				} else {
 					return 10;
 				}
-            }
+		}
+		if((int)values.get(0) != 2 && (int)(values.get(0)) != 10){
+			return (int)values.get(0);
+		} else if((int)(values.get(0))== 2){
+			return 2;
+		} else {
+			return 10;
 		}
 	}
 
@@ -87,7 +93,7 @@ public class AI{
 		p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
 		p.add(new Card("diamonds", 3));
-		AI driver = new AI(h,f,new ArrayList<Card>(),0,0,p);
-        System.out.println(driver.logical());
+		AI driver = new AI(h,f,new ArrayList<Player>());
+        System.out.println(driver.logical(p,3));
 	}
 }
