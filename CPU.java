@@ -16,7 +16,7 @@ public class CPU extends Player{
         sortHand();
     }
     
-    public int move(Pile currP, Deck d, ){
+    public int move(Pile currP, Deck d){
         if(canMove()){
             int value = ai.logical(currP, facedown.size()), index;
             if(value == 100){

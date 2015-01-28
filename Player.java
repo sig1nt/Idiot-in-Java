@@ -162,7 +162,11 @@ public class Player{
     public int handsize(){
         return hand.size();
     }
-    
+
+    public int numDown(){
+        return facedown.size();
+    }
+
     //FOR TESTING ONLY
     public static void main(String [] args){
         Random r = new Random();
