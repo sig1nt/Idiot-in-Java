@@ -9,10 +9,10 @@ public class Player{
     
     //non-static vars
     protected boolean human;
-    private ArrayList<Card> hand, facedown;
+    protected ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
-    private ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
+    protected ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
     
     //For use with the CPU class
     public Player(){
@@ -149,6 +149,16 @@ public class Player{
         }
     }
     
+    //Gets the size of the player's hand
+    public int handsize(){
+        return hand.size();
+    }
+    
+    //Gets number of cards facedown for a player
+    public int numDown(){
+        return facedown.size();
+    }
+    
     //Returns a String with the name and hand of the player
     public String toString(){
         String s = name + "\n";
@@ -156,11 +166,6 @@ public class Player{
             s += c.toString() + " ";
         }
         return s;
-    }
-    
-    //Gets the size of the player's hand
-    public int handsize(){
-        return hand.size();
     }
     
     //FOR TESTING ONLY

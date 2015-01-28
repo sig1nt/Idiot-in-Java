@@ -70,6 +70,7 @@ public class AI{
 				} else {
 					return 10;
 				}
+            }
 		}
 	}
 
