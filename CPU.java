@@ -27,7 +27,7 @@ public class CPU extends Player{
                 index = hand.indexOf(value);
             }
             int numPlayable = 0;
-            if(value != 2 && value != 10){
+            if(value != 2 && value != 10 && value != 100){
                 for(int i = index; i < index + 3; i++){
                     if(hand.get(i).value == hand.get(index).value){
                         numPlayable++;
@@ -45,7 +45,7 @@ public class CPU extends Player{
                 hand.add(d.draw());
             }
             sortHand();
-            cio.type("Played");
+            cio.type("Played" + numPlayable + " " + value + "s");
             if(hand.isEmpty() && facedown.isEmpty()){
                 return 2;
             }
@@ -63,6 +63,16 @@ public class CPU extends Player{
     }
     
     public static void main(String[]args){
-        CPU comp = new CPU("CPU-Test"
+        Deck d = new Deck();
+        ArrayList<Player> playas = new ArrayList<Player>();
+        playas.add(new Player(true, "Kent", d));
+        CPU comp = new CPU("CPU-Test", d, playas);
+        playas.add(comp);
+        Pile p = new Pile();
+        p.add(d.draw());
+        while(!d.empty()){
+            comp.move(p, d);
+            p.add(d.draw());
+        }
     }
 }

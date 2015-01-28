@@ -5,7 +5,7 @@ import java.util.*;
 public class Player{
     //static vars
     protected static int numHuman = 0, numCPUs = 0, numPlayers = 0;
-    private static ArrayList<String> suits = (ArrayList<String>)Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts");
+    private static ArrayList<String> suits;
     
     //non-static vars
     protected boolean human;
@@ -20,6 +20,8 @@ public class Player{
         hand = new ArrayList<Card>();
         facedown = new ArrayList<Card>();
         faceup = new ArrayList<Card>();
+        suits = new ArrayList<String>();
+        suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
     }
     
     //For use with human players
@@ -34,6 +36,8 @@ public class Player{
         hand = new ArrayList<Card>();
         facedown = new ArrayList<Card>();
         faceup = new ArrayList<Card>();
+        suits = new ArrayList<String>();
+        suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
         name = n;
         for(int i = 0; i < 3; i++){
             facedown.add(d.draw());
