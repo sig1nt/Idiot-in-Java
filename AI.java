@@ -37,7 +37,7 @@ public class AI{
 	}
 
 	public int logical(Pile pile, int fdCount){
-	if(hand.isEmpty() && faceup.isEmpty()){return 1000; /* this means use a facedown card */}
+		if(hand.isEmpty() && faceup.isEmpty()){return 1000; /* this means use a facedown card */}
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return 100;
@@ -48,7 +48,7 @@ public class AI{
 			values.add(new Integer(card.value));
 		}
 		Collections.sort(values);
-		if(isWinning(players.get(0).getHandCount(),players.get(0).numDown())) {
+		if(isWinning(players.get(0).handsize(),players.get(0).numDown())) {
 			if(values.get(values.size()-1)>10){
 				return(int)(values.get(values.size()-1));
 			} else if(values.contains(7)){
@@ -60,7 +60,7 @@ public class AI{
 			}
 		}
 		if(players.size()>1){
-			if(isWinning(players.get(1).handsize(),players.get(1).getfdCount())) { 
+			if(isWinning(players.get(1).handsize(),players.get(1).numDown())) { 
 				if((int)(values.get(0)) != 7 && (int)(values.get(0))!=10 && (int)(values.get(0))!=2){
 					return (int)(values.get(0));
 				} else if((int)(values.get(0)) == 7) {
@@ -80,7 +80,7 @@ public class AI{
 		}
 	}
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
         h.add(new Card("hearts", 3));
@@ -90,10 +90,13 @@ public class AI{
         f.add(new Card("hearts", 5));
         f.add(new Card("hearts", 8));
 		Pile p = new Pile();
-		p.add(new Card("spades", 3));
+		//p.add(new Card("spades", 3));
 		p.add(new Card("clubs", 3));
 		p.add(new Card("diamonds", 3));
-		AI driver = new AI(h,f,new ArrayList<Player>());
+		ArrayList<Player> o = new ArrayList<Player>();
+		Deck d = new Deck();
+		o.add(new CPU("test",d));
+		AI driver = new AI(h,f,o);
         System.out.println(driver.logical(p,3));
-	}
+	}*/
 }

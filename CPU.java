@@ -19,7 +19,11 @@ public class CPU extends Player{
     }
     
     public int move(Pile currP, Deck d){
+<<<<<<< HEAD
         if(canMove(currP)){
+=======
+        if(canMove()){
+>>>>>>> 04de35783c5b8adef0377601febe12f23608ce94
             int value = ai.logical(currP, facedown.size()), index;
             if(value == 100){
                 index = hand.indexOf(currP.checkTop());

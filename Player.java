@@ -168,6 +168,18 @@ public class Player{
         return s;
     }
     
+<<<<<<< HEAD
+=======
+    //Gets the size of the player's hand
+    public int handsize(){
+        return hand.size();
+    }
+
+    public int numDown(){
+        return facedown.size();
+    }
+
+>>>>>>> 04de35783c5b8adef0377601febe12f23608ce94
     //FOR TESTING ONLY
     public static void main(String [] args){
         Random r = new Random();
