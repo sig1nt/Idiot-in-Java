@@ -40,7 +40,6 @@ public class Card{
     }
     
     public boolean equals(Object other){
-        if(other == null) return false;
         if(other == this) return true;
         if(!(other instanceof Card) return false;
         Card oCard = (Card)other;
