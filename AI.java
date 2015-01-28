@@ -58,7 +58,7 @@ public class AI{
 			}
 		}
 		if(players.size()>1){
-			if(isWinning(players.get(1).handsize(),players.get(1).numDown())) { 
+			if(isWinning(players.get(1).handsize(),players.get(1).numDown())) {
 				if((int)(values.get(0)) != 7 && (int)(values.get(0))!=10 && (int)(values.get(0))!=2){
 					return (int)(values.get(0));
 				} else if((int)(values.get(0)) == 7) {
@@ -70,11 +70,15 @@ public class AI{
 				}
             }
 		}
-		if((int)(values.get(0)) != 2 && (int)(values.get(0)) != 10){
-			return (int)(values.get(0));
-		} else if((int)(values.get(0))== 2){
+		for (Integer i : values){
+			if((int)(i)!=10 && (int)(i)!=2){
+				return (int)(i);
+			}
+		}
+		if((int)(values.get(0)) == 2){
 			return 2;
-		} else {
+		}
+		else{
 			return 10;
 		}
 	}
@@ -82,8 +86,8 @@ public class AI{
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
-        h.add(new Card("hearts", 6));
-        h.add(new Card("hearts", 4));
+        h.add(new Card("hearts", 10));
+        h.add(new Card("hearts", 13));
         ArrayList<Card> f = new ArrayList<Card>();
         f.add(new Card("spades", 7));
         f.add(new Card("hearts", 5));
@@ -95,6 +99,7 @@ public class AI{
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
+		player.hand = 
 		op.add(player);
 		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3));
