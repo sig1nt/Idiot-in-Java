@@ -39,6 +39,16 @@ public class Card{
         return new Card(suit, value);
     }
     
+    public boolean equals(Object other){
+        if(other == null) return false;
+        if(other == this) return true;
+        if(!(other instanceof Card) return false;
+        Card oCard = (Card)other;
+        if(oCard.value != value) return false;
+        if(!oCard.suit.equals(suit) return false;
+        return true;
+    }
+    
     //returns a string in the form "__value__ of __suit__"
     public String toString(){
         String s = "";
