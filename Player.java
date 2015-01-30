@@ -59,8 +59,8 @@ public class Player{
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
-            if(hand.empty() || faceup.empty()){
-                if(hand.empty()){
+            if(hand.isEmpty() || faceup.isEmpty()){
+                if(hand.isEmpty()){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){
                         cinh += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
