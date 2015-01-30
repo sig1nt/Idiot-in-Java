@@ -4,31 +4,35 @@ public class Game {
 	
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
 	protected String[] takenNames = new String[5];
+	ArrayList<Player> players = new ArrayList();
+	Deck deck = new Deck();
+	Pile pile = new Pile();
+	int humanCount;
+	int cpuCount;
+	int numPlayers;
 
 	/* Constructor, builds a Deck deck, a Pile pile,
 	 * and an ArrayList<Player> players
 	 */
 	public Game() {
-		Deck deck = new Deck();
-		Pile pile = new Pile();
-		int humanCount = getPlayerCount(true);
-		int cpuCount = getPlayerCount(false);
-		ArrayList<Player> players = new ArrayList();
+		humanCount = getPlayerCount(true);
+		cpuCount = getPlayerCount(false);
 		for (int i=0; i < humanCount; i++) {
 			players.add(new Player(true, getPlayerName(i), deck));
 		}
 		for (int i=0; i < cpuCount; i++) {
 			players.add(new CPU("CPU-" + (i+1), deck, players));
 		}
+		numPlayers = humanCount+cpuCount;
     }
 
 	// Determines how many players of each type in Human, CPU to instantiate
 	private int getPlayerCount(boolean isHuman) {
 		int p;
 		if (isHuman) {
-			int p = (int) console.in("How many human players? ", 0);
+			p = (int) console.in("How many human players? ", 0);
 		} else {
-			int p = (int) console.in("How many computer players? ", 0);
+			p = (int) console.in("How many computer players? ", 0);
 		}
 		return p;
 	}
@@ -37,7 +41,7 @@ public class Game {
 	private String getPlayerName(int i) {
 		String name = "";
 		while (name.length() == 0) {
-			name = console.in(name, "Please input your name: ");
+			name = (String) console.in("Please input your name: ", "");
 			for (int t = i; t >= 0; t--) {
 				if (takenNames[t] == name) {
 					System.out.println("That name is taken.");
@@ -51,12 +55,13 @@ public class Game {
 
 	// Takes the list of players w/ sorted hands and determines who goes first.
 	private int goesFirst(ArrayList<Player> players) {
-		Player goesFirst = players[0];
-		Card lowCard = goesFirst.hand[0];
-		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("clubs",
-				"diamonds", "spades", "hearts"));
+		Player goesFirst = players.get(0);
+		Card lowCard = goesFirst.hand.get(0);
+		Card c;
+		ArrayList<String> suits = new ArrayList<String>();
+		suits.addAll(Arrays.asList("clubs", "diamonds", "spades", "hearts"));
 		for (Player p : players.subList(1, players.size()-1)) {
-			c = p.hand[0];
+		c = p.hand.get(0);
 			if (c.value < lowCard.value) {
 				lowCard = c;
 				goesFirst = p;
@@ -83,10 +88,10 @@ public class Game {
 		int i = goesFirst(players);
 		int moveExitStatus;
 		while (true) {
-			if (players[i].human) {
-				moveExitStatus = players[i].move(pile, deck);
+			if (players.get(i).human) {
+				moveExitStatus = players.get(i).move(pile, deck);
 			} else {
-				moveExitStatus = players[i].move(pile, deck, players);
+				moveExitStatus = players.get(i).move(pile, deck);
 			}
 			switch (moveExitStatus) {
 				case 0:
@@ -97,7 +102,7 @@ public class Game {
 					}
 					break;
 				case 2:
-					winGame(players[i]);
+					winGame(players.get(i));
 				case 1:
 				default:
 					break;
