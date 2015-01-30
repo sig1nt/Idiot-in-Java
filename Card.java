@@ -41,10 +41,10 @@ public class Card{
     
     public boolean equals(Object other){
         if(other == this) return true;
-        if(!(other instanceof Card) return false;
+        if(!(other instanceof Card)) return false;
         Card oCard = (Card)other;
         if(oCard.value != value) return false;
-        if(!oCard.suit.equals(suit) return false;
+        if(!oCard.suit.equals(suit)) return false;
         return true;
     }
     

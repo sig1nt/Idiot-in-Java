@@ -29,9 +29,9 @@ public class AI{
 		return false;
 	}
 
-	public boolean isWinning(int handCount, int fdCount){
+	public boolean isWinning(Player opp){
 	//determines if the opponent is about to win
-		return ((handCount+fdCount < 3) && (handCount == 0 || fdCount == 0));
+		return ((opp.hand.size()+opp.facedown.size() < 3) && (opp.hand.size() == 0 || opp.facedown.size() == 0));
 	}
 
 	public int logical(Pile pile, int fdCount){
@@ -46,7 +46,7 @@ public class AI{
 			values.add(new Integer(card.value));
 		}
 		Collections.sort(values);
-		if(isWinning(players.get(0).handsize(),players.get(0).numDown())) {
+		if(isWinning(players.get(0))) {
 			if(values.get(values.size()-1)>10){
 				return(int)(values.get(values.size()-1));
 			} else if(values.contains(7)){
@@ -58,14 +58,17 @@ public class AI{
 			}
 		}
 		if(players.size()>1){
-			if(isWinning(players.get(1).handsize(),players.get(1).numDown())) {
-				if((int)(values.get(0)) != 7 && (int)(values.get(0))!=10 && (int)(values.get(0))!=2){
-					return (int)(values.get(0));
-				} else if((int)(values.get(0)) == 7) {
+			if(isWinning(players.get(1))) {
+				for (Integer i : values){
+					if((int)(i)!=7 && (int)(i) != 2 && (int)(i) != 10){
+						return (int)(i);
+					}
+				}
+				if((int)(values.get(0)) == 7) {
 					return 7;
 				} else if((int)(values.get(0)) == 2) {
 					return 2;
-				} else {
+				} else if((int)(values.get(0)) == 2){
 					return 10;
 				}
             }
@@ -86,7 +89,7 @@ public class AI{
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
-        h.add(new Card("hearts", 10));
+        h.add(new Card("hearts", 6));
         h.add(new Card("hearts", 13));
         ArrayList<Card> f = new ArrayList<Card>();
         f.add(new Card("spades", 7));
@@ -99,7 +102,10 @@ public class AI{
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
-		player.hand = 
+		ArrayList<Card> ophand = new ArrayList<Card>();
+		ophand.add(new Card("hearts",12));
+		player.hand = ophand; 
+		player.facedown = new ArrayList<Card>();
 		op.add(player);
 		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3));
