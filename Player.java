@@ -154,6 +154,7 @@ public class Player{
             sortHand();
             return 0;
         }
+        return -1;
     }
     
     /*checks the hand to see if a player can move based on their hand and the pile p
