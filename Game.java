@@ -9,14 +9,13 @@ public class Game {
 		Pile pile = new Pile();
 		int humanCount = getPlayerCount(true);
 		int cpuCount = getPlayerCount(false);
-		Player[humanCount+cpuCount] playersArray;
+		ArrayList<Player> players = new ArrayList();
 		for (int i=0; i < humanCount; i++) {
-			playersArray[i] = new Player(true, getPlayerName(i), deck);
+			players.add(new Player(true, getPlayerName(i), deck));
 		}
 		for (int i=0; i < cpuCount; i++) {
-			playersArray[i] = new Player(false, "CPU-" + (i+1), deck);
+			players.add(new CPU("CPU-" + (i+1), deck, players));
 		}
-		ArrayList<Player> players = new ArrayList().addAll(playersArray);
     }
 
 	// Determines how many players of each type in Human, CPU to instantiate
@@ -109,4 +108,5 @@ public class Game {
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.play();
+	}
 }

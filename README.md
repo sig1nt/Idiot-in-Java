@@ -13,8 +13,12 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Game works on the server
 
 **Tasks**
-* Complete and integrate for goal 1: Possibly Monday 1/26
-* Determine tasks to finish goal 1, or determine tasks for goal 2
+* Complete and integrate for goal 1
+* Determine tasks for goal 2
+
+`
+What's left for goal 1? Readme communication++
+`
 
 *Kent*
 * Player class
@@ -24,4 +28,4 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * AI
 
 *Max*
-* Game class: Needs code review
+* Game class (done?)
