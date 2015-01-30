@@ -47,6 +47,14 @@ public class Card{
         if(!oCard.suit.equals(suit) return false;
         return true;
     }
+
+/*
+	public int toInt(){
+		// If we did this, couldn't we do stuff like
+		// card1 >= card2
+		// ?
+	}
+*/
     
     //returns a string in the form "__value__ of __suit__"
     public String toString(){
