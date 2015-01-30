@@ -44,7 +44,7 @@ public class Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
-        sortHand();
+        sort(hand);
     }
     
     /*Allows a human to choose their their move, given a certain Pile currP, and then populating the hand up to 3 cards from the deck D
@@ -95,7 +95,7 @@ public class Player{
                     while(hand.size() < 3){
                         hand.add(d.draw());
                     }
-                    sortHand();
+                    sort(hand);
                     cio.type("Played");
                     if(hand.isEmpty() && facedown.isEmpty()){
                         return 2;
@@ -154,14 +154,14 @@ public class Player{
                 }else{
                     hand.addAll(currP.pickup());
                     cio.type("Picked up pile");
-                    sortHand();
+                    sort(hand);
                     return 0;
                 } 
             }
         }else{
             hand.addAll(currP.pickup());
             cio.type("Picked up pile");
-            sortHand();
+            sort(hand);
             return 0;
         }
         cio.type("Hey");
@@ -172,14 +172,17 @@ public class Player{
       reutrns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
-        for(Card c: hand){
-            if(p.validMove(c)){
-                return true;
+        if(!hand.isEmpty()){
+            for(Card c: hand){
+                if(p.validMove(c)){
+                    return true;
+                }
             }
-        }
-        for(Card c: faceup){
-            if(p.validMove(c)){
-                return true;
+        }else{
+            for(Card c: faceup){
+                if(p.validMove(c)){
+                    return true;
+                }
             }
         }
         return false;
@@ -188,20 +191,18 @@ public class Player{
     public void sort(ArrayList<Card> cards){
         Card[] tempCards = cards.toArray(new Card[1]);
         cards.clear();
-        int highestFilled = 0;
         for(int i = 0; i < tempCards.length; i++){
-            if(tempCards[i] == null){
-                break;
-            }
-            highestFilled = i;
-        }
-        for(int i = 0; i < highestFilled + 1; i++){
             Card currSmallest = tempCards[i];
             int index = i;
-            for(int j = i + 1; j < highestFilled + 1; j++){
-                if(tempCards[j].value < currSmallest.value && suits.indexOf(tempCards[j].suit) < suits.indexOf(currSmallest.suit)){
+            for(int j = i + 1; j < tempCards.length; j++){
+                if(tempCards[j].value < currSmallest.value){
                     currSmallest = tempCards[j];
                     index = j;
+                }else{
+                    if(tempCards[j].value == currSmallest.value && suits.indexOf(tempCards[j].suit) < suits.indexOf(currSmallest.suit)){
+                        currSmallest = tempCards[j];
+                        index = j;
+                    }
                 }
             }
             if(i != index){
@@ -209,13 +210,9 @@ public class Player{
                 tempCards[i] = currSmallest;
                 tempCards[index] = temp;
             }
-            hand.add(tempCards[i]);
+            cio.type(cards);
+            cards.add(tempCards[i]);
         }
-    }
-    
-    //sorts the hand of the player by number and suit
-    public void sortHand(){
-        sort(hand);
     }
     
     //Gets the size of the player's hand
