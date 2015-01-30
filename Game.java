@@ -1,8 +1,7 @@
 public class Game {
 	
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
-	protected String[] takenNames;
-	String[] takenNames = new String[5];
+	protected String[] takenNames = new String[5];
 
 	/* Constructor, builds a Deck deck, a Pile pile,
 	 * and an ArrayList<Player> players
