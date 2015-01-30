@@ -46,24 +46,19 @@ public class Game {
 
 	// Takes the list of players w/ sorted hands and determines who goes first.
 	private Player goesFirst(ArrayList<Player> players) {
-		Card lowCard = players[0].hand[0];
-		Player goesFirst;
-		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("Clubs",
-				"Diamonds", "Spades", "Hearts"));
-		for (Player p : players) {
-				c = p.hand[0];
-				if (c.value <= lowCard.value) {
-					if (c.value == lowCard.value) {
-						if (suits.indexOf(c.suit) < suits.indexOf(lowCard.suit)) {
-							lowCard = c;
-							goesFirst = p;
-						}
-					}
-					else {
-						lowCard = c;
-						goesFirst = p;
-					}
-				}
+		Player goesFirst = players[0];
+		Card lowCard = goesFirst.hand[0];
+		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("clubs",
+				"diamonds", "spades", "hearts"));
+		for (Player p : players) { // TODO slice ArrayList index 1 to end, exclude zero because initial lowCard
+			c = p.hand[0];
+			if (c.value < lowCard.value) {
+				lowCard = c;
+				goesFirst = p;
+			} else if (c.value == lowCard.value && suits.indexOf(c.suit) < suits.indexOf(lowCard.suit)) {
+				lowCard = c;
+				goesFirst = p;
+			}
 		}
 		return goesFirst;
 	}
@@ -88,17 +83,16 @@ public class Game {
 				moveExitStatus = players[i].move(pile, deck, players);
 			}
 			switch (moveExitStatus) {
-				case 2:
-					winGame(players[i]); // no break b/c exit is a black hole
-				case 1:
-					break;
-				case 2:
-					if (i == numPlayers) {
+				case 0:
+					if (i == numPlayers-1) {
 						i = 0;
 					} else {
 						i++;
 					}
 					break;
+				case 2:
+					winGame(players[i]);
+				case 1:
 				default:
 					break;
 			}
