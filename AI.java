@@ -11,7 +11,7 @@ public class AI{
 		this.players = players;
 	}
 
-	public boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
+	private boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
 	//checks if the AI can complete a four of a kind
 		if(handy.isEmpty()){return false;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
@@ -29,17 +29,16 @@ public class AI{
 		return false;
 	}
 
-	public boolean isWinning(Player opp){
+	private boolean isWinning(Player opp){
 	//determines if the opponent is about to win
 		return ((opp.hand.size()+opp.facedown.size() < 3) && (opp.hand.size() == 0 || opp.facedown.size() == 0));
 	}
 
-	public int logical(Pile pile, int fdCount){
-		if(hand.isEmpty() && faceup.isEmpty()){return 1000; /* this means use a facedown card */}
+	private int logic(Pile pile, int fdCount){
+		if(hand.isEmpty() && faceup.isEmpty()){return 0; /* this means use a facedown card */}
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
-			return 100;
-			//100 means complete the four
+			return pile.checkTop().value;
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
@@ -56,23 +55,20 @@ public class AI{
 			} else {
 				return 10;
 			}
-		}
-		if(players.size()>1){
-			if(isWinning(players.get(1))) {
-				for (Integer i : values){
-					if((int)(i)!=7 && (int)(i) != 2 && (int)(i) != 10){
-						return (int)(i);
-					}
+		} if(players.size()>1 && isWinning(players.get(1))) {
+			for (Integer i : values){
+				if((int)(i)!=7 && (int)(i) != 2 && (int)(i) != 10){
+					return (int)(i);
 				}
-				if((int)(values.get(0)) == 7) {
-					return 7;
-				} else if((int)(values.get(0)) == 2) {
-					return 2;
-				} else if((int)(values.get(0)) == 2){
-					return 10;
-				}
-            }
-		}
+			}
+			if((int)(values.get(0)) == 7) {
+				return 7;
+			} else if((int)(values.get(0)) == 2) {
+				return 2;
+			} else if((int)(values.get(0)) == 2){
+				return 10;
+			}
+        }
 		for (Integer i : values){
 			if((int)(i)!=10 && (int)(i)!=2){
 				return (int)(i);
@@ -86,10 +82,20 @@ public class AI{
 		}
 	}
 
+	public Card logical(Pile pilein, int fdCountin){
+		int value = logic(pilein, fdCountin);
+		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
+		for (Card c : reserve){
+			if(c.value == value){return c;}
+		}
+		return new Card("errors",12);
+
+	}
+
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
-        h.add(new Card("hearts", 6));
+        h.add(new Card("hearts", 8));
         h.add(new Card("hearts", 13));
         ArrayList<Card> f = new ArrayList<Card>();
         f.add(new Card("spades", 7));
@@ -105,9 +111,9 @@ public class AI{
 		ArrayList<Card> ophand = new ArrayList<Card>();
 		ophand.add(new Card("hearts",12));
 		player.hand = ophand; 
-		player.facedown = new ArrayList<Card>();
+		//player.facedown = new ArrayList<Card>();
 		op.add(player);
 		AI driver = new AI(h,f,op);
-        System.out.println(driver.logical(p,3));
+        System.out.println(driver.logical(p,3).toString());
 	}
 }
