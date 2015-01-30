@@ -53,7 +53,7 @@ public class Game {
 		Card lowCard = goesFirst.hand[0];
 		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("clubs",
 				"diamonds", "spades", "hearts"));
-		for (Player p : players.subList(1, players.size()-1) {
+		for (Player p : players.subList(1, players.size()-1)) {
 			c = p.hand[0];
 			if (c.value < lowCard.value) {
 				lowCard = c;
@@ -77,7 +77,7 @@ public class Game {
 	 * Iterates through players, wrapping around, and
 	 * finishes when a player.move() returns 2
 	 */
-    public play() {
+    public void play() {
 		int i = goesFirst(players);
 		int moveExitStatus;
 		while (true) {
