@@ -66,7 +66,7 @@ public class CPU extends Player{
                     return 0;
                 }
             }
-            cio.type("Played" + numPlayable + " " + value + "s");
+            cio.type("Played" + numPlayable + " " + c.value + "s");
             if(hand.isEmpty() && facedown.isEmpty()){
                 return 2;
             }
