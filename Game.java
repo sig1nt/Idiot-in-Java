@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Game {
 	
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
