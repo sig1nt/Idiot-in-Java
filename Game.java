@@ -45,12 +45,12 @@ public class Game {
 	}
 
 	// Takes the list of players w/ sorted hands and determines who goes first.
-	private Player goesFirst(ArrayList<Player> players) {
+	private int goesFirst(ArrayList<Player> players) {
 		Player goesFirst = players[0];
 		Card lowCard = goesFirst.hand[0];
 		ArrayList<String> suits = new ArrayList().addAll(Arrays.asList("clubs",
 				"diamonds", "spades", "hearts"));
-		for (Player p : players) { // TODO slice ArrayList index 1 to end, exclude zero because initial lowCard
+		for (Player p : players.subList(1, players.size()-1) {
 			c = p.hand[0];
 			if (c.value < lowCard.value) {
 				lowCard = c;
@@ -60,7 +60,7 @@ public class Game {
 				goesFirst = p;
 			}
 		}
-		return goesFirst;
+		return players.indexOf(goesFirst);
 	}
 
 	// Eventually, this should close a thread and return to the lobby manager
@@ -74,7 +74,7 @@ public class Game {
 	 * finishes when a player.move() returns 2
 	 */
     public play() {
-		int i = players.indexOf(goesFirst(players));
+		int i = goesFirst(players);
 		int moveExitStatus;
 		while (true) {
 			if (players[i].human) {
