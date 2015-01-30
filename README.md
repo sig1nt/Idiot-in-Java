@@ -16,10 +16,6 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Complete and integrate for goal 1
 * Determine tasks for goal 2
 
-`
-What's left for goal 1? Readme communication++
-`
-
 *Kent*
 * Player class
 * CPU class
@@ -29,3 +25,6 @@ What's left for goal 1? Readme communication++
 
 *Max*
 * Game class (done?)
+
+**Dependencies**
+* Lightweight Java Game Library (lwjgl) version 3 stable (1/30/15)
