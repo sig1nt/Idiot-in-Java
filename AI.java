@@ -11,8 +11,9 @@ public class AI{
 		this.players = players;
 	}
 
-	private boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
 	//checks if the AI can complete a four of a kind
+	private boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
+
 		if(handy.isEmpty()){return false;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
 		temp.addAll(pile.seeThree());
@@ -29,13 +30,13 @@ public class AI{
 		return false;
 	}
 
+	//determines if the passed player is about to win
 	private boolean isWinning(Player opp){
-	//determines if the opponent is about to win
 		return ((opp.hand.size()+opp.facedown.size() < 3) && (opp.hand.size() == 0 || opp.facedown.size() == 0));
 	}
 
+	//this finds the value of the card that we're going to play
 	private int logic(Pile pile, int fdCount){
-		if(hand.isEmpty() && faceup.isEmpty()){return 0; /* this means use a facedown card */}
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return pile.checkTop().value;
@@ -82,6 +83,7 @@ public class AI{
 		}
 	}
 
+	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
 		int value = logic(pilein, fdCountin);
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
