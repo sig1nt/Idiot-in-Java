@@ -3,7 +3,9 @@ public class Game {
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
 	protected String[5] takenNames;
 
-	// Constructor, builds a Deck deck, a Pile pile, and an ArrayList<Player> players
+	/* Constructor, builds a Deck deck, a Pile pile,
+	 * and an ArrayList<Player> players
+	 */
 	public Game() {
 		Deck deck = new Deck();
 		Pile pile = new Pile();
@@ -55,7 +57,8 @@ public class Game {
 			if (c.value < lowCard.value) {
 				lowCard = c;
 				goesFirst = p;
-			} else if (c.value == lowCard.value && suits.indexOf(c.suit) < suits.indexOf(lowCard.suit)) {
+			} else if (c.value == lowCard.value
+					&& suits.indexOf(c.suit) < suits.indexOf(lowCard.suit)) {
 				lowCard = c;
 				goesFirst = p;
 			}
