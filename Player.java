@@ -59,8 +59,8 @@ public class Player{
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
-            if(hand.isEmpty() || faceup.isEmpty()){
-                if(hand.isEmpty()){
+            if(!hand.isEmpty() || !faceup.isEmpty()){
+                if(!hand.isEmpty()){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){
                         cinh += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
@@ -147,6 +147,16 @@ public class Player{
                         return 1;
                     }
                 }
+            }else{
+               if(currP.validMove(facedown.get(0))){
+                    currP.add(facedown.get(0));
+                    facedown.remove(0);
+                }else{
+                    hand.addAll(currP.pickup());
+                    cio.type("Picked up pile");
+                    sortHand();
+                    return 0;
+                } 
             }
         }else{
             hand.addAll(currP.pickup());
@@ -154,6 +164,7 @@ public class Player{
             sortHand();
             return 0;
         }
+        cio.type("Hey");
         return -1;
     }
     
@@ -230,7 +241,7 @@ public class Player{
     public static void main(String [] args){
         Random r = new Random();
         Deck d = new Deck();
-        Player p = new Player(true, "Kent",d);
+        Player p = new Player(true, "Kent", d);
         Pile pi = new Pile();
         do{
             pi.add(d.draw());

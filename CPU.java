@@ -56,7 +56,7 @@ public class CPU extends Player{
                     }
                 }
             }else{
-                if(validMove(facedown.get(0))){
+                if(currP.validMove(facedown.get(0))){
                     currP.add(facedown.get(0));
                     facedown.remove(0);
                 }else{
