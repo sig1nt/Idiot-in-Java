@@ -24,9 +24,9 @@ public class Game {
 	// Determines how many players of each type in Human, CPU to instantiate
 	private int getPlayerCount(boolean isHuman) {
 		if (isHuman) {
-			console.in(int p, "How many human players? ");
+			int p = (int) console.in("How many human players? ", 0);
 		} else {
-			console.in(int p, "How many computer players? ");
+			int p = (int) console.in("How many computer players? ", 0);
 		}
 		return p;
 	}
