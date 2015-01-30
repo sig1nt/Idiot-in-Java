@@ -15,7 +15,7 @@ public class CPU extends Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
-        sortHand();
+        sort(hand);
         sort(faceup);
     }
     
@@ -41,7 +41,7 @@ public class CPU extends Player{
                     }while(hand.size() < 3){
                         hand.add(d.draw());
                     }
-                    sortHand();
+                    sort(hand);
                 }else{
                     index = getIndex(c, faceup);
                     if(c.value != 2 && c.value != 10){
@@ -52,7 +52,7 @@ public class CPU extends Player{
                         }
                     }
                     for(int i = 0; i < numPlayable; i++){
-                        currP.add(faceups.get(index));
+                        currP.add(faceup.get(index));
                     }
                 }
             }else{
@@ -62,7 +62,7 @@ public class CPU extends Player{
                 }else{
                     hand.addAll(currP.pickup());
                     cio.type("Picked up pile");
-                    sortHand();
+                    sort(hand);
                     return 0;
                 }
             }
