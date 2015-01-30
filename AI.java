@@ -90,7 +90,7 @@ public class AI{
 		for (Card c : reserve){
 			if(c.value == value){return c;}
 		}
-		return new Card("errors",12);
+		return new Card("f",11);
 
 	}
 
