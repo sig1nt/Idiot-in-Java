@@ -78,7 +78,7 @@ public class CPU extends Player{
         }else{
             hand.addAll(currP.pickup());
             cio.type("Picked up pile");
-            sortHand();
+            sort(hand);
             return 0;
         }
     }
