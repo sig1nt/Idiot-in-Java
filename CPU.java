@@ -16,35 +16,56 @@ public class CPU extends Player{
             hand.add(d.draw());
         }
         sortHand();
+        sort(faceup);
     }
     
     public int move(Pile currP, Deck d){
         if(canMove(currP)){
-            int value = ai.logical(currP, facedown.size()), index;
-            if(value == 100){
-                index = hand.indexOf(currP.checkTop());
-            }else{
-                index = hand.indexOf(value);
-            }
-            int numPlayable = 0;
-            if(value != 2 && value != 10 && value != 100){
-                for(int i = index; i < index + 3; i++){
-                    if(hand.get(i).value == hand.get(index).value){
-                        numPlayable++;
-                    }else{
-                        break;
+            Card c = ai.logical(currP, facedown.size());
+            int index, numPlayable = 0;
+            if(hand.empty() || faceup.empty()){
+                if(hand.empty()){
+                    index = getIndex(c, hand);
+                    if(c.value != 2 && c.value != 10){
+                        for(int i = index; i < index + 3; i++){
+                            if(hand.get(i).value == hand.get(index).value){
+                                numPlayable++;
+                            }else{
+                                break;
+                            }
+                        }
+                    }
+                    for(int i = 0; i < numPlayable; i++){
+                        currP.add(hand.get(index));
+                        hand.remove(index);
+                    }while(hand.size() < 3){
+                        hand.add(d.draw());
+                    }
+                    sortHand();
+                }else{
+                    index = getIndex(c, faceup);
+                    if(c.value != 2 && c.value != 10){
+                        for(Card currC: faceup){
+                            if(currC.value == c.value){
+                                numPlayable++;
+                            }
+                        }
+                    }
+                    for(int i = 0; i < numPlayable; i++){
+                        currP.add(faceups.get(index));
                     }
                 }
+            }else{
+                if(validMove(facedown.get(0))){
+                    currP.add(facedown.get(0));
+                    facedown.remove(0);
+                }else{
+                    hand.addAll(currP.pickup());
+                    cio.type("Picked up pile");
+                    sortHand();
+                    return 0;
+                }
             }
-            for(int i = 0; i < numPlayable; i++){
-                currP.add(hand.get(index - 1));
-            }
-            for(int i = 0; i < numPlayable; i++){
-                hand.remove(index - 1);
-            }while(hand.size() < 3){
-                hand.add(d.draw());
-            }
-            sortHand();
             cio.type("Played" + numPlayable + " " + value + "s");
             if(hand.isEmpty() && facedown.isEmpty()){
                 return 2;
@@ -60,6 +81,17 @@ public class CPU extends Player{
             sortHand();
             return 0;
         }
+    }
+    
+    public int getIndex(Card c, ArrayList<Card> options){
+        int index = 0;
+        for(Card hCard: options){
+            if(hCard.equals(c)){
+                return index;
+            }
+            index++;
+        }
+        return -1;
     }
     
     public static void main(String[]args){

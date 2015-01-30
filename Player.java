@@ -56,53 +56,97 @@ public class Player{
     public int move(Pile currP, Deck d){
         String s = "Cards in the Pile are:\n";
         s += currP.checkTop().getShortName() + "\n";
-        s += "the cards in your hand are:\n";
-        for(int i = 0; i < hand.size(); i++){
-            s += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
-        }
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
-            int numPlay = 1, index;
-            Card c;
-            do{
-                index = (int)cio.in("enter the index of the card you wish to play", 0);
-                c = hand.get(index - 1);
-                if(!currP.validMove(c)){
-                    cio.typeln("that move is illegal");
-                }else{
-                    int sameVals = 0;
-                    for(Card currC: hand){
-                        if(currC.value == c.value){
-                            sameVals++;
+            if(hand.empty() || faceup.empty()){
+                if(hand.empty()){
+                    String cinh = "the cards in your hand are:\n";
+                    for(int i = 0; i < hand.size(); i++){
+                        cinh += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
+                    }
+                    cio.typeln(cinh);
+                    int numPlay = 1, index;
+                    Card c;
+                    do{
+                        index = (int)cio.in("enter the index of the card you wish to play", 0);
+                        c = hand.get(index - 1);
+                        if(!currP.validMove(c)){
+                            cio.typeln("that move is illegal");
+                        }else{
+                            int sameVals = 0;
+                            for(Card currC: hand){
+                                if(currC.value == c.value){
+                                    sameVals++;
+                                }
+                            }
+                            if(sameVals > 1){
+                                do{
+                                    numPlay = (int)cio.in("How many Do you want to play? (Up to" + sameVals + ")", 0);
+                                }while(numPlay < 1 || numPlay > sameVals);
+                            }
+                            chosen = true;
                         }
+                    }while(!chosen);
+                    for(int i = 0; i < numPlay; i++){
+                        currP.add(hand.get(index - 1));
+                        hand.remove(index - 1);
                     }
-                    if(sameVals > 1){
-                        do{
-                            numPlay = (int)cio.in("How many Do you want to play? (Up to" + sameVals + ")", 0);
-                        }while(numPlay < 1 || numPlay > sameVals);
+                    while(hand.size() < 3){
+                        hand.add(d.draw());
                     }
-                    chosen = true;
+                    sortHand();
+                    cio.type("Played");
+                    if(hand.isEmpty() && facedown.isEmpty()){
+                        return 2;
+                    }
+                    if(c.value != 10 && !currP.fourKind()){
+                        return 0;
+                    }else{
+                        return 1;
+                    }
+                }else{
+                    String cinf = "the cards in your hand are:\n";
+                    for(int i = 0; i < faceup.size(); i++){
+                        cinf += (i + 1) + ") " + faceup.get(i).getShortName() + "\n";
+                    }
+                    cio.typeln(cinf);
+                    int numPlay = 1, index;
+                    Card c;
+                    do{
+                        index = (int)cio.in("enter the index of the card you wish to play", 0);
+                        c = faceup.get(index - 1);
+                        if(!currP.validMove(c)){
+                            cio.typeln("that move is illegal");
+                        }else{
+                            int sameVals = 0;
+                            for(Card currC: faceup){
+                                if(currC.value == c.value){
+                                    sameVals++;
+                                }
+                            }
+                            if(sameVals > 1){
+                                do{
+                                    numPlay = (int)cio.in("How many Do you want to play? (Up to" + sameVals + ")", 0);
+                                }while(numPlay < 1 || numPlay > sameVals);
+                            }
+                            chosen = true;
+                        }
+                    }while(!chosen);
+                    for(int i = 0; i < numPlay; i++){
+                        currP.add(faceup.get(index - 1));
+                        faceup.remove(index - 1);
+                    }
+                    cio.type("Played");
+                    if(hand.isEmpty() && facedown.isEmpty()){
+                        return 2;
+                    }
+                    if(c.value != 10 && !currP.fourKind()){
+                        return 0;
+                    }else{
+                        return 1;
+                    }
                 }
-            }while(!chosen);
-            for(int i = 0; i < numPlay; i++){
-                currP.add(hand.get(index - 1));
-            }
-            for(int i = 0; i < numPlay; i++){
-                hand.remove(index - 1);
-            }
-            while(hand.size() < 3){
-                hand.add(d.draw());
-            }
-            sortHand();
-            cio.type("Played");
-            if(hand.isEmpty() && facedown.isEmpty()){
-                return 2;
-            }
-            if(c.value != 10 && !currP.fourKind()){
-                return 0;
-            }else{
-                return 1;
             }
         }else{
             hand.addAll(currP.pickup());
@@ -121,36 +165,45 @@ public class Player{
                 return true;
             }
         }
+        for(Card c: faceup){
+            if(p.validMove(c)){
+                return true;
+            }
+        }
         return false;
     }
     
-    //sorts the hand of the player by number and suit
-    public void sortHand(){
-        Card[] tempHand = hand.toArray(new Card[1]);
-        hand.clear();
+    public void sort(ArrayList<Card> cards){
+        Card[] tempCards = cards.toArray(new Card[1]);
+        cards.clear();
         int highestFilled = 0;
-        for(int i = 0; i < tempHand.length; i++){
-            if(tempHand[i] == null){
+        for(int i = 0; i < tempCards.length; i++){
+            if(tempCards[i] == null){
                 break;
             }
             highestFilled = i;
         }
         for(int i = 0; i < highestFilled + 1; i++){
-            Card currSmallest = tempHand[i];
+            Card currSmallest = tempCards[i];
             int index = i;
             for(int j = i + 1; j < highestFilled + 1; j++){
-                if(tempHand[j].value < currSmallest.value && suits.indexOf(tempHand[j].suit) < suits.indexOf(currSmallest.suit)){
-                    currSmallest = tempHand[j];
+                if(tempCards[j].value < currSmallest.value && suits.indexOf(tempCards[j].suit) < suits.indexOf(currSmallest.suit)){
+                    currSmallest = tempCards[j];
                     index = j;
                 }
             }
             if(i != index){
-                Card temp = tempHand[i];
-                tempHand[i] = currSmallest;
-                tempHand[index] = temp;
+                Card temp = tempCards[i];
+                tempCards[i] = currSmallest;
+                tempCards[index] = temp;
             }
-            hand.add(tempHand[i]);
+            hand.add(tempCards[i]);
         }
+    }
+    
+    //sorts the hand of the player by number and suit
+    public void sortHand(){
+        sort(hand);
     }
     
     //Gets the size of the player's hand
