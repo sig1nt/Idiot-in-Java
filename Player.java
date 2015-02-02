@@ -174,7 +174,7 @@ public class Player{
         return -1;
         }
     
-    public int firstMove(Pile currP){
+    public int firstMove(Pile currP, Deck d){
         Card c = hand.get(0);
         int numPlayable = 0;
         if(c.value != 2 && c.value != 10){
