@@ -69,6 +69,10 @@ public class Pile{
         }
     }
     
+    boolean isEmpty(){
+        return p.isEmpty();
+    }
+    
     //Returns a string with the short names of the cards in the pile from top to bottom
     public String toString(){
         String s = "";

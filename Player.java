@@ -54,8 +54,15 @@ public class Player{
       2: end game, current player wins
     */
     public int move(Pile currP, Deck d){
-        String s = "Cards in the Pile are:\n";
-        s += currP.checkTop().getShortName() + "\n";
+        String s = "";
+        if(currP.isEmpty()){
+            s += "Cards in the Pile are:\n";
+            for(Card c: currP.seeThree()){
+                s += currP.checkTop().getShortName() + "\n";
+            }
+        }else{
+            s += "There are no cards in the pile";
+        }
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
@@ -164,8 +171,27 @@ public class Player{
             sort(hand);
             return 0;
         }
-        cio.type("Hey");
         return -1;
+        }
+    
+    public int firstMove(Pile currP){
+        Card c = hand.get(0);
+        int numPlayable = 0;
+        if(c.value != 2 && c.value != 10){
+            for(Card currC: faceup){
+                if(currC.value == c.value){
+                    numPlayable++;
+                }
+            }
+        }
+        for(int i = 0; i < numPlayable; i++){
+            currP.add(faceup.get(0));
+            faceup.remove(0);
+        }
+        while(hand.size() < 3){
+            hand.add(d.draw());
+        }
+        sort(hand);
     }
     
     /*checks the hand to see if a player can move based on their hand and the pile p

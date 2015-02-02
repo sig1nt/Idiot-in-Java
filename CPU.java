@@ -38,7 +38,8 @@ public class CPU extends Player{
                     for(int i = 0; i < numPlayable; i++){
                         currP.add(hand.get(index));
                         hand.remove(index);
-                    }while(hand.size() < 3){
+                    }
+                    while(hand.size() < 3){
                         hand.add(d.draw());
                     }
                     sort(hand);
@@ -53,7 +54,12 @@ public class CPU extends Player{
                     }
                     for(int i = 0; i < numPlayable; i++){
                         currP.add(faceup.get(index));
+                        faceup.remove(0);
                     }
+                    while(hand.size() < 3){
+                        hand.add(d.draw());
+                    }
+                    sort(hand);
                 }
             }else{
                 if(currP.validMove(facedown.get(0))){
