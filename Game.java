@@ -90,7 +90,7 @@ public class Game {
 		players.get(i).firstMove(pile, deck);
 		if (i == numPlayers-1) {
 			i = 0;
-		else {
+		} else {
 			i++;
 		}
 		while (true) {
