@@ -58,7 +58,7 @@ public class Player{
         if(!currP.isEmpty()){
             s += "Cards in the Pile are:\n";
             for(Card c: currP.seeThree()){
-                s += currP.checkTop().getShortName() + "\n";
+                s += c.getShortName() + "\n";
             }
         }else{
             s += "There are no cards in the pile";
@@ -109,6 +109,7 @@ public class Player{
                     if(c.value != 10 && !currP.fourKind()){
                         return 0;
                     }else{
+                        currP.clear();
                         return 1;
                     }
                 }else{
@@ -149,6 +150,7 @@ public class Player{
                     if(c.value != 10 && !currP.fourKind()){
                         return 0;
                     }else{
+                        currP.clear();
                         return 1;
                     }
                 }
