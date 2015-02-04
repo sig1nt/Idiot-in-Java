@@ -99,7 +99,7 @@ public class Player{
                         currP.add(hand.get(index - 1));
                         hand.remove(index - 1);
                     }
-                    while(hand.size() < 3){
+                    while(hand.size() < 3 && !d.empty()){
                         hand.add(d.draw());
                     }
                     sort(hand);
@@ -175,6 +175,7 @@ public class Player{
         }
     
     public int firstMove(Pile currP, Deck d){
+    cio.typeln("Making First Move");
         Card c = hand.get(0);
         int numPlayable = 0;
         if(c.value != 2 && c.value != 10){
@@ -192,6 +193,7 @@ public class Player{
             hand.add(d.draw());
         }
         sort(hand);
+        cio.typeln("Ending First Move");
         if(c.value != 10 && !currP.fourKind()){
             return 0;
         }else{

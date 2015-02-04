@@ -21,7 +21,7 @@ public class Pile{
             return p;
         }else{
             ArrayList<Card> cArr = new ArrayList<Card>();
-            cArr.addAll(p.subList(p.size() - 4, p.size() - 1));
+            cArr.addAll(p.subList(p.size() - 3, p.size()));
             return cArr;
         }
     }

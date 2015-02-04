@@ -41,7 +41,7 @@ public class CPU extends Player{
                         currP.add(hand.get(index));
                         hand.remove(index);
                     }
-                    while(hand.size() < 3){
+                    while(hand.size() < 3 && !d.empty()){
                         hand.add(d.draw());
                     }
                     sort(hand);
