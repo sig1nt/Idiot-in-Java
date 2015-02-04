@@ -29,6 +29,7 @@ public class CPU extends Player{
                     if(c.value != 2 && c.value != 10){
                         for(int i = index; i < index + 3; i++){
                             if(hand.get(i).value == hand.get(index).value){
+                                System.out.println("plus 1");
                                 numPlayable++;
                             }else{
                                 break;
@@ -72,7 +73,7 @@ public class CPU extends Player{
                     return 0;
                 }
             }
-            cio.type("Played" + numPlayable + " " + c.value + "s");
+            cio.type("Played " + numPlayable + " " + c.value + "s");
             if(hand.isEmpty() && facedown.isEmpty()){
                 return 2;
             }

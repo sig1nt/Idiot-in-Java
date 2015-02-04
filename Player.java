@@ -192,22 +192,31 @@ public class Player{
             hand.add(d.draw());
         }
         sort(hand);
+        if(c.value != 10 && !currP.fourKind()){
+            return 0;
+        }else{
+            return 1;
+        }
     }
     
     /*checks the hand to see if a player can move based on their hand and the pile p
       reutrns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
-        if(!hand.isEmpty()){
-            for(Card c: hand){
-                if(p.validMove(c)){
-                    return true;
-                }
-            }
+        if(p.isEmpty()){
+            return true;
         }else{
-            for(Card c: faceup){
-                if(p.validMove(c)){
-                    return true;
+            if(!hand.isEmpty()){
+                for(Card c: hand){
+                    if(p.validMove(c)){
+                        return true;
+                    }
+                }
+            }else{
+                for(Card c: faceup){
+                    if(p.validMove(c)){
+                        return true;
+                    }
                 }
             }
         }
