@@ -59,7 +59,7 @@ public class Game {
 		Card lowCard = goesFirst.hand.get(0);
 		Card c;
 		ArrayList<String> suits = new ArrayList<String>();
-		suits.addAll(Arrays.asList("clubs", "diamonds", "spades", "hearts"));
+		suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
 		for (Player p : players.subList(1, players.size()-1)) {
 		c = p.hand.get(0);
 			if (c.value < lowCard.value) {
@@ -88,6 +88,7 @@ public class Game {
 		int i = goesFirst(players);
 		int moveExitStatus;
 		moveExitStatus = players.get(i).firstMove(pile, deck);
+		console.typeln(players.get(i).name + "'s turn");
 		if (moveExitStatus == 0) {
 			if (i == numPlayers-1) {
 				i = 0;
