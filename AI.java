@@ -36,7 +36,7 @@ public class AI{
 	}
 
 	//this finds the value of the card that we're going to play
-	private int logic(Pile pile, int fdCount){
+	private int getPlayValue(Pile pile, int fdCount){
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return pile.checkTop().value;
@@ -85,7 +85,7 @@ public class AI{
 
 	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
-		int value = logic(pilein, fdCountin);
+		int value = getPlayValue(pilein, fdCountin);
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		for (Card c : reserve){
 			if(c.value == value){return c;}
