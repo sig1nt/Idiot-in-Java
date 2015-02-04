@@ -87,11 +87,13 @@ public class Game {
     public void play() {
 		int i = goesFirst(players);
 		int moveExitStatus;
-		players.get(i).firstMove(pile, deck);
-		if (i == numPlayers-1) {
-			i = 0;
-		} else {
-			i++;
+		moveExitStatus = players.get(i).firstMove(pile, deck);
+		if (moveExitStatus == 0) {
+			if (i == numPlayers-1) {
+				i = 0;
+			} else {
+				i++;
+			}
 		}
 		while (true) {
 			if (players.get(i).human) {
