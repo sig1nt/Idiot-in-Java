@@ -55,7 +55,7 @@ public class Player{
     */
     public int move(Pile currP, Deck d){
         String s = "";
-        if(currP.isEmpty()){
+        if(!currP.isEmpty()){
             s += "Cards in the Pile are:\n";
             for(Card c: currP.seeThree()){
                 s += currP.checkTop().getShortName() + "\n";
@@ -103,7 +103,6 @@ public class Player{
                         hand.add(d.draw());
                     }
                     sort(hand);
-                    cio.type("Played");
                     if(hand.isEmpty() && facedown.isEmpty()){
                         return 2;
                     }
@@ -144,7 +143,6 @@ public class Player{
                         currP.add(faceup.get(index - 1));
                         faceup.remove(index - 1);
                     }
-                    cio.type("Played");
                     if(hand.isEmpty() && facedown.isEmpty()){
                         return 2;
                     }
@@ -160,14 +158,14 @@ public class Player{
                     facedown.remove(0);
                 }else{
                     hand.addAll(currP.pickup());
-                    cio.type("Picked up pile");
+                    cio.typeln("Picked up pile");
                     sort(hand);
                     return 0;
                 } 
             }
         }else{
             hand.addAll(currP.pickup());
-            cio.type("Picked up pile");
+            cio.typeln("Picked up pile");
             sort(hand);
             return 0;
         }
@@ -245,7 +243,6 @@ public class Player{
                 tempCards[i] = currSmallest;
                 tempCards[index] = temp;
             }
-            cio.type(cards);
             cards.add(tempCards[i]);
         }
     }

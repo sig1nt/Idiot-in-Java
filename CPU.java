@@ -22,14 +22,14 @@ public class CPU extends Player{
     public int move(Pile currP, Deck d){
         if(canMove(currP)){
             Card c = ai.logical(currP, facedown.size());
-            int index, numPlayable = 0;
+            int index, numPlayable = 1;
             if(hand.isEmpty() || faceup.isEmpty()){
-                if(hand.isEmpty()){
+                if(!hand.isEmpty()){
                     index = getIndex(c, hand);
+                    int currVal = c.value;
                     if(c.value != 2 && c.value != 10){
-                        for(int i = index; i < index + 3; i++){
-                            if(hand.get(i).value == hand.get(index).value){
-                                System.out.println("plus 1");
+                        for(int i = index + 1; i < index + 3; i++){
+                            if(hand.get(i).value == currVal){
                                 numPlayable++;
                             }else{
                                 break;
@@ -61,6 +61,7 @@ public class CPU extends Player{
                         hand.add(d.draw());
                     }
                     sort(hand);
+                    cio.typeln(currP);
                 }
             }else{
                 if(currP.validMove(facedown.get(0))){
@@ -68,12 +69,12 @@ public class CPU extends Player{
                     facedown.remove(0);
                 }else{
                     hand.addAll(currP.pickup());
-                    cio.type("Picked up pile");
+                    cio.typeln("Picked up pile");
                     sort(hand);
                     return 0;
                 }
             }
-            cio.type("Played " + numPlayable + " " + c.value + "s");
+            cio.typeln("Played " + numPlayable + " " + c.value + "s");
             if(hand.isEmpty() && facedown.isEmpty()){
                 return 2;
             }
@@ -84,7 +85,7 @@ public class CPU extends Player{
             }
         }else{
             hand.addAll(currP.pickup());
-            cio.type("Picked up pile");
+            cio.typeln("Picked up pile");
             sort(hand);
             return 0;
         }
