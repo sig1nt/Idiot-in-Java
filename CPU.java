@@ -20,6 +20,7 @@ public class CPU extends Player{
     }
     
     public int move(Pile currP, Deck d){
+        cio.type(hand);
         if(canMove(currP)){
             Card c = ai.logical(currP, facedown.size());
             int index, numPlayable = 1;
@@ -57,16 +58,15 @@ public class CPU extends Player{
                         currP.add(faceup.get(index));
                         faceup.remove(0);
                     }
-                    while(hand.size() < 3){
-                        hand.add(d.draw());
-                    }
-                    sort(hand);
                     cio.typeln(currP);
                 }
             }else{
                 if(currP.validMove(facedown.get(0))){
                     currP.add(facedown.get(0));
                     facedown.remove(0);
+                    if(hand.isEmpty() && facedown.isEmpty()){
+                        return 2;
+                    }
                 }else{
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
@@ -81,6 +81,7 @@ public class CPU extends Player{
             if(currP.checkTop().value != 10 && !currP.fourKind()){
                 return 0;
             }else{
+                currP.clear();
                 return 1;
             }
         }else{
