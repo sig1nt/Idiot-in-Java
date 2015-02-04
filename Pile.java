@@ -20,7 +20,9 @@ public class Pile{
         if(p.size() <= 3){
             return p;
         }else{
-            return (ArrayList<Card>)p.subList(p.size() - 4, p.size() - 1);
+            ArrayList<Card> cArr = new ArrayList<Card>();
+            cArr.addAll(p.subList(p.size() - 4, p.size() - 1));
+            return cArr;
         }
     }
     

@@ -69,7 +69,7 @@ public class CPU extends Player{
                     facedown.remove(0);
                 }else{
                     hand.addAll(currP.pickup());
-                    cio.typeln("Picked up pile");
+                    cio.typeln(name + " picked up pile");
                     sort(hand);
                     return 0;
                 }
@@ -85,7 +85,7 @@ public class CPU extends Player{
             }
         }else{
             hand.addAll(currP.pickup());
-            cio.typeln("Picked up pile");
+            cio.typeln(name + " picked up pile");
             sort(hand);
             return 0;
         }
