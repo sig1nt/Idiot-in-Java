@@ -96,11 +96,8 @@ public class Game {
 			}
 		}
 		while (true) {
-			if (players.get(i).human) {
-				moveExitStatus = players.get(i).move(pile, deck);
-			} else {
-				moveExitStatus = players.get(i).move(pile, deck);
-			}
+			console.typeln(players.get(i).name + "'s turn");
+			moveExitStatus = players.get(i).move(pile, deck);
 			switch (moveExitStatus) {
 				case 0:
 					if (i == numPlayers-1) {
