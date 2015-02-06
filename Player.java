@@ -214,7 +214,7 @@ public class Player{
       reutrns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
-        if(p.isEmpty() || (hand.isEmpty && faceup.isEmpty())){
+        if(p.isEmpty() || (hand.isEmpty() && faceup.isEmpty())){
             return true;
         }else{
             if(!hand.isEmpty()){
