@@ -168,6 +168,8 @@ public class Player{
                     currP.add(facedown.get(0));
                     facedown.remove(0);
                 }else{
+                    currP.add(facedown.get(0));
+                    facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
                     sort(hand);
@@ -198,6 +200,7 @@ public class Player{
             currP.add(faceup.get(0));
             faceup.remove(0);
         }
+        cio.typeln(name + " played " + numPlayable + " " + c.value + "s");
         while(hand.size() < 3){
             hand.add(d.draw());
         }
@@ -211,7 +214,7 @@ public class Player{
     }
     
     /*checks the hand to see if a player can move based on their hand and the pile p
-      reutrns true if the player can move and false if they can't
+      returns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
         if(p.isEmpty() || (hand.isEmpty() && faceup.isEmpty())){
@@ -224,14 +227,12 @@ public class Player{
                     }
                     cio.typeln(c.value + " was not valid");
                 }
-            }else if(!faceup.isEmpty()){
+            }else{
                 for(Card c: faceup){
                     if(p.validMove(c)){
                         return true;
                     }
                 }
-            }else{
-                
             }
         }
         return false;
@@ -261,16 +262,6 @@ public class Player{
             }
             cards.add(tempCards[i]);
         }
-    }
-    
-    //Gets the size of the player's hand
-    public int handsize(){
-        return hand.size();
-    }
-    
-    //Gets number of cards facedown for a player
-    public int numDown(){
-        return facedown.size();
     }
     
     //Returns a String with the name and hand of the player
