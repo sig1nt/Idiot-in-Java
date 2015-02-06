@@ -74,9 +74,13 @@ public class Player{
                     }
                     cio.typeln(cinh);
                     int numPlay = 1, index;
-                    Card c;
+                    Card c = new Card();
                     do{
                         index = (int)cio.in("enter the index of the card you wish to play", 0);
+                        if(index<1 || index>hand.size()-1){
+                            cio.typeln("Please enter a valid hand index.\n");
+                            continue;
+                        }
                         c = hand.get(index - 1);
                         if(!currP.validMove(c)){
                             cio.typeln("that move is illegal");
@@ -119,9 +123,13 @@ public class Player{
                     }
                     cio.typeln(cinf);
                     int numPlay = 1, index;
-                    Card c;
+                    Card c = new Card();
                     do{
                         index = (int)cio.in("enter the index of the card you wish to play", 0);
+                        if(index<1 || index>hand.size()){
+                            cio.typeln("Please enter a valid hand index.\n");
+                            continue;
+                        }
                         c = faceup.get(index - 1);
                         if(!currP.validMove(c)){
                             cio.typeln("that move is illegal");
