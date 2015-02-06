@@ -213,7 +213,7 @@ public class Player{
       reutrns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
-        if(p.isEmpty()){
+        if(p.isEmpty() || (hand.isEmpty && faceup.isEmpty())){
             return true;
         }else{
             if(!hand.isEmpty()){
@@ -223,12 +223,14 @@ public class Player{
                     }
                     cio.typeln(c.value + " was not valid");
                 }
-            }else{
+            }else if(!faceup.isEmpty()){
                 for(Card c: faceup){
                     if(p.validMove(c)){
                         return true;
                     }
                 }
+            }else{
+                
             }
         }
         return false;
