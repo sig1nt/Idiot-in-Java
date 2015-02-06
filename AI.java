@@ -35,7 +35,8 @@ public class AI{
 	}
 
 	private boolean isValid(Pile p, Card c){
-		return (p.checkTop().value > c.value)?False:True;
+		if(p.isEmpty()){return true;}
+		return (p.checkTop().value > c.value)?false:true;
 	}
 
 	//this finds the value of the card that we're going to play
@@ -46,7 +47,9 @@ public class AI{
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
-			values.add(new Integer(card.value));
+			if(isValid(pile,card)){
+				values.add(new Integer(card.value));
+			}
 		}
 		Collections.sort(values);
 		if(isWinning(players.get(0))) {
