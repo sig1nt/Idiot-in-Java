@@ -106,7 +106,7 @@ public class AI{
 
 	}
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
         h.add(new Card("hearts", 8));
@@ -129,5 +129,5 @@ public class AI{
 		op.add(player);
 		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3).toString());
-	}
+	}*/
 }
