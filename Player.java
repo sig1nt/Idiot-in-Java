@@ -76,10 +76,11 @@ public class Player{
                     int numPlay = 1, index;
                     Card c = new Card();
                     do{
-                        index = (int)cio.in("enter the index of the card you wish to play", 0);
-                        if(index<1 || index>hand.size()-1){
-                            cio.typeln("Please enter a valid hand index.\n");
-                            continue;
+                        while(true){
+                            index = (int)cio.in("enter the index of the card you wish to play", 0);
+                            if(index > 1 && index < hand.size()){
+                                break;
+                            }
                         }
                         c = hand.get(index - 1);
                         if(!currP.validMove(c)){
@@ -93,7 +94,7 @@ public class Player{
                             }
                             if(sameVals > 1){
                                 do{
-                                    numPlay = (int)cio.in("How many Do you want to play? (Up to" + sameVals + ")", 0);
+                                    numPlay = (int)cio.in("How many Do you want to play? (Up to " + sameVals + ")", 0);
                                 }while(numPlay < 1 || numPlay > sameVals);
                             }
                             chosen = true;
