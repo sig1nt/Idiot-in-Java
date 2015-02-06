@@ -17,13 +17,21 @@ public class Game {
 	public Game() {
 		humanCount = getPlayerCount(true);
 		cpuCount = getPlayerCount(false);
+		numPlayers = humanCount+cpuCount;
+		if (numPlayers == 0) {
+			System.out.println("0 total players, so game over.");
+			System.exit(1);
+		} else if  (numPlayers == 1) {
+			System.out.println("1 player, so game over.");
+			System.out.println("Not much fun to play with yourself, eh?");
+			System.exit(1);
+		}
 		for (int i=0; i < humanCount; i++) {
 			players.add(new Player(true, getPlayerName(i), deck));
 		}
 		for (int i=0; i < cpuCount; i++) {
 			players.add(new CPU("CPU-" + (i+1), deck, players));
 		}
-		numPlayers = humanCount+cpuCount;
     }
 
 	// Determines how many players of each type in Human, CPU to instantiate
