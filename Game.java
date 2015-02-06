@@ -87,8 +87,8 @@ public class Game {
     public void play() {
 		int i = goesFirst(players);
 		int moveExitStatus;
-		moveExitStatus = players.get(i).firstMove(pile, deck);
 		console.typeln(players.get(i).name + "'s turn");
+		moveExitStatus = players.get(i).firstMove(pile, deck);
 		if (moveExitStatus == 0) {
 			if (i == numPlayers-1) {
 				i = 0;
