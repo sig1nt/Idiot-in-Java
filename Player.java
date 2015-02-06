@@ -78,7 +78,7 @@ public class Player{
                     do{
                         while(true){
                             index = (int)cio.in("enter the index of the card you wish to play", 0);
-                            if(index > 1 && index < hand.size()){
+                            if(index => 1 && index <= hand.size()){
                                 break;
                             }
                         }
