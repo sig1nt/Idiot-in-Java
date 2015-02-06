@@ -60,12 +60,11 @@ public class Pile{
     }
     
     //returns true if the selected move is legal and false if it is illegal
-    public boolean validMove(Card c){
-        if(c.value == 2 || c.value == 10 || p.isEmpty()){
+    public boolean validMove(Card c){        if(c.value == 2 || c.value == 10 || p.isEmpty()){
             return true;
         }else if(p.get(p.size() - 1).value == 7 && c.value <= 7){
             return true;
-        }else if(c.value >= p.get(p.size() - 1).value){
+        }else if(c.value >= p.get(p.size() - 1).value && p.get(p.size() - 1).value != 7){
             return true;
         }else{
             return false;
