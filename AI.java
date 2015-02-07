@@ -34,6 +34,7 @@ public class AI{
 		return ((opp.hand.size()+opp.facedown.size() < 3) && (opp.hand.size() == 0 || opp.facedown.size() == 0));
 	}
 
+	//checks if a card can be put on the pile
 	private boolean isValid(Pile p, Card c){
 		if(p.isEmpty()){return true;}
 		return (p.checkTop().value > c.value)?false:true;
