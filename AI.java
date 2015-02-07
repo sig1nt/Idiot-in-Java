@@ -22,7 +22,7 @@ public class AI{
 		}
 		Collections.sort(values);
 		for(int i = 0; i<(values.size()-3); i++){
-			if(values.get(i)==values.get(i+1) && values.get(i)==values.get(i+2)&&values.get(i)==values.get(i+3)){
+			if(values.get(i)==values.get(i+3)){
 				return true;
 			}
 		}
@@ -34,20 +34,27 @@ public class AI{
 		return ((opp.hand.size()+opp.facedown.size() < 3) && (opp.hand.size() == 0 || opp.facedown.size() == 0));
 	}
 
+	//checks if a card can be put on the pile
 	private boolean isValid(Pile p, Card c){
-		return (p.checkTop().value > c.value)?False:True;
+		if(p.isEmpty()){return true;}
+		return (p.checkTop().value > c.value)?false:true;
 	}
 
 	//this finds the value of the card that we're going to play
 	private int getPlayValue(Pile pile, int fdCount){
+		System.out.println("\nHand I am handed:" + hand);
+		System.out.println("\nPile I'm given:" + pile.seeThree());
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return pile.checkTop().value;
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
-			values.add(new Integer(card.value));
+			if(isValid(pile,card)){
+				values.add(new Integer(card.value));
+			}
 		}
+		System.out.println("\n Cards in reserve:" + values);
 		Collections.sort(values);
 		if(isWinning(players.get(0))) {
 			if(values.get(values.size()-1)>10){
@@ -88,17 +95,19 @@ public class AI{
 
 	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
-
 		int value = getPlayValue(pilein, fdCountin);
+		System.out.println("Value of Card I will play:" + value);
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		for (Card c : reserve){
-			if(c.value == value){return c;}
+			if(c.value == value){
+				System.out.println("\nCard I am sending:" + c);
+				return c;}
 		}
 		return new Card("f",11);
 
 	}
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
         h.add(new Card("hearts", 8));
@@ -121,5 +130,5 @@ public class AI{
 		op.add(player);
 		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3).toString());
-	}
+	}*/
 }
