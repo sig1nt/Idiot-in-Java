@@ -24,7 +24,7 @@ public class CPU extends Player{
         if(canMove(currP)){
             Card c = ai.logical(currP, facedown.size());
             int index, numPlayable = 1;
-            if(hand.isEmpty() || faceup.isEmpty()){
+            if(!hand.isEmpty() || !faceup.isEmpty()){
                 if(!hand.isEmpty()){
                     index = getIndex(c, hand);
                     int currVal = c.value;
