@@ -30,7 +30,7 @@ public class CPU extends Player{
                     int currVal = c.value;
                     if(c.value != 2 && c.value != 10){
                         for(int i = index + 1; i < index + 3; i++){
-                            if(hand.get(i).value == currVal){
+                            if(i != hand.size() && hand.get(i).value == currVal){
                                 numPlayable++;
                             }else{
                                 break;
