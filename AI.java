@@ -36,7 +36,7 @@ public class AI{
 
 	//checks if a card can be put on the pile
 	private boolean isValid(Pile p, Card c){
-		if(p.isEmpty()){return true;}
+		if(p.isEmpty()||c.value == 2){return true;}
 		return (p.checkTop().value > c.value)?false:true;
 	}
 
