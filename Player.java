@@ -220,7 +220,7 @@ public class Player{
         if(p.isEmpty() || (hand.isEmpty() && faceup.isEmpty())){
             return true;
         }else{
-            System.out.println(hand.isEmpty());
+            System.out.println("Hand: " + hand.isEmpty());
             if(!hand.isEmpty()){
                 for(Card c: hand){
                     if(p.validMove(c)){
