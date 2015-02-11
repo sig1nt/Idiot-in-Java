@@ -1,0 +1,18 @@
+CPU-2's turn 
+
+[7 of Hearts, 10 of Clubs, Queen of Clubs] 7 was not valid 
+
+
+Hand I am handed:[7 of Hearts, 10 of Clubs, Queen of Clubs]
+
+Pile I'm given:[Queen of Hearts, King of Diamonds, King of Hearts]
+
+ Cards in reserve:[]
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+at java.util.ArrayList.rangeCheck(ArrayList.java:653)
+at java.util.ArrayList.get(ArrayList.java:429)
+at AI.getPlayValue(AI.java:88)
+at AI.logical(AI.java:98)
+at CPU.move(CPU.java:25)
+at Game.play(Game.java:109)
+at Game.main(Game.java:129)
