@@ -107,6 +107,7 @@ public class Game {
 		while (true) {
 			console.typeln(players.get(i).name + "'s turn");
 			moveExitStatus = players.get(i).move(pile, deck);
+			System.out.println("Deck size: " + deck.empty());
 			switch (moveExitStatus) {
 				case 0:
 					if (i == numPlayers-1) {

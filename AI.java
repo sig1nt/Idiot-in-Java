@@ -34,23 +34,17 @@ public class AI{
 		return ((opp.hand.size()+opp.facedown.size() < 3) && (opp.hand.size() == 0 || opp.facedown.size() == 0));
 	}
 
-	//checks if a card can be put on the pile
-	private boolean isValid(Pile p, Card c){
-		if(p.isEmpty()||c.value == 2){return true;}
-		return (p.checkTop().value > c.value)?false:true;
-	}
-
 	//this finds the value of the card that we're going to play
 	private int getPlayValue(Pile pile, int fdCount){
 		System.out.println("\nHand I am handed:" + hand);
 		System.out.println("\nPile I'm given:" + pile.seeThree());
-		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
+		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return pile.checkTop().value;
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
-			if(isValid(pile,card)){
+			if(pile.validMove(card)){
 				values.add(new Integer(card.value));
 			}
 		}
@@ -101,13 +95,14 @@ public class AI{
 		for (Card c : reserve){
 			if(c.value == value){
 				System.out.println("\nCard I am sending:" + c);
-				return c;}
+				return c;
+			}
 		}
 		return new Card("f",11);
 
 	}
 
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
         h.add(new Card("spades", 10));
         h.add(new Card("hearts", 8));
@@ -119,7 +114,7 @@ public class AI{
 		Pile p = new Pile();
 		p.add(new Card("spades", 6));
 		p.add(new Card("clubs", 6));
-		p.add(new Card("diamonds", 6));
+		p.add(new Card("diamonds", 14));
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
@@ -130,5 +125,5 @@ public class AI{
 		op.add(player);
 		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3).toString());
-	}*/
+	}
 }
