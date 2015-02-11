@@ -12,7 +12,7 @@ public class Player{
     protected ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
-    protected ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
+    protected ConsoleIO cio = new ConsoleIO("That's not right", 0, 100, 0);
     
     //For use with the CPU class
     public Player(){
@@ -220,6 +220,7 @@ public class Player{
         if(p.isEmpty() || (hand.isEmpty() && faceup.isEmpty())){
             return true;
         }else{
+            System.out.println(hand.isEmpty());
             if(!hand.isEmpty()){
                 for(Card c: hand){
                     if(p.validMove(c)){
