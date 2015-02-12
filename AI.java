@@ -38,6 +38,7 @@ public class AI{
 	private int getPlayValue(Pile pile, int fdCount){
 		System.out.println("\nHand I am handed:" + hand);
 		System.out.println("\nPile I'm given:" + pile.seeThree());
+		System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		if(canCompleteFour(reserve, pile)){
 			return pile.checkTop().value;
