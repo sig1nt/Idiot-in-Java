@@ -221,7 +221,7 @@ public class Player{
             return true;
         }else{
             System.out.println("Hand: " + hand.isEmpty());
-            if(!hand.isEmpty()){
+            if(!(hand.get(0) == null)){
                 for(Card c: hand){
                     if(p.validMove(c)){
                         return true;
