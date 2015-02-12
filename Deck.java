@@ -8,11 +8,11 @@ public class Deck{
   public Deck(){
     oDeck = new Card[52];
     int cardsInDeck = 0;
-    String types[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    String suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
     int vals[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
     for(int val: vals){
-      for(String type: types){
-        oDeck[cardsInDeck] = new Card(type, val);
+      for(String suit: suits){
+        oDeck[cardsInDeck] = new Card(suit, val);
         cardsInDeck++;
       }
     }
@@ -39,14 +39,11 @@ public class Deck{
   
   //returns a new card from the stack and removes it from the stack
   public Card draw(){
-    if(!sDeck.empty()){
-      return sDeck.pop();
-    }else{
-      return null;
-    }
+      return sDeck.pop(); // Deck.draw() never gets called when the deck is empty
   }
   
   //returns true if the stack is empty and false if it is not
+  // TODO rename this isEmpty throughout the codebase
   public boolean empty(){
     return sDeck.empty();
   }
