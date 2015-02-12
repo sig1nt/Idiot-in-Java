@@ -100,8 +100,7 @@ public class AI{
 				return c;
 			}
 		}
-		return new Card("f",11);
-
+		return new Card();
 	}
 
 	/*public static void main(String[] args){

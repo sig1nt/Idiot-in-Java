@@ -5,6 +5,8 @@ public class Card{
     //Default constructor - DO NOT USE
     public Card(){
         suit = "";
+		System.out.println("Someone fucked up.");
+		System.exit(1);
     }
     
     /*USE THIS NOT DEFAULT
