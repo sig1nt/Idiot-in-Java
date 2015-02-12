@@ -47,10 +47,13 @@ public class CPU extends Player{
                     sort(hand);
                 }else{
                     index = getIndex(c, faceup);
+                    int currVal = c.value;
                     if(c.value != 2 && c.value != 10){
-                        for(Card currC: faceup){
-                            if(currC.value == c.value){
+                        for(int i = index + 1; i < index + 3; i++){
+                            if(i != faceup.size() && faceup.get(i).value == currVal){
                                 numPlayable++;
+                            }else{
+                                break;
                             }
                         }
                     }
