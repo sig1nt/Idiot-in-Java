@@ -12,7 +12,7 @@ public class Player{
     protected ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
-    protected ConsoleIO cio = new ConsoleIO("That's not right", 0, 100, 0);
+    protected ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 100);
     
     //For use with the CPU class
     public Player(){
@@ -66,7 +66,7 @@ public class Player{
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
-            if(!(hand.get(0) == null) || !(faceup.get(0) == null)){
+            if(hand.get(0) != null || faceup.size() != 0){
                 if(!(hand.get(0) == null)){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){

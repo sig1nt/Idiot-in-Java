@@ -22,10 +22,11 @@ public class CPU extends Player{
     public int move(Pile currP, Deck d){
         cio.type(hand);
         if(canMove(currP)){
-            Card c = ai.logical(currP, facedown.size());
+            Card c;
             int index, numPlayable = 1;
-            if(!(hand.get(0) == null) || !(faceup.get(0) == null)){
-                if(!(hand.get(0) == null)){
+            if(hand.get(0) != null || faceup.size() != 0){
+                c = ai.logical(currP, facedown.size());
+                if(hand.get(0) != null){
                     index = getIndex(c, hand);
                     int currVal = c.value;
                     if(c.value != 2 && c.value != 10){
@@ -65,7 +66,8 @@ public class CPU extends Player{
                 }
             }else{
                 if(currP.validMove(facedown.get(0))){
-                    currP.add(facedown.get(0));
+                    c = facedown.get(0);
+                    currP.add(c);
                     facedown.remove(0);
                     if(hand.isEmpty() && facedown.isEmpty()){
                         return 2;
