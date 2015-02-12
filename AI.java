@@ -40,7 +40,7 @@ public class AI{
 		System.out.println("\nPile I'm given:" + pile.seeThree());
 		System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
-		if(canCompleteFour(reserve, pile)){
+		if(canCompleteFour(reserve, pile)&&!pile.isEmpty()){
 			return pile.checkTop().value;
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();

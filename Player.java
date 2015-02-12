@@ -12,7 +12,7 @@ public class Player{
     protected ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
-    protected ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 100);
+    protected ConsoleIO cio = new ConsoleIO("That's not right", 0, 100, 100);
     
     //For use with the CPU class
     public Player(){
