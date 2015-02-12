@@ -15,8 +15,8 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Game works on the server
 
 **Tasks**
-* Complete and integrate for goal 1
-* Determine tasks for goal 2
+* Debug
+* Graphics
 
 *Kent*
 * Player class
@@ -26,7 +26,7 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * AI
 
 *Max*
-* Game class (done?)
+* Protocol specification
 
 **Dependencies**
 * Lightweight Java Game Library (lwjgl) version 3 stable (1/30/15)
