@@ -93,6 +93,7 @@ public class AI{
 		System.out.println("Value of Card I will play:" + value);
 		ArrayList<Card> reserve = (hand.isEmpty())?faceup:hand;
 		for (Card c : reserve){
+			//The error is here, it's getting a null pointer
 			if(c.value == value){
 				System.out.println("\nCard I am sending:" + c);
 				return c;
