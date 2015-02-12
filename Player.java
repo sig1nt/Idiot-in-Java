@@ -183,7 +183,7 @@ public class Player{
             return 0;
         }
         return -1;
-        }
+    }
     
     public int firstMove(Pile currP, Deck d){
     cio.typeln("Making First Move");
@@ -217,7 +217,7 @@ public class Player{
       returns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
-        if(p.isEmpty() || (hand.get(0) == null && faceup.get(0) == null)){
+        if(p.isEmpty() || (hand.size() == 0 && faceup.size() == 0)){
             return true;
         }else{
             System.out.println("Hand: " + hand.isEmpty());
@@ -240,6 +240,9 @@ public class Player{
     }
     
     public void sort(ArrayList<Card> cards){
+        if(cards.size() != 0 && cards.get(0) == null){
+            cards.remove(0);
+        }
         Card[] tempCards = cards.toArray(new Card[1]);
         cards.clear();
         for(int i = 0; i < tempCards.length; i++){
