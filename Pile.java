@@ -28,8 +28,8 @@ public class Pile{
     
     //empties the pile
     public void clear(){
-        p = new ArrayList<Card>();
         System.out.println("clearing the pile");
+        p.clear();
     }
     
     // returns all the cards in the pile and clears the pile

@@ -186,19 +186,22 @@ public class Player{
     }
     
     public int firstMove(Pile currP, Deck d){
-    cio.typeln("Making First Move");
+    	cio.typeln("Making First Move");
         Card c = hand.get(0);
         int numPlayable = 0;
         if(c.value != 2 && c.value != 10){
-            for(Card currC: faceup){
+            for(Card currC: hand){
                 if(currC.value == c.value){
                     numPlayable++;
                 }
             }
-        }
+        } else {
+			// Play one two if we have one
+			// Play one ten in we have one
+		}
         for(int i = 0; i < numPlayable; i++){
-            currP.add(faceup.get(0));
-            faceup.remove(0);
+            currP.add(hand.get(0));
+            hand.remove(0);
         }
         cio.typeln(name + " played " + numPlayable + " " + c.value + "s");
         while(hand.size() < 3){
@@ -206,7 +209,7 @@ public class Player{
         }
         sort(hand);
         cio.typeln("Ending First Move");
-        if(c.value != 10 && !currP.fourKind()){
+        if(c.value != 10){
             return 0;
         }else{
             return 1;
@@ -240,14 +243,16 @@ public class Player{
     }
     
     public void sort(ArrayList<Card> cards){
+		// is cards.length() ever 0? if so, check here and return cards
         if(cards.size() != 0 && cards.get(0) == null){
             cards.remove(0);
         }
         Card[] tempCards = cards.toArray(new Card[1]);
         cards.clear();
+		int index;
         for(int i = 0; i < tempCards.length; i++){
             Card currSmallest = tempCards[i];
-            int index = i;
+            index = i;
             for(int j = i + 1; j < tempCards.length; j++){
                 if(tempCards[j].value < currSmallest.value){
                     currSmallest = tempCards[j];
@@ -267,6 +272,47 @@ public class Player{
             cards.add(tempCards[i]);
         }
     }
+
+	public Card getLowerCard(Card a, Card b) {
+		if (a.value < b.value) {
+			return a;
+		} else if (b.value < a.value) {
+			return b;
+		} else {
+			return (suits.indexOf(a.suit) < suits.indexOf(b.suit)) ? a : b;
+	}
+
+	private void merge(ArrayList<Card> left, ArrayList<Card> right) {
+		int ia, ib;
+		ia = ib = 0;
+		ArrayList<Card> merged = new ArrayList<Card>;
+		while (ia < a.size() && ib < b.size()) {
+			if (a[ia] < b[ib]) {
+				merged.add(a[ai]);
+				ia++;
+			} else {
+				merged.add(b[ib]);
+				ib++;
+			}
+		}
+		while (ia < a.size()) {
+			merged.add(a[ia]);
+			ia++;
+		}
+		while (ib < b.size()) {
+			merged.add(b[ib]);
+			ib++;
+		}
+		return merged;
+	}
+
+	public void sort(ArrayList<Card> cards) {
+		if (cards.size() < 2){
+			return cards;
+		} else {
+			// sort
+		}
+	}
     
     //Returns a String with the name and hand of the player
     public String toString(){
