@@ -318,6 +318,25 @@ public class Player{
 		}
 	}
     
+    public void swapHand(){
+        ArrayList<Card> hf = new ArrayList<Card>(6);
+        hf.addAll(hand);
+        hf.addAll(faceup);
+        hand.clear();
+        faceup.clear();
+        for(int i = 0; i < 3; i++){
+            String out = "Cards available are:\n";
+            for(int i = 0; i < hf.size(); i++){
+                out += (i + 1) + ") " + hf.get(i).getShortName() + "\n";
+            }
+            cio.typeln(out);
+            int index = cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
+            faceup.add(hf.get(index - 1));
+            hf.remove(index -1);
+        }
+        hand.addAll(hf);
+    }
+    
     //Returns a String with the name and hand of the player
     public String toString(){
         String s = name + "\n";
