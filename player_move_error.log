@@ -1,0 +1,23 @@
+Um...
+
+Max's turn 
+
+Cards in the Pile are: 
+04S 
+
+
+the cards in your hand are: 
+1) 07C 
+2) 07H 
+3) 08S 
+
+
+enter the index of the card you wish to play 1
+How many Do you want to play? (Up to 2) 2
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: -1
+	at java.util.ArrayList.elementData(ArrayList.java:418)
+	at java.util.ArrayList.get(ArrayList.java:431)
+	at Player.move(Player.java:109)
+	at Game.play(Game.java:109)
+	at Game.main(Game.java:130)
+
