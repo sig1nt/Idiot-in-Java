@@ -95,8 +95,6 @@ public class Player{
                                     if(i < index){
                                         index = i;
                                     }
-                                }else{
-                                    break;
                                 }
                             }
                             if(sameVals > 1){
@@ -151,8 +149,6 @@ public class Player{
                                     if(i < index){
                                         index = i;
                                     }
-                                }else{
-                                    break;
                                 }
                             }
                             if(sameVals > 1){
