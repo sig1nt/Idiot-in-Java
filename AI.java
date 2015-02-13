@@ -16,13 +16,16 @@ public class AI{
 		if(handy.isEmpty()){return -1;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
 		ArrayList<Card> topThree = pile.seeThree();
-		temp.add(topThree.get(2));
-		if(topThree.get(2)==topThree.get(1)){
-			temp.add(topThree.get(1));
-			if(topThree.get(1)==topThree.get(0)){
-				temp.add(topThree.get(0));
-			}
+		int numPlayable = 0;
+		Card sentinel = pile.checkTop();
+		for(Card c: temp){
+			if(c.value==sentinel.value){numPlayable++;}
 		}
+		for(Card c: topThree){
+			if(c.value==sentinel.value){numPlayable++;}
+			else{break;}
+		}
+		if(numPlayable==4){return sentinel.value;}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card c : temp){
 			values.add(c.value);
