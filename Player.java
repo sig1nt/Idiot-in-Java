@@ -271,7 +271,6 @@ public class Player{
 			merged.add(b.get(ib));
 			ib++;
 		}
-		System.out.println("Merged: " + merged);
 		return merged;
 	}
 
@@ -283,12 +282,8 @@ public class Player{
 			left.addAll(cards.subList(0, (int) cards.size()/2));
 			ArrayList<Card> right = new ArrayList<Card>();
 			right.addAll(cards.subList(left.size(), cards.size()));
-			System.out.println("Left pre-sort: " + left);
-			System.out.println("Right pre-sort: " + right);
 			left = sort(left);
 			right = sort(right);
-			System.out.println("Left post-sort: " + left);
-			System.out.println("Right post-sort: " + right);
 			return merge(left, right);
 		}
 	}

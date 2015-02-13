@@ -15,8 +15,8 @@ public class CPU extends Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
-        sort(hand);
-        sort(faceup);
+        hand = sort(hand);
+        faceup = sort(faceup);
     }
     
     public int move(Pile currP, Deck d){
@@ -45,7 +45,9 @@ public class CPU extends Player{
                     while(hand.size() < 3 && !d.empty()){
                         hand.add(d.draw());
                     }
-                    sort(hand);
+					System.out.println("Pre-sort hand " + hand);
+                    hand = sort(hand);
+					System.out.println("Post-sort hand " + hand);
                 }else{
                     index = getIndex(c, faceup);
                     int currVal = c.value;
@@ -77,7 +79,7 @@ public class CPU extends Player{
                     facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
-                    sort(hand);
+                    hand = sort(hand);
                     return 0;
                 }
             }
@@ -94,7 +96,7 @@ public class CPU extends Player{
         }else{
             hand.addAll(currP.pickup());
             cio.typeln(name + " picked up pile");
-            sort(hand);
+            hand = sort(hand);
             return 0;
         }
     }
