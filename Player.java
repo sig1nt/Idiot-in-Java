@@ -275,7 +275,9 @@ public class Player{
 	}
 
 	public void sort(ArrayList<Card> cards) {
-		if (cards.size() > 1){
+		if (cards.size() <= 1){
+			return;
+		} else {
 			ArrayList<Card> left = new ArrayList<Card>();
 			left.addAll(cards.subList(0, (int) cards.size()/2));
 			ArrayList<Card> right = new ArrayList<Card>();
