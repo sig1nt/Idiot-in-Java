@@ -274,17 +274,17 @@ public class Player{
 		return merged;
 	}
 
-	public ArrayList<Card> sort(ArrayList<Card> cards) {
-		if (cards.size() <= 1){
-			return cards;
-		} else {
+	public void sort(ArrayList<Card> cards) {
+		if (cards.size() > 1){
 			ArrayList<Card> left = new ArrayList<Card>();
 			left.addAll(cards.subList(0, (int) cards.size()/2));
 			ArrayList<Card> right = new ArrayList<Card>();
 			right.addAll(cards.subList(left.size(), cards.size()));
 			left = sort(left);
 			right = sort(right);
-			return merge(left, right);
+            cards.clear();
+            cards.ensureCapacity(right.size() + left.size());
+			cards.addAll(merge(left, right));
 		}
 	}
     
