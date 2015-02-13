@@ -34,7 +34,10 @@ public class Pile{
     
     // returns all the cards in the pile and clears the pile
     public ArrayList<Card> pickup(){
-        ArrayList<Card> temp = p;
+        ArrayList<Card> temp = new ArrayList<Card>();
+		for (Card c : p) {
+			temp.add(c);
+		}
         clear();
         return temp;
     }

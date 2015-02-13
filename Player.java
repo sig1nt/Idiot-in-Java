@@ -44,7 +44,7 @@ public class Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
-        sort(hand);
+        hand = sort(hand);
     }
     
     /*Allows a human to choose their their move, given a certain Pile currP, and then populating the hand up to 3 cards from the deck D
@@ -107,7 +107,7 @@ public class Player{
                     while(hand.size() < 3 && !d.empty()){
                         hand.add(d.draw());
                     }
-                    sort(hand);
+                    hand = sort(hand);
                     if(hand.isEmpty() && facedown.isEmpty()){
                         return 2;
                     }
@@ -172,14 +172,14 @@ public class Player{
                     facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
-                    sort(hand);
+                    hand = sort(hand);
                     return 0;
                 } 
             }
         }else{
             hand.addAll(currP.pickup());
             cio.typeln(name + " picked up pile");
-            sort(hand);
+            hand = sort(hand);
             return 0;
         }
         return -1;
@@ -207,7 +207,7 @@ public class Player{
         while(hand.size() < 3){
             hand.add(d.draw());
         }
-        sort(hand);
+        hand = sort(hand);
         cio.typeln("Ending First Move");
         if(c.value != 10){
             return 0;
@@ -273,20 +273,25 @@ public class Player{
 			merged.add(b.get(ib));
 			ib++;
 		}
+		System.out.println("Merged: " + merged);
 		return merged;
 	}
 
-	public void sort(ArrayList<Card> cards) {
+	public ArrayList<Card> sort(ArrayList<Card> cards) {
 		if (cards.size() <= 1){
-			return;
+			return cards;
 		} else {
 			ArrayList<Card> left = new ArrayList<Card>();
 			left.addAll(cards.subList(0, (int) cards.size()/2));
 			ArrayList<Card> right = new ArrayList<Card>();
 			right.addAll(cards.subList(left.size(), cards.size()));
-			sort(left);
-			sort(right);
-			merge(left, right);
+			System.out.println("Left pre-sort: " + left);
+			System.out.println("Right pre-sort: " + right);
+			left = sort(left);
+			right = sort(right);
+			System.out.println("Left post-sort: " + left);
+			System.out.println("Right post-sort: " + right);
+			return merge(left, right);
 		}
 	}
     
