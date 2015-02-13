@@ -330,7 +330,7 @@ public class Player{
                 out += (j + 1) + ") " + hf.get(j).getShortName() + "\n";
             }
             cio.typeln(out);
-            int index = (String)cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
+            int index = (int)cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
             faceup.add(hf.get(index - 1));
             hf.remove(index -1);
         }
