@@ -307,10 +307,14 @@ public class Player{
 	}
 
 	public void sort(ArrayList<Card> cards) {
-		if (cards.size() < 2){
+		if (cards.size() <= 1){
 			return cards;
 		} else {
-			// sort
+			ArrayList<Card> left = cards.subList(0, (int) cards.size()/2);
+			ArrayList<Card> right = cards.subList(left.size(), cards.size());
+			left = sort(left);
+			right = sort(right);
+			merge(left, right);
 		}
 	}
     
