@@ -220,8 +220,6 @@ public class Player{
             for(Card currC: hand){
                 if(currC.value == c.value){
                     numPlayable++;
-                }else{
-                    break;
                 }
             }
         }else{
