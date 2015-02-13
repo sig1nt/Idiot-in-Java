@@ -286,6 +286,7 @@ public class Player{
 			sort(right);
 			ArrayList<Card> tempCards = merge(left, right);
 			cards.clear();
+			cards.ensureCapacity(tempCards.size());
 			cards.addAll(tempCards);
 		}
 	}
