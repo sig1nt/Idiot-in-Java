@@ -1,0 +1,23 @@
+I had a ten and two jacks initially, and firstMove() played the ten
+
+How many human players? 1
+How many computer players? 1
+Please input your name: Max
+Max's turn 
+
+Making First Move from hand: [10 of Spades, Jack of Spades, Jack of Hearts] 
+
+Max played 1 10s 
+
+Ending First Move 
+
+Max's turn 
+
+Cards in the Pile are: 
+10S 
+
+
+the cards in your hand are: 
+1) 09D 
+2)  JS 
+3)  JH 
