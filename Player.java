@@ -286,10 +286,7 @@ public class Player{
 			sort(right);
 			ArrayList<Card> tempCards = merge(left, right);
 			cards.clear();
-			// could we just cards.addAll(tempCards) here?
-			for (Card c : tempCards) {
-				cards.add(c);
-			}
+			cards.addAll(tempCards);
 		}
 	}
     
