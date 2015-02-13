@@ -88,9 +88,15 @@ public class Player{
                             cio.typeln("that move is illegal");
                         }else{
                             int sameVals = 0;
-                            for(Card currC: hand){
+                            for(int i = 0; i < hand.size(); i++){
+                                Card currC = hand.get(i);
                                 if(currC.value == c.value){
                                     sameVals++;
+                                    if(i < index){
+                                        index = i;
+                                    }
+                                }else{
+                                    break;
                                 }
                             }
                             if(sameVals > 1){
@@ -138,9 +144,15 @@ public class Player{
                             cio.typeln("that move is illegal");
                         }else{
                             int sameVals = 0;
-                            for(Card currC: faceup){
+                            for(int i = 0; i < faceup.size(); i++){
+                                Card currC = faceup.get(i);
                                 if(currC.value == c.value){
                                     sameVals++;
+                                    if(i < index){
+                                        index = i;
+                                    }
+                                }else{
+                                    break;
                                 }
                             }
                             if(sameVals > 1){
@@ -199,8 +211,12 @@ public class Player{
             for(Card currC: hand){
                 if(currC.value == c.value){
                     numPlayable++;
+                }else{
+                    break;
                 }
             }
+        }else{
+            numPlayable = 1;
         }
         for(int i = 0; i < numPlayable; i++){
             currP.add(hand.get(0));
