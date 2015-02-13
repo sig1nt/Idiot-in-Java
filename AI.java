@@ -12,10 +12,10 @@ public class AI{
 	}
 
 	//checks if the AI can complete a four of a kind
-	private boolean canCompleteFour(ArrayList<Card> handy, Pile pile) {
-		if(handy.isEmpty()){return false;}
+	private int canCompleteFour(ArrayList<Card> handy, Pile pile) {
+		if(handy.isEmpty()){return -1;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
-		temp.addAll(pile.seeThree());
+		if(!pile.isEmpty()){temp.add(pile.checkTop());}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card c : temp){
 			values.add(c.value);
@@ -23,10 +23,11 @@ public class AI{
 		Collections.sort(values);
 		for(int i = 0; i<(values.size()-3); i++){
 			if(values.get(i)==values.get(i+3)){
-				return true;
+				System.out.println(values.get(i) + " " + values.get(i+3));
+				return values.get(i);
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	//determines if the passed player is about to win
@@ -40,9 +41,8 @@ public class AI{
 		System.out.println("\nPile I'm given:" + pile.seeThree());
 		System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
-		if(canCompleteFour(reserve, pile)){
-			return pile.checkTop().value;
-		}
+		int fourCheck = canCompleteFour(reserve,pile);
+		if(fourCheck != -1){return fourCheck;}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
 			if(pile.validMove(card)){
@@ -52,6 +52,7 @@ public class AI{
 		System.out.println("\n Cards in reserve:" + values);
 		Collections.sort(values);
 		if(isWinning(players.get(0))) {
+			System.out.println("One person is winning");
 			if(values.get(values.size()-1)>10){
 				return(int)(values.get(values.size()-1));
 			} else if(values.contains(7)){
@@ -62,6 +63,7 @@ public class AI{
 				return 10;
 			}
 		} if(players.size()>1 && isWinning(players.get(1))) {
+			System.out.println("Someone far away is winning");
 			for (Integer i : values){
 				if((int)(i)!=7 && (int)(i) != 2 && (int)(i) != 10){
 					return (int)(i);
@@ -75,6 +77,7 @@ public class AI{
 				return 10;
 			}
         }
+        System.out.println("Default");
 		for (Integer i : values){
 			if((int)(i)!=10 && (int)(i)!=2){
 				return (int)(i);
