@@ -45,7 +45,9 @@ public class CPU extends Player{
                     while(hand.size() < 3 && !d.empty()){
                         hand.add(d.draw());
                     }
+					System.out.println("Pre-sort hand " + hand);
                     sort(hand);
+					System.out.println("Post-sort hand " + hand);
                 }else{
                     index = getIndex(c, faceup);
                     int currVal = c.value;
