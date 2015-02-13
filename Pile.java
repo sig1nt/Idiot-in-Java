@@ -33,7 +33,7 @@ public class Pile{
     
     // returns all the cards in the pile and clears the pile
     public ArrayList<Card> pickup(){
-        ArrayList<Card> temp = p
+        ArrayList<Card> temp = p;
         clear();
         return temp;
     }
