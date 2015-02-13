@@ -15,7 +15,15 @@ public class AI{
 	private int canCompleteFour(ArrayList<Card> handy, Pile pile) {
 		if(handy.isEmpty()){return -1;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
-		if(!pile.isEmpty()){temp.add(pile.checkTop());}
+		ArrayList<Card> topThree = pile.seeThree();
+		for(int i = 1; i > -1; i--){
+			if(topThree.get(i)!=topThree.get(i+1)||topThree.get(i+1)==null){
+				topThree.set(i,null);
+			}
+		}
+		for(Card card: topThree){
+			if(card != null){temp.add(card);}
+		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card c : temp){
 			values.add(c.value);
@@ -42,6 +50,7 @@ public class AI{
 		//System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		int fourCheck = canCompleteFour(reserve,pile);
+		//System.out.println(fourCheck);
 		if(fourCheck != -1){return fourCheck;}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : reserve){
@@ -97,7 +106,6 @@ public class AI{
 		//System.out.println("Value of Card I will play:" + value);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		for (Card c : reserve){
-			//The error is here, it's getting a null pointer
 			if(c.value == value){
 				//System.out.println("\nCard I am sending:" + c);
 				return c;
@@ -108,17 +116,18 @@ public class AI{
 
 	/*public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
-        h.add(new Card("spades", 10));
-        h.add(new Card("hearts", 8));
-        h.add(new Card("hearts", 13));
+		h.add(new Card("spades",11));
+        h.add(new Card("spades", 6));
+        h.add(new Card("hearts", 6));
+        h.add(new Card("hearts", 3));
         ArrayList<Card> f = new ArrayList<Card>();
         f.add(new Card("spades", 7));
         f.add(new Card("hearts", 5));
         f.add(new Card("hearts", 8));
 		Pile p = new Pile();
 		p.add(new Card("spades", 6));
-		p.add(new Card("clubs", 6));
-		p.add(new Card("diamonds", 14));
+		p.add(new Card("clubs", 14));
+		p.add(new Card("diamonds", 6));
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
