@@ -19,13 +19,14 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Graphics
 
 *Kent*
-* Player class
-* CPU class
+* Player.firstMove()
+* Graphics
 
 *Nick*
-* AI
+* Graphics
 
 *Max*
+* Graphics
 * Protocol specification
 
 **Dependencies**
