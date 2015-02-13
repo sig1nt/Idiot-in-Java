@@ -67,7 +67,7 @@ public class Player{
         boolean chosen = false;
         if(canMove(currP)){
             if(hand.get(0) != null || faceup.size() != 0){
-                if(!(hand.get(0) == null)){
+                if(hand.get(0) != null){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){
                         cinh += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
@@ -220,16 +220,14 @@ public class Player{
       returns true if the player can move and false if they can't
     */
     public boolean canMove(Pile p){
-        if(p.isEmpty() || (hand.size() == 0 && faceup.size() == 0)){
+        if(p.isEmpty() || (hand.isEmpty() && faceup.isEmpty())){
             return true;
         }else{
-            System.out.println("Hand: " + hand.isEmpty());
-            if(!(hand.get(0) == null)){
+            if(!hand.isEmpty()){
                 for(Card c: hand){
                     if(p.validMove(c)){
                         return true;
                     }
-                    cio.typeln(c.value + " was not valid");
                 }
             }else{
                 for(Card c: faceup){
