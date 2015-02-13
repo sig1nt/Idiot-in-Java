@@ -23,7 +23,7 @@ public class AI{
 		Collections.sort(values);
 		for(int i = 0; i<(values.size()-3); i++){
 			if(values.get(i)==values.get(i+3)){
-				System.out.println(values.get(i) + " " + values.get(i+3));
+				//System.out.println(values.get(i) + " " + values.get(i+3));
 				return values.get(i);
 			}
 		}
@@ -37,9 +37,9 @@ public class AI{
 
 	//this finds the value of the card that we're going to play
 	private int getPlayValue(Pile pile, int fdCount){
-		System.out.println("\nHand I am handed:" + hand);
-		System.out.println("\nPile I'm given:" + pile.seeThree());
-		System.out.println("\nFaceups: " + faceup);
+		//System.out.println("\nHand I am handed:" + hand);
+		//System.out.println("\nPile I'm given:" + pile.seeThree());
+		//System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		int fourCheck = canCompleteFour(reserve,pile);
 		if(fourCheck != -1){return fourCheck;}
@@ -49,10 +49,10 @@ public class AI{
 				values.add(new Integer(card.value));
 			}
 		}
-		System.out.println("\n Cards in reserve:" + values);
+		//System.out.println("\n Cards in reserve:" + values);
 		Collections.sort(values);
 		if(isWinning(players.get(0))) {
-			System.out.println("One person is winning");
+			//System.out.println("One person is winning");
 			if(values.get(values.size()-1)>10){
 				return(int)(values.get(values.size()-1));
 			} else if(values.contains(7)){
@@ -63,7 +63,7 @@ public class AI{
 				return 10;
 			}
 		} if(players.size()>1 && isWinning(players.get(1))) {
-			System.out.println("Someone far away is winning");
+			//System.out.println("Someone far away is winning");
 			for (Integer i : values){
 				if((int)(i)!=7 && (int)(i) != 2 && (int)(i) != 10){
 					return (int)(i);
@@ -77,7 +77,7 @@ public class AI{
 				return 10;
 			}
         }
-        System.out.println("Default");
+        //System.out.println("Default");
 		for (Integer i : values){
 			if((int)(i)!=10 && (int)(i)!=2){
 				return (int)(i);
@@ -99,7 +99,7 @@ public class AI{
 		for (Card c : reserve){
 			//The error is here, it's getting a null pointer
 			if(c.value == value){
-				System.out.println("\nCard I am sending:" + c);
+				//System.out.println("\nCard I am sending:" + c);
 				return c;
 			}
 		}
