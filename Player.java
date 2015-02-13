@@ -211,6 +211,7 @@ public class Player{
             }else{
                 if(i == 2){
                     index = 0;
+                    c = hand.get(0);
                 }
             }
         }
