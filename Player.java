@@ -242,65 +242,35 @@ public class Player{
         return false;
     }
     
-    public void sort(ArrayList<Card> cards){
-		// is cards.length() ever 0? if so, check here and return cards
-        if(cards.size() != 0 && cards.get(0) == null){
-            cards.remove(0);
-        }
-        Card[] tempCards = cards.toArray(new Card[1]);
-        cards.clear();
-		int index;
-        for(int i = 0; i < tempCards.length; i++){
-            Card currSmallest = tempCards[i];
-            index = i;
-            for(int j = i + 1; j < tempCards.length; j++){
-                if(tempCards[j].value < currSmallest.value){
-                    currSmallest = tempCards[j];
-                    index = j;
-                }else{
-                    if(tempCards[j].value == currSmallest.value && suits.indexOf(tempCards[j].suit) < suits.indexOf(currSmallest.suit)){
-                        currSmallest = tempCards[j];
-                        index = j;
-                    }
-                }
-            }
-            if(i != index){
-                Card temp = tempCards[i];
-                tempCards[i] = currSmallest;
-                tempCards[index] = temp;
-            }
-            cards.add(tempCards[i]);
-        }
-    }
-
-	public Card getLowerCard(Card a, Card b) {
+	private Card getLowerCard(Card a, Card b) {
 		if (a.value < b.value) {
 			return a;
 		} else if (b.value < a.value) {
 			return b;
 		} else {
 			return (suits.indexOf(a.suit) < suits.indexOf(b.suit)) ? a : b;
+		}
 	}
 
-	private void merge(ArrayList<Card> left, ArrayList<Card> right) {
+	private ArrayList<Card> merge(ArrayList<Card> a, ArrayList<Card> b) {
 		int ia, ib;
 		ia = ib = 0;
-		ArrayList<Card> merged = new ArrayList<Card>;
+		ArrayList<Card> merged = new ArrayList<Card>();
 		while (ia < a.size() && ib < b.size()) {
-			if (a[ia] < b[ib]) {
-				merged.add(a[ai]);
+			if (getLowerCard(a.get(ia), b.get(ib)) == a.get(ia)) {
+				merged.add(a.get(ia));
 				ia++;
 			} else {
-				merged.add(b[ib]);
+				merged.add(b.get(ib));
 				ib++;
 			}
 		}
 		while (ia < a.size()) {
-			merged.add(a[ia]);
+			merged.add(a.get(ia));
 			ia++;
 		}
 		while (ib < b.size()) {
-			merged.add(b[ib]);
+			merged.add(b.get(ib));
 			ib++;
 		}
 		return merged;
@@ -308,12 +278,14 @@ public class Player{
 
 	public void sort(ArrayList<Card> cards) {
 		if (cards.size() <= 1){
-			return cards;
+			return;
 		} else {
-			ArrayList<Card> left = cards.subList(0, (int) cards.size()/2);
-			ArrayList<Card> right = cards.subList(left.size(), cards.size());
-			left = sort(left);
-			right = sort(right);
+			ArrayList<Card> left = new ArrayList<Card>();
+			left.addAll(cards.subList(0, (int) cards.size()/2));
+			ArrayList<Card> right = new ArrayList<Card>();
+			right.addAll(cards.subList(left.size(), cards.size()));
+			sort(left);
+			sort(right);
 			merge(left, right);
 		}
 	}
