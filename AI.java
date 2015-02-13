@@ -94,7 +94,7 @@ public class AI{
 	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
 		int value = getPlayValue(pilein, fdCountin);
-		System.out.println("Value of Card I will play:" + value);
+		//System.out.println("Value of Card I will play:" + value);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		for (Card c : reserve){
 			//The error is here, it's getting a null pointer

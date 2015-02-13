@@ -179,6 +179,8 @@ public class Player{
                 }
                 if(hand.size() == 0 && facedown.size() == 0){
                     return 2;
+                }else{
+                    return 0;
                 }
             }
         }else{
@@ -187,7 +189,6 @@ public class Player{
             sort(hand);
             return 0;
         }
-        return -1;
     }
     
     public int firstMove(Pile currP, Deck d){
@@ -200,10 +201,7 @@ public class Player{
                     numPlayable++;
                 }
             }
-        } else {
-			// Play one two if we have one
-			// Play one ten in we have one
-		}
+        }
         for(int i = 0; i < numPlayable; i++){
             currP.add(hand.get(0));
             hand.remove(0);

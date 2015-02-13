@@ -20,7 +20,6 @@ public class CPU extends Player{
     }
     
     public int move(Pile currP, Deck d){
-        cio.type(hand);
         if(canMove(currP)){
             Card c;
             int index, numPlayable = 1;
