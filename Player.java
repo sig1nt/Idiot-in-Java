@@ -109,7 +109,7 @@ public class Player{
                         currP.add(hand.get(index - 1));
                         hand.remove(index - 1);
                     }
-                    while(hand.size() < 3 && !d.empty()){
+                    while(hand.size() < 3 && !d.isEmpty()){
                         hand.add(d.draw());
                     }
                     sort(hand);
@@ -355,6 +355,6 @@ public class Player{
         do{
             pi.add(d.draw());
             p.move(pi, d);
-        }while(!d.empty());
+        }while(!d.isEmpty());
     }
 }
