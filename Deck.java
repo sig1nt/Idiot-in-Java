@@ -43,8 +43,7 @@ public class Deck{
   }
   
   //returns true if the stack is empty and false if it is not
-  // TODO rename this isEmpty throughout the codebase
-  public boolean empty(){
+  public boolean isEmpty(){
     return sDeck.empty();
   }
   
@@ -53,6 +52,6 @@ public class Deck{
     Deck myDeck = new Deck();
     do{
       System.out.println(myDeck.draw());
-    }while(!myDeck.empty());
+    }while(!myDeck.isEmpty());
   }
 }
