@@ -92,8 +92,8 @@ public class Player{
                                 Card currC = hand.get(i);
                                 if(currC.value == c.value){
                                     sameVals++;
-                                    if(i < index){
-                                        index = i;
+                                    if(i < index - 1){
+                                        index = i + 1;
                                     }
                                 }
                             }
@@ -146,8 +146,8 @@ public class Player{
                                 Card currC = faceup.get(i);
                                 if(currC.value == c.value){
                                     sameVals++;
-                                    if(i < index){
-                                        index = i;
+                                    if(i < index - 1){
+                                        index = i + 1;
                                     }
                                 }
                             }
@@ -220,8 +220,6 @@ public class Player{
             for(Card currC: hand){
                 if(currC.value == c.value){
                     numPlayable++;
-                }else{
-                    break;
                 }
             }
         }else{
