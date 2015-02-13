@@ -16,13 +16,12 @@ public class AI{
 		if(handy.isEmpty()){return -1;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
 		ArrayList<Card> topThree = pile.seeThree();
-		for(int i = 1; i > -1; i--){
-			if(topThree.get(i)!=topThree.get(i+1)||topThree.get(i+1)==null){
-				topThree.set(i,null);
+		temp.add(topThree.get(2));
+		if(topThree.get(2)==topThree.get(1)){
+			temp.add(topThree.get(1));
+			if(topThree.get(1)==topThree.get(0)){
+				temp.add(topThree.get(0));
 			}
-		}
-		for(Card card: topThree){
-			if(card != null){temp.add(card);}
 		}
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card c : temp){
@@ -114,7 +113,7 @@ public class AI{
 		return new Card();
 	}
 
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
 		h.add(new Card("spades",11));
         h.add(new Card("spades", 6));
@@ -138,5 +137,5 @@ public class AI{
 		op.add(player);
 		AI driver = new AI(h,f,op);
         System.out.println(driver.logical(p,3).toString());
-	}*/
+	}
 }
