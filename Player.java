@@ -186,7 +186,7 @@ public class Player{
     }
     
     public int firstMove(Pile currP, Deck d){
-    	cio.typeln("Making First Move");
+    	cio.typeln("Making First Move from hand: " + hand);
         Card c = hand.get(0);
         int numPlayable = 0;
         if(c.value != 2 && c.value != 10){
