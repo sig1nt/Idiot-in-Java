@@ -326,11 +326,11 @@ public class Player{
         faceup.clear();
         for(int i = 0; i < 3; i++){
             String out = "Cards available are:\n";
-            for(int i = 0; i < hf.size(); i++){
-                out += (i + 1) + ") " + hf.get(i).getShortName() + "\n";
+            for(int j = 0; j < hf.size(); i++){
+                out += (j + 1) + ") " + hf.get(j).getShortName() + "\n";
             }
             cio.typeln(out);
-            int index = cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
+            int index = (String)cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
             faceup.add(hf.get(index - 1));
             hf.remove(index -1);
         }
