@@ -279,8 +279,8 @@ public class Player{
 			return;
 		} else {
 			ArrayList<Card> left = new ArrayList<Card>();
-			left.addAll(cards.subList(0, (int) cards.size()/2));
 			ArrayList<Card> right = new ArrayList<Card>();
+			left.addAll(cards.subList(0, (int) cards.size()/2));
 			right.addAll(cards.subList(left.size(), cards.size()));
 			sort(left);
 			sort(right);
