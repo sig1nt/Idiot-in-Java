@@ -45,6 +45,7 @@ public class Player{
             hand.add(d.draw());
         }
         sort(hand);
+        sort(faceup);
     }
     
     /*Allows a human to choose their their move, given a certain Pile currP, and then populating the hand up to 3 cards from the deck D
@@ -66,15 +67,15 @@ public class Player{
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
-            if(hand.get(0) != null || faceup.size() != 0){
-                if(hand.get(0) != null){
+            if(hand.size() != 0 || faceup.size() != 0){
+                if(hand.size() != 0){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){
                         cinh += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
                     }
                     cio.typeln(cinh);
                     int numPlay = 1, index;
-                    Card c = new Card();
+                    Card c;
                     do{
                         while(true){
                             index = (int)cio.in("enter the index of the card you wish to play", 0);
@@ -118,18 +119,19 @@ public class Player{
                         return 1;
                     }
                 }else{
-                    String cinf = "the cards in your hand are:\n";
+                    String cinf = "the cards in your faceups are:\n";
                     for(int i = 0; i < faceup.size(); i++){
                         cinf += (i + 1) + ") " + faceup.get(i).getShortName() + "\n";
                     }
                     cio.typeln(cinf);
                     int numPlay = 1, index;
-                    Card c = new Card();
+                    Card c;
                     do{
-                        index = (int)cio.in("enter the index of the card you wish to play", 0);
-                        if(index<1 || index>hand.size()){
-                            cio.typeln("Please enter a valid hand index.\n");
-                            continue;
+                        while(true){
+                            index = (int)cio.in("enter the index of the card you wish to play", 0);
+                            if(index >= 1 && index <= faceup.size()){
+                                break;
+                            }
                         }
                         c = faceup.get(index - 1);
                         if(!currP.validMove(c)){
@@ -174,7 +176,10 @@ public class Player{
                     cio.typeln(name + " picked up pile");
                     sort(hand);
                     return 0;
-                } 
+                }
+                if(hand.size() == 0 && facedown.size() == 0){
+                    return 2;
+                }
             }
         }else{
             hand.addAll(currP.pickup());

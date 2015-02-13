@@ -60,9 +60,8 @@ public class CPU extends Player{
                     }
                     for(int i = 0; i < numPlayable; i++){
                         currP.add(faceup.get(index));
-                        faceup.remove(0);
+                        faceup.remove(index);
                     }
-                    cio.typeln(currP);
                 }
             }else{
                 if(currP.validMove(facedown.get(0))){
