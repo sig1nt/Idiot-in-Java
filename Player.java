@@ -202,6 +202,18 @@ public class Player{
     public int firstMove(Pile currP, Deck d){
     	cio.typeln("Making First Move from hand: " + hand);
         Card c = hand.get(0);
+        int index = 0;
+        for(int i = 0; i < 3; i++){
+            c = hand.get(i);
+            index = i;
+            if(c.value != 2 && c.value != 10){
+                break;
+            }else{
+                if(i == 2){
+                    index = 0;
+                }
+            }
+        }
         int numPlayable = 0;
         if(c.value != 2 && c.value != 10){
             for(Card currC: hand){
@@ -215,8 +227,8 @@ public class Player{
             numPlayable = 1;
         }
         for(int i = 0; i < numPlayable; i++){
-            currP.add(hand.get(0));
-            hand.remove(0);
+            currP.add(hand.get(index));
+            hand.remove(index);
         }
         cio.typeln(name + " played " + numPlayable + " " + c.value + "s");
         while(hand.size() < 3){
@@ -227,6 +239,7 @@ public class Player{
         if(c.value != 10){
             return 0;
         }else{
+            currP.clear();
             return 1;
         }
     }

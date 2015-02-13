@@ -68,7 +68,7 @@ public class Game {
 		Card c;
 		ArrayList<String> suits = new ArrayList<String>();
 		suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
-		for (Player p : players.subList(1, players.size()-1)) {
+		for (Player p : players.subList(1, players.size()) {
 			c = p.hand.get(0);
 			if (c.value < lowCard.value) {
 				lowCard = c;
