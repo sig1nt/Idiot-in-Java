@@ -12,9 +12,15 @@ public class AI{
 	}
 
 	//checks if the AI can complete a four of a kind
-	private int canCompleteFour(ArrayList<Card> handy, Pile pile) {
+	/*private int canCompleteFour(ArrayList<Card> handy, Pile pile) {
 		if(handy.isEmpty()){return -1;}
 		ArrayList<Card> temp = new ArrayList<Card>(handy);
+		if(temp.size()>=4){
+			for(int i = 0; i < temp.size()-3; i++){
+				if(temp.get(i)==temp.get(i+3)){return temp.get(i).value;}
+			}
+		}
+		if
 		ArrayList<Card> topThree = pile.seeThree();
 		int numPlayable = 0;
 		Card sentinel = pile.checkTop();
@@ -38,6 +44,38 @@ public class AI{
 			}
 		}
 		return -1;
+	}*/
+
+	private int canCompleteFour(ArrayList<Card> reserve, Pile pile){
+		ArrayList<Card> useableCards = new ArrayList<Card>(reserve);
+		ArrayList<Card> pTop = new ArrayList<Card>(pile.seeThree());
+		if(!pTop.isEmpty()){
+			int size = pTop.size();
+			useableCards.add(pTop.remove(size-1));
+			size--;
+			Card temp;
+			while(!pTop.isEmpty()){
+				temp = pTop.remove(pTop.size()-1);
+				if(temp.value==useableCards.get(useableCards.size()-1).value) {
+					useableCards.add(temp);
+				}
+				else{
+					break;
+				}
+			}
+		}
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		for (Card c : useableCards){
+			values.add(c.value);
+		}
+		Collections.sort(values);
+		for(int i = 0; i<(values.size()-3); i++){
+			if(values.get(i)==values.get(i+3)){
+				//System.out.println(values.get(i) + " " + values.get(i+3));
+				return values.get(i);
+			}
+		}
+		return -1;
 	}
 
 	//determines if the passed player is about to win
@@ -47,20 +85,23 @@ public class AI{
 
 	//this finds the value of the card that we're going to play
 	private int getPlayValue(Pile pile, int fdCount){
-		//System.out.println("\nHand I am handed:" + hand);
-		//System.out.println("\nPile I'm given:" + pile.seeThree());
-		//System.out.println("\nFaceups: " + faceup);
+		System.out.println("\nHand I am handed:" + hand);
+		System.out.println("\nPile I'm given:" + pile.seeThree());
+		System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
-		int fourCheck = canCompleteFour(reserve,pile);
-		//System.out.println(fourCheck);
-		if(fourCheck != -1){return fourCheck;}
-		ArrayList<Integer> values = new ArrayList<Integer>();
+		ArrayList<Card> validReserve = new ArrayList<Card>();
 		for (Card card : reserve){
 			if(pile.validMove(card)){
-				values.add(new Integer(card.value));
+				validReserve.add(card);
 			}
 		}
-		//System.out.println("\n Cards in reserve:" + values);
+		int moveFour = canCompleteFour(validReserve, pile);
+		if(moveFour!=-1){System.out.println("Complete Four");return moveFour;}
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		for (Card card : validReserve){
+			values.add(new Integer(card.value));
+		}
+		System.out.println("\n Cards in reserve:" + values);
 		Collections.sort(values);
 		if(isWinning(players.get(0))) {
 			//System.out.println("One person is winning");
@@ -105,11 +146,11 @@ public class AI{
 	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
 		int value = getPlayValue(pilein, fdCountin);
-		//System.out.println("Value of Card I will play:" + value);
+		System.out.println("Value of Card I will play:" + value);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		for (Card c : reserve){
 			if(c.value == value){
-				//System.out.println("\nCard I am sending:" + c);
+				System.out.println("\nCard I am sending:" + c);
 				return c;
 			}
 		}
@@ -128,8 +169,8 @@ public class AI{
         f.add(new Card("hearts", 8));
 		Pile p = new Pile();
 		p.add(new Card("spades", 6));
-		p.add(new Card("clubs", 14));
-		p.add(new Card("diamonds", 6));
+		p.add(new Card("clubs", 6));
+		p.add(new Card("diamonds", 5));
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
