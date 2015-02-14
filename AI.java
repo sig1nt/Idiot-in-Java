@@ -159,23 +159,23 @@ public class AI{
 
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
-		h.add(new Card("spades",11));
-        h.add(new Card("spades", 6));
-        h.add(new Card("hearts", 6));
-        h.add(new Card("hearts", 3));
+		h.add(new Card("Spades",11));
+        h.add(new Card("Spades", 6));
+        h.add(new Card("Hearts", 6));
+        h.add(new Card("Hearts", 3));
         ArrayList<Card> f = new ArrayList<Card>();
-        f.add(new Card("spades", 7));
-        f.add(new Card("hearts", 5));
-        f.add(new Card("hearts", 8));
+        f.add(new Card("Spades", 7));
+        f.add(new Card("Hearts", 5));
+        f.add(new Card("Hearts", 8));
 		Pile p = new Pile();
-		p.add(new Card("spades", 6));
-		p.add(new Card("clubs", 6));
-		p.add(new Card("diamonds", 5));
+		p.add(new Card("Spades", 6));
+		p.add(new Card("Clubs", 6));
+		p.add(new Card("Diamonds", 5));
 		ArrayList<Player> op = new ArrayList<Player>();
 		Deck d = new Deck();
 		Player player = new Player(true,"test",d);
 		ArrayList<Card> ophand = new ArrayList<Card>();
-		ophand.add(new Card("hearts",12));
+		ophand.add(new Card("Hearts",12));
 		player.hand = ophand; 
 		//player.facedown = new ArrayList<Card>();
 		op.add(player);
