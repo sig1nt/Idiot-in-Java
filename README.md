@@ -10,16 +10,15 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 
 **Goals**
-* Game works with command line interface
+* Game works with command line interface (done?)
 * Game works with graphics locally
 * Game works on the server
 
 **Tasks**
-* Debug
+* Debug (done?)
 * Graphics
 
 *Kent*
-* Player.firstMove()
 * Graphics
 
 *Nick*
