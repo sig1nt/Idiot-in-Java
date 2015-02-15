@@ -176,9 +176,11 @@ public class Player{
             }else{
                if(currP.validMove(facedown.get(0))){
                     currP.add(facedown.get(0));
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     facedown.remove(0);
                 }else{
                     currP.add(facedown.get(0));
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
