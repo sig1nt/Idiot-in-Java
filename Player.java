@@ -269,6 +269,7 @@ public class Player{
         return false;
     }
     
+	// Returns the lower of two cards
 	private Card getLowerCard(Card a, Card b) {
 		if (a.value < b.value) {
 			return a;
@@ -279,6 +280,7 @@ public class Player{
 		}
 	}
 
+	// Returns a merged sorted ArrayList from two sorted ArrayLists
 	private ArrayList<Card> merge(ArrayList<Card> a, ArrayList<Card> b) {
 		int ia, ib;
 		ia = ib = 0;
@@ -303,6 +305,7 @@ public class Player{
 		return merged;
 	}
 
+	// Recursively merge-sorts an ArrayList of cards in-place
 	public void sort(ArrayList<Card> cards) {
 		if (cards.size() <= 1){
 			return;

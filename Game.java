@@ -25,6 +25,9 @@ public class Game {
 			System.out.println("1 player, so game over.");
 			System.out.println("Not much fun to play with yourself, eh?");
 			System.exit(1);
+		} else if (numPlayers > 5) {
+			System.out.println("Maximum number of players exceeded. Max: 5, Given: " + numPlayers);
+			System.exit(1);
 		}
 		for (int i=0; i < humanCount; i++) {
 			players.add(new Player(true, getPlayerName(i), deck));
@@ -66,15 +69,30 @@ public class Game {
 		Player goesFirst = players.get(0);
 		Card lowCard = goesFirst.hand.get(0);
 		Card c;
+		int i;
+		for (i = 0; i < 3; i++) {
+			lowCard = goesFirst.hand.get(i);
+			if (lowCard.value != 2 & lowCard.value != 10) {
+				break;
+			} else if (i == 2) {
+				lowCard = goesFirst.hand.get(0);
+			}
+		}
 		ArrayList<String> suits = new ArrayList<String>();
 		suits.addAll(Arrays.asList("Clubs", "Diamonds", "Spades", "Hearts"));
 		for (Player p : players.subList(1, players.size())) {
 			c = p.hand.get(0);
-			if (c.value < lowCard.value) {
-				lowCard = c;
-				goesFirst = p;
-			} else if (c.value == lowCard.value
-					&& suits.indexOf(c.suit) < suits.indexOf(lowCard.suit)) {
+			for (i = 0; i < 3; i++) {
+				c = p.hand.get(i);
+				if (c.value != 2 && c.value != 10) {
+					break;
+				} else if (i == 2) {
+					c = p.hand.get(0);
+				}
+			}
+			if ((c.value < lowCard.value) ||
+					(c.value == lowCard.value &&
+						suits.indexOf(c.suit) < suits.indexOf(lowCard.suit))) {
 				lowCard = c;
 				goesFirst = p;
 			}
