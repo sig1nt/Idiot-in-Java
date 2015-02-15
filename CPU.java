@@ -65,6 +65,7 @@ public class CPU extends Player{
             }else{
                 if(currP.validMove(facedown.get(0))){
                     c = facedown.get(0);
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     currP.add(c);
                     facedown.remove(0);
                     if(hand.isEmpty() && facedown.isEmpty()){
@@ -72,6 +73,7 @@ public class CPU extends Player{
                     }
                 }else{
                     currP.add(facedown.get(0));
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
