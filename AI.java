@@ -146,29 +146,52 @@ public class AI{
 	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
 		int value = getPlayValue(pilein, fdCountin);
-		System.out.println("Value of Card I will play:" + value);
+		System.out.println("Value of Card I will play: " + value);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		for (Card c : reserve){
 			if(c.value == value){
-				System.out.println("\nCard I am sending:" + c);
+				System.out.println("\nCard I am sending: " + c);
 				return c;
 			}
 		}
 		return new Card();
 	}
 
+	//First three cards in the hand, last three as faceups
+	public ArrayList<Card> strategizeFaceups(){
+		ArrayList<Card> reserve = new ArrayList<Card>(hand);
+		reserve.addAll(faceup);
+		ArrayList<Card> goodCards = new ArrayList<Card>();
+		Player p = new Player();
+		p.sort(reserve);
+		System.out.println(reserve);
+		for (int i = 0; i < reserve.size(); i++){
+			if(!(reserve.get(i).value == 10 || reserve.get(i).value == 7 || reserve.get(i).value == 2)){
+				goodCards.add(reserve.get(i));
+			}
+		}
+		for (int i = 0; i < reserve.size(); i++){
+			if(reserve.get(i).value == 10 || reserve.get(i).value == 7 || reserve.get(i).value == 2){
+				goodCards.add(reserve.get(i));
+			}
+		}
+		System.out.println(goodCards);
+		return new goodCards;
+
+	}
+
 	public static void main(String[] args){
 		ArrayList<Card> h = new ArrayList<Card>();
 		h.add(new Card("Spades",11));
-        h.add(new Card("Spades", 6));
-        h.add(new Card("Hearts", 6));
+        h.add(new Card("Spades", 10));
+        //h.add(new Card("Hearts", 7));
         h.add(new Card("Hearts", 3));
         ArrayList<Card> f = new ArrayList<Card>();
         f.add(new Card("Spades", 7));
         f.add(new Card("Hearts", 5));
         f.add(new Card("Hearts", 8));
 		Pile p = new Pile();
-		p.add(new Card("Spades", 6));
+		p.add(new Card("Diamonds", 6));
 		p.add(new Card("Clubs", 6));
 		p.add(new Card("Diamonds", 5));
 		ArrayList<Player> op = new ArrayList<Player>();
@@ -180,6 +203,7 @@ public class AI{
 		//player.facedown = new ArrayList<Card>();
 		op.add(player);
 		AI driver = new AI(h,f,op);
-        System.out.println(driver.logical(p,3).toString());
+        //System.out.println(driver.logical(p,3).toString());
+        driver.strategizeFaceups();
 	}
 }
