@@ -1,8 +1,6 @@
 Idiot-in-Java
 =============
 
-**We need to work on this outside of class - let's determine tasks in class on Friday and do them over the weekend**
-
 Implementation of the "idiot" card game in java for CSC 102
 
 Max Zinkus, Nick Gonella, and Kent Kawahara
@@ -10,12 +8,14 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 
 **Goals**
-* Game works with command line interface (done?)
-* Game works with graphics locally
-* Game works on the server
+* Game works with command line interface
+* Game client w/ graphics
+* Game client and server interact locally
+* Server lobby works with clients locally
+* Game clients interact with remote server lobby
 
 **Tasks**
-* Debug (done?)
+* Debug
 * Graphics
 
 *Kent*
