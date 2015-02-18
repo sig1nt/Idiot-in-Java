@@ -110,6 +110,16 @@ public class CPU extends Player{
         return -1;
     }
     
+    public void swapHand(){
+        ArrayList<Card> temp = ai.strategizeFaceups();
+        hand.clear();
+        faceup.clear();
+        hand.ensureCapacity(3);
+        faceup.ensureCapacity(3);
+        hand.addAll(temp.subList(0, 3));
+        faceup.addAll(temp.subList(3, 6));
+    }
+    
     public static void main(String[]args){
         Deck d = new Deck();
         ArrayList<Player> playas = new ArrayList<Player>();

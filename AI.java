@@ -176,7 +176,7 @@ public class AI{
 			}
 		}
 		System.out.println(goodCards);
-		return new goodCards;
+		return goodCards;
 
 	}
 
