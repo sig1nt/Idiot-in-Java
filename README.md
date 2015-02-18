@@ -18,14 +18,13 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Graphics
 
 *Kent*
-* Client
+* Client interface
 * Graphics
 
 *Nick*
+* Game interface
 * Graphics
 
 *Max*
+* Mina
 * Graphics
-
-**Dependencies**
-* Lightweight Java Game Library (lwjgl) version 3 stable (1/30/15)
