@@ -164,7 +164,7 @@ public class AI{
 		ArrayList<Card> goodCards = new ArrayList<Card>();
 		Player p = new Player();
 		p.sort(reserve);
-		System.out.println(reserve);
+		//System.out.println(reserve);
 		for (int i = 0; i < reserve.size(); i++){
 			if(!(reserve.get(i).value == 10 || reserve.get(i).value == 7 || reserve.get(i).value == 2)){
 				goodCards.add(reserve.get(i));
@@ -175,7 +175,7 @@ public class AI{
 				goodCards.add(reserve.get(i));
 			}
 		}
-		System.out.println(goodCards);
+		//System.out.println(goodCards);
 		return goodCards;
 
 	}
