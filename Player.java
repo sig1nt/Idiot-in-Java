@@ -329,9 +329,10 @@ public class Player{
         hf.addAll(faceup);
         hand.clear();
         faceup.clear();
+        System.out.println("We got to here");
         for(int i = 0; i < 3; i++){
             String out = "Cards available are:\n";
-            for(int j = 0; j < hf.size(); i++){
+            for(int j = 0; j < hf.size(); j++){
                 out += (j + 1) + ") " + hf.get(j).getShortName() + "\n";
             }
             cio.typeln(out);
