@@ -27,6 +27,3 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 
 *Max*
 * Game class (done?)
-
-**Dependencies**
-* Lightweight Java Game Library (lwjgl) version 3 stable (1/30/15)
