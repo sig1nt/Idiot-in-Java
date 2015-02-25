@@ -15,15 +15,10 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Game works on the server
 
 **Tasks**
-* Complete and integrate for goal 1
 * Determine tasks for goal 2
 
 *Kent*
-* Player class
-* CPU class
 
 *Nick*
-* AI
 
 *Max*
-* Game class (done?)

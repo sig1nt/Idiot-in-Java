@@ -3,7 +3,7 @@ import java.util.*;
 public class Game {
 	
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
-	protected String[] takenNames = new String[5];
+	protected String[] takenNames = new String[4];
 	ArrayList<Player> players = new ArrayList<Player>();
 	Deck deck = new Deck();
 	Pile pile = new Pile();
