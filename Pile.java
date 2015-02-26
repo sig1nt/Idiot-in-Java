@@ -29,7 +29,6 @@ public class Pile{
     //empties the pile
     public void clear(){
         p = new ArrayList<Card>();
-        System.out.println("clearing the pile");
     }
     
     // returns all the cards in the pile and clears the pile
@@ -63,9 +62,9 @@ public class Pile{
     public boolean validMove(Card c){
         if(c.value == 2 || c.value == 10 || p.isEmpty()){
             return true;
-        }else if(p.get(p.size() - 1).value == 7 && c.value <= 7){
+        }else if(checkTop().value == 7 && c.value <= 7){
             return true;
-        }else if(c.value >= p.get(p.size() - 1).value && p.get(p.size() - 1).value != 7){
+        }else if(c.value >= checkTop().value && checkTop().value != 7){
             return true;
         }else{
             return false;

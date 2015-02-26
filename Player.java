@@ -12,7 +12,7 @@ public class Player{
     protected ArrayList<Card> hand, facedown;
     protected ArrayList<Card> faceup;
     protected String name;
-    protected ConsoleIO cio = new ConsoleIO("That's not right", 10, 100, 10);
+    protected ConsoleIO cio = new ConsoleIO("That's not right", 0, 100, 100);
     
     //For use with the CPU class
     public Player(){
@@ -45,6 +45,7 @@ public class Player{
             hand.add(d.draw());
         }
         sort(hand);
+        sort(faceup);
     }
     
     /*Allows a human to choose their their move, given a certain Pile currP, and then populating the hand up to 3 cards from the deck D
@@ -66,15 +67,15 @@ public class Player{
         cio.typeln(s);
         boolean chosen = false;
         if(canMove(currP)){
-            if(!hand.isEmpty() || !faceup.isEmpty()){
-                if(!hand.isEmpty()){
+            if(hand.size() != 0 || faceup.size() != 0){
+                if(hand.size() != 0){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){
                         cinh += (i + 1) + ") " + hand.get(i).getShortName() + "\n";
                     }
                     cio.typeln(cinh);
                     int numPlay = 1, index;
-                    Card c = new Card();
+                    Card c;
                     do{
                         while(true){
                             index = (int)cio.in("enter the index of the card you wish to play", 0);
@@ -87,9 +88,13 @@ public class Player{
                             cio.typeln("that move is illegal");
                         }else{
                             int sameVals = 0;
-                            for(Card currC: hand){
+                            for(int i = 0; i < hand.size(); i++){
+                                Card currC = hand.get(i);
                                 if(currC.value == c.value){
                                     sameVals++;
+                                    if(i < index - 1){
+                                        index = i + 1;
+                                    }
                                 }
                             }
                             if(sameVals > 1){
@@ -104,7 +109,7 @@ public class Player{
                         currP.add(hand.get(index - 1));
                         hand.remove(index - 1);
                     }
-                    while(hand.size() < 3 && !d.empty()){
+                    while(hand.size() < 3 && !d.isEmpty()){
                         hand.add(d.draw());
                     }
                     sort(hand);
@@ -118,27 +123,32 @@ public class Player{
                         return 1;
                     }
                 }else{
-                    String cinf = "the cards in your hand are:\n";
+                    String cinf = "the cards in your faceups are:\n";
                     for(int i = 0; i < faceup.size(); i++){
                         cinf += (i + 1) + ") " + faceup.get(i).getShortName() + "\n";
                     }
                     cio.typeln(cinf);
                     int numPlay = 1, index;
-                    Card c = new Card();
+                    Card c;
                     do{
-                        index = (int)cio.in("enter the index of the card you wish to play", 0);
-                        if(index<1 || index>hand.size()){
-                            cio.typeln("Please enter a valid hand index.\n");
-                            continue;
+                        while(true){
+                            index = (int)cio.in("enter the index of the card you wish to play", 0);
+                            if(index >= 1 && index <= faceup.size()){
+                                break;
+                            }
                         }
                         c = faceup.get(index - 1);
                         if(!currP.validMove(c)){
                             cio.typeln("that move is illegal");
                         }else{
                             int sameVals = 0;
-                            for(Card currC: faceup){
+                            for(int i = 0; i < faceup.size(); i++){
+                                Card currC = faceup.get(i);
                                 if(currC.value == c.value){
                                     sameVals++;
+                                    if(i < index - 1){
+                                        index = i + 1;
+                                    }
                                 }
                             }
                             if(sameVals > 1){
@@ -166,15 +176,22 @@ public class Player{
             }else{
                if(currP.validMove(facedown.get(0))){
                     currP.add(facedown.get(0));
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     facedown.remove(0);
                 }else{
                     currP.add(facedown.get(0));
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
                     sort(hand);
                     return 0;
-                } 
+                }
+                if(hand.size() == 0 && facedown.size() == 0){
+                    return 2;
+                }else{
+                    return 0;
+                }
             }
         }else{
             hand.addAll(currP.pickup());
@@ -182,23 +199,37 @@ public class Player{
             sort(hand);
             return 0;
         }
-        return -1;
-        }
+    }
     
     public int firstMove(Pile currP, Deck d){
-    cio.typeln("Making First Move");
+    	cio.typeln("Making First Move from hand: " + hand);
         Card c = hand.get(0);
+        int index = 0;
+        for(int i = 0; i < 3; i++){
+            c = hand.get(i);
+            index = i;
+            if(c.value != 2 && c.value != 10){
+                break;
+            }else{
+                if(i == 2){
+                    index = 0;
+                    c = hand.get(0);
+                }
+            }
+        }
         int numPlayable = 0;
         if(c.value != 2 && c.value != 10){
-            for(Card currC: faceup){
+            for(Card currC: hand){
                 if(currC.value == c.value){
                     numPlayable++;
                 }
             }
+        }else{
+            numPlayable = 1;
         }
         for(int i = 0; i < numPlayable; i++){
-            currP.add(faceup.get(0));
-            faceup.remove(0);
+            currP.add(hand.get(index));
+            hand.remove(index);
         }
         cio.typeln(name + " played " + numPlayable + " " + c.value + "s");
         while(hand.size() < 3){
@@ -206,9 +237,10 @@ public class Player{
         }
         sort(hand);
         cio.typeln("Ending First Move");
-        if(c.value != 10 && !currP.fourKind()){
+        if(c.value != 10){
             return 0;
         }else{
+            currP.clear();
             return 1;
         }
     }
@@ -225,7 +257,6 @@ public class Player{
                     if(p.validMove(c)){
                         return true;
                     }
-                    cio.typeln(c.value + " was not valid");
                 }
             }else{
                 for(Card c: faceup){
@@ -238,30 +269,78 @@ public class Player{
         return false;
     }
     
-    public void sort(ArrayList<Card> cards){
-        Card[] tempCards = cards.toArray(new Card[1]);
-        cards.clear();
-        for(int i = 0; i < tempCards.length; i++){
-            Card currSmallest = tempCards[i];
-            int index = i;
-            for(int j = i + 1; j < tempCards.length; j++){
-                if(tempCards[j].value < currSmallest.value){
-                    currSmallest = tempCards[j];
-                    index = j;
-                }else{
-                    if(tempCards[j].value == currSmallest.value && suits.indexOf(tempCards[j].suit) < suits.indexOf(currSmallest.suit)){
-                        currSmallest = tempCards[j];
-                        index = j;
-                    }
-                }
+	// Returns the lower of two cards
+	private Card getLowerCard(Card a, Card b) {
+		if (a.value < b.value) {
+			return a;
+		} else if (b.value < a.value) {
+			return b;
+		} else {
+			return (suits.indexOf(a.suit) < suits.indexOf(b.suit)) ? a : b;
+		}
+	}
+
+	// Returns a merged sorted ArrayList from two sorted ArrayLists
+	private ArrayList<Card> merge(ArrayList<Card> a, ArrayList<Card> b) {
+		int ia, ib;
+		ia = ib = 0;
+		ArrayList<Card> merged = new ArrayList<Card>();
+		while (ia < a.size() && ib < b.size()) {
+			if (getLowerCard(a.get(ia), b.get(ib)) == a.get(ia)) {
+				merged.add(a.get(ia));
+				ia++;
+			} else {
+				merged.add(b.get(ib));
+				ib++;
+			}
+		}
+		while (ia < a.size()) {
+			merged.add(a.get(ia));
+			ia++;
+		}
+		while (ib < b.size()) {
+			merged.add(b.get(ib));
+			ib++;
+		}
+		return merged;
+	}
+
+	// Recursively merge-sorts an ArrayList of cards in-place
+	public void sort(ArrayList<Card> cards) {
+		if (cards.size() <= 1){
+			return;
+		} else {
+			ArrayList<Card> left = new ArrayList<Card>();
+			ArrayList<Card> right = new ArrayList<Card>();
+			left.addAll(cards.subList(0, (int) cards.size()/2));
+			right.addAll(cards.subList(left.size(), cards.size()));
+			sort(left);
+			sort(right);
+			ArrayList<Card> tempCards = merge(left, right);
+			cards.clear();
+			cards.ensureCapacity(tempCards.size());
+			cards.addAll(tempCards);
+		}
+	}
+    
+    public void swapHand(){
+        ArrayList<Card> hf = new ArrayList<Card>(6);
+        hf.addAll(hand);
+        hf.addAll(faceup);
+        hand.clear();
+        faceup.clear();
+        System.out.println("We got to here");
+        for(int i = 0; i < 3; i++){
+            String out = "Cards available are:\n";
+            for(int j = 0; j < hf.size(); j++){
+                out += (j + 1) + ") " + hf.get(j).getShortName() + "\n";
             }
-            if(i != index){
-                Card temp = tempCards[i];
-                tempCards[i] = currSmallest;
-                tempCards[index] = temp;
-            }
-            cards.add(tempCards[i]);
+            cio.typeln(out);
+            int index = (int)cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
+            faceup.add(hf.get(index - 1));
+            hf.remove(index -1);
         }
+        hand.addAll(hf);
     }
     
     //Returns a String with the name and hand of the player
@@ -282,6 +361,6 @@ public class Player{
         do{
             pi.add(d.draw());
             p.move(pi, d);
-        }while(!d.empty());
+        }while(!d.isEmpty());
     }
 }

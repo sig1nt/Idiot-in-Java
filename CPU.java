@@ -20,11 +20,11 @@ public class CPU extends Player{
     }
     
     public int move(Pile currP, Deck d){
-        cio.type(hand);
         if(canMove(currP)){
-            Card c = ai.logical(currP, facedown.size());
+            Card c;
             int index, numPlayable = 1;
             if(!hand.isEmpty() || !faceup.isEmpty()){
+                c = ai.logical(currP, facedown.size());
                 if(!hand.isEmpty()){
                     index = getIndex(c, hand);
                     int currVal = c.value;
@@ -41,34 +41,39 @@ public class CPU extends Player{
                         currP.add(hand.get(index));
                         hand.remove(index);
                     }
-                    while(hand.size() < 3 && !d.empty()){
+                    while(hand.size() < 3 && !d.isEmpty()){
                         hand.add(d.draw());
                     }
                     sort(hand);
                 }else{
                     index = getIndex(c, faceup);
+                    int currVal = c.value;
                     if(c.value != 2 && c.value != 10){
-                        for(Card currC: faceup){
-                            if(currC.value == c.value){
+                        for(int i = index + 1; i < index + 3; i++){
+                            if(i != faceup.size() && faceup.get(i).value == currVal){
                                 numPlayable++;
+                            }else{
+                                break;
                             }
                         }
                     }
                     for(int i = 0; i < numPlayable; i++){
                         currP.add(faceup.get(index));
-                        faceup.remove(0);
+                        faceup.remove(index);
                     }
-                    cio.typeln(currP);
                 }
             }else{
                 if(currP.validMove(facedown.get(0))){
-                    currP.add(facedown.get(0));
+                    c = facedown.get(0);
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
+                    currP.add(c);
                     facedown.remove(0);
                     if(hand.isEmpty() && facedown.isEmpty()){
                         return 2;
                     }
                 }else{
                     currP.add(facedown.get(0));
+					System.out.println("Playing " + facedown.get(0) + " from facedowns");
                     facedown.remove(0);
                     hand.addAll(currP.pickup());
                     cio.typeln(name + " picked up pile");
@@ -105,6 +110,16 @@ public class CPU extends Player{
         return -1;
     }
     
+    public void swapHand(){
+        ArrayList<Card> temp = ai.strategizeFaceups();
+        hand.clear();
+        faceup.clear();
+        hand.ensureCapacity(3);
+        faceup.ensureCapacity(3);
+        hand.addAll(temp.subList(0, 3));
+        faceup.addAll(temp.subList(3, 6));
+    }
+    
     public static void main(String[]args){
         Deck d = new Deck();
         ArrayList<Player> playas = new ArrayList<Player>();
@@ -113,7 +128,7 @@ public class CPU extends Player{
         playas.add(comp);
         Pile p = new Pile();
         p.add(d.draw());
-        while(!d.empty()){
+        while(!d.isEmpty()){
             comp.move(p, d);
             p.add(d.draw());
         }
