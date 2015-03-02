@@ -10,3 +10,5 @@ public class GenericClientIPC {
         return message;
     }
 }
+
+// Extensions: SetName, PlaysCard, InitSwap, Abort
