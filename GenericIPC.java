@@ -10,7 +10,8 @@ public class GenericIPC {
         return message;
     }
 }
-
+// IPC messages specification
+//
 // CLIENT
 // Extensions: SetName, PlaysCard, InitSwap, Abort
 // SetName: "name" e.g. "Max"
