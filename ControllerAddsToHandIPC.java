@@ -5,6 +5,7 @@ public class ControllerAddsToHandIPC extends GenericControllerIPC {
     }
 
     public ControllerAddsToHandIPC(ArrayList<Card> cards) {
+        message = "pickup:|";
         for (card : cards) {
             message += card.getShortName();
             message += "|";

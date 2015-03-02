@@ -3,7 +3,8 @@ public class ControllerPlaysFacedownIPC extends GenericControllerIPC {
     }
 
     public ControllerPlaysFacedownIPC(Card card) {
-        message += "play:facedown:";
+        message = "play:facedown:|";
         message += card.getShortName();
+        message += "|";
     }
 }

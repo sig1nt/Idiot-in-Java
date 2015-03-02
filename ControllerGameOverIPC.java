@@ -3,7 +3,7 @@ public class ControllerGameOverIPC extends GenericControllerIPC {
     }
 
     public ControllerGameOverIPC(String winner) {
-        message += "winner:";
+        message = "winner:";
         message += winner.name;
     }
 }
