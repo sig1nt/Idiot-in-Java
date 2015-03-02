@@ -1,4 +1,4 @@
-public class ClientPlaysCardIPC extends GenericClientIPC {
+public class ClientPlaysCardIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

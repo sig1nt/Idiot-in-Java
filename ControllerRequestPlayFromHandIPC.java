@@ -1,4 +1,4 @@
-public class ControllerRequestPlayFromHandIPC extends GenericControllerIPC {
+public class ControllerRequestPlayFromHandIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

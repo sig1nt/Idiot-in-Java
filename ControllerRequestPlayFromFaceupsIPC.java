@@ -1,4 +1,4 @@
-public class ControllerRequestPlayFromFaceupsIPC extends GenericControllerIPC {
+public class ControllerRequestPlayFromFaceupsIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

@@ -1,4 +1,4 @@
-public class ClientInitSwapIPC extends GenericClientIPC {
+public class ClientInitSwapIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

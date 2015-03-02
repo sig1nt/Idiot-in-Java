@@ -1,4 +1,4 @@
-public class ClientSetNameIPC extends GenericClientIPC {
+public class ClientSetNameIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

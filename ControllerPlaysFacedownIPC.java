@@ -1,4 +1,4 @@
-public class ControllerPlaysFacedownIPC extends GenericControllerIPC {
+public class ControllerPlaysFacedownIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

@@ -1,4 +1,4 @@
-public class ControllerGameOverIPC extends GenericControllerIPC {
+public class ControllerGameOverIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

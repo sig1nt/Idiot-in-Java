@@ -1,4 +1,4 @@
-public class ClientAbortIPC extends GenericClientIPC {
+public class ClientAbortIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class ControllerInitializeIPC extends GenericControllerIPC {
+public class ControllerInitializeIPC extends GenericIPC {
     public static void main(String[] args) {
     }
 
