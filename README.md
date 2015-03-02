@@ -10,9 +10,10 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 * Game works with threaded graphics via inter-process communication (IPC)
 
 **Tasks**
+* Graphics client
 * Animations
-* Graphics
-* IPC
+* Build IPC into client
+* Build IPC into game
 
 *Kent*
 * IDK
