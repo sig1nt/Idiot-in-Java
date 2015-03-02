@@ -14,17 +14,10 @@ Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 * Game clients interact with remote server lobby
 
 **Tasks**
-* Client, Server
-* Graphics
+* Determine tasks for goal 2
 
 *Kent*
-* Client interface
-* Graphics
 
 *Nick*
-* Game interface
-* Graphics
 
 *Max*
-* Mina
-* Graphics
