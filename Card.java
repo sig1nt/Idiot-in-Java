@@ -22,7 +22,7 @@ public class Card{
         suit = s;
     }
     
-    //returns a 3 char name of the card where the first two are the card's number value or the first letter of the face and the last char is the first letter ofd the suit
+    //returns a 3 char name of the card where the first two are the card's number value or the first letter of the face and the last char is the first letter of the suit
     public String getShortName(){
         String s = "";
         if(value < 10){
@@ -50,14 +50,6 @@ public class Card{
         return true;
     }
 
-/*
-	public int toInt(){
-		// If we did this, couldn't we do stuff like
-		// card1 >= card2
-		// ?
-	}
-*/
-    
     //returns a string in the form "__value__ of __suit__"
     public String toString(){
         String s = "";
