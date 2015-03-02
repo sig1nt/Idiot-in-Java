@@ -1,8 +1,6 @@
 Idiot-in-Java
 =============
 
-**We need to work on this outside of class - let's determine tasks in class on Friday and do them over the weekend**
-
 Implementation of the "idiot" card game in java for CSC 102
 
 Max Zinkus, Nick Gonella, and Kent Kawahara
