@@ -8,10 +8,8 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 Python codebase: https://github.com/DeltaHeavy/idiot-card-game
 
 **Goals**
-* Game client w/ graphics
-* Game client and server interact locally
-* Server lobby works with clients locally
-* Game clients interact with remote server lobby
+* Game works with command line interface: Completed 2/1X/15
+* Game works with graphics
 
 **Tasks**
 * Determine tasks for goal 2
