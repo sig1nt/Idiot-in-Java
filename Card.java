@@ -1,6 +1,9 @@
+import processing.core.*;
+
 public class Card{
     protected String suit, faces[] = {"Jack", "Queen", "King", "Ace"};
-    protected int value;
+    protected int value, x, y;
+    PImage 
     
     //Default constructor - DO NOT USE
     public Card(){
@@ -36,6 +39,14 @@ public class Card{
         return s;
     }
     
+    public void drawCard(){
+        
+    }
+    
+    public void update(){
+        
+    }
+    
     //returns a copy of the card in question
     public Card clone(){
         return new Card(suit, value);
@@ -49,7 +60,7 @@ public class Card{
         if(!oCard.suit.equals(suit)) return false;
         return true;
     }
-
+    
     //returns a string in the form "__value__ of __suit__"
     public String toString(){
         String s = "";
