@@ -25,7 +25,7 @@ public class Card{
         suit = s;
     }
     
-    //returns a 3 char name of the card where the first two are the card's number value or the first letter of the face and the last char is the first letter ofd the suit
+    //returns a 3 char name of the card where the first two are the card's number value or the first letter of the face and the last char is the first letter of the suit
     public String getShortName(){
         String s = "";
         if(value < 10){
