@@ -3,7 +3,7 @@ import processing.core.*;
 public class Card{
     protected String suit, faces[] = {"Jack", "Queen", "King", "Ace"};
     protected int value, x, y;
-    PImage 
+    PImage cardFace;
     
     //Default constructor - DO NOT USE
     public Card(){
