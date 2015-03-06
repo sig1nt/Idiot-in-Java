@@ -1,4 +1,5 @@
 import java.util.*;
+import processing.core.*;
 
 public class Deck{
   private Stack<Card> sDeck;
@@ -49,7 +50,7 @@ public class Deck{
   
   //for testing only
   public static void main(String[]args){
-    Deck myDeck = new Deck();
+    Deck myDeck = new Deck(new PApplet());
     do{
       System.out.println(myDeck.draw());
     }while(!myDeck.isEmpty());

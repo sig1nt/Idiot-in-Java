@@ -1,4 +1,5 @@
 import java.util.*;
+import processing.core.*;
 
 public class Game {
 	
@@ -15,7 +16,7 @@ public class Game {
 	 * and an ArrayList<Player> players
 	 */
 	public Game(PApplet p) {
-        deck =  = new Deck(p);
+        deck = new Deck(p);
         pile = new Pile();
     }
 
@@ -149,7 +150,7 @@ public class Game {
 	}
 
 	public static void main(String[] args) {
-		Game game = new Game();
+		Game game = new Game(new PApplet());
 		game.play();
 	}
 }

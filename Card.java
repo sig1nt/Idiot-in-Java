@@ -5,7 +5,6 @@ public class Card{
     protected int value, x, y;
     PImage cardFace;
     PApplet parent;
-    PVector topLeft
     
     //Default constructor - DO NOT USE
     public Card(){
@@ -21,6 +20,7 @@ public class Card{
         suit = s;
         value = v;
         parent = p;
+        cardFace = parent.createImage("SVG/" + toString().toLowercase().replace(" ", "_") + ".svg");
     }
     
     //Sets the suit of the card
@@ -52,7 +52,7 @@ public class Card{
     
     //returns a copy of the card in question
     public Card clone(){
-        return new Card(suit, value);
+        return new Card(suit, value, p);
     }
     
     public boolean equals(Object other){
