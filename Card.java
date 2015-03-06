@@ -17,9 +17,10 @@ public class Card{
     /*USE THIS NOT DEFAULT
       creates a Card with a suit and a value
     */
-    public Card(String s, int v){
+    public Card(String s, int v, PApplet p){
         suit = s;
         value = v;
+        parent = p;
     }
     
     //Sets the suit of the card
@@ -42,19 +43,11 @@ public class Card{
     }
     
     public void drawCard(){
-        parent.rect(topLeft.x,topLeft.y,150,200);
+        
     }
     
     public void update(){
         
-    }
-
-    pubilc int xDraw(){
-        return (int)PVector.x;
-    }
-
-    public int yDraw(){
-        return (int)PVector.y;
     }
     
     //returns a copy of the card in question

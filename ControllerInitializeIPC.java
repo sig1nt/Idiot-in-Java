@@ -6,7 +6,7 @@ public class ControllerInitializeIPC extends GenericIPC {
 
     public ControllerInitializeIPC(ArrayList<Player> humans, ArrayList<Player> cpus, ArrayList<Card> hand, ArrayList<Card> faceups) {
         message = "init:";
-        message += (String) cpus.length();
+        message += cpus.length();
         message += "|";
         for (cpu : cpus) {
             message += "|"
@@ -15,7 +15,7 @@ public class ControllerInitializeIPC extends GenericIPC {
             }
         }
         message += "|";
-        message += (String) humans.length();
+        message += humans.length();
         message += "|";
         for (human : humans) {
             message += "|";

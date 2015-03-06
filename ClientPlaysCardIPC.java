@@ -3,6 +3,6 @@ public class ClientPlaysCardIPC extends GenericIPC {
     }
 
     public ClientPlaysCardIPC(int index, int count) {
-        message = (String) index + (String) count;
+        message = index + count;
     }
 }

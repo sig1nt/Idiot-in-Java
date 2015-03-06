@@ -5,8 +5,8 @@ public class Game {
 	private final static ConsoleIO console = new ConsoleIO("Invalid input.", 0, 80, 0);
 	protected String[] takenNames = new String[5];
 	ArrayList<Player> players = new ArrayList<Player>();
-	Deck deck = new Deck();
-	Pile pile = new Pile();
+	Deck deck;
+	Pile pile;
 	int humanCount;
 	int cpuCount;
 	int numPlayers;
@@ -14,7 +14,9 @@ public class Game {
 	/* Constructor, builds a Deck deck, a Pile pile,
 	 * and an ArrayList<Player> players
 	 */
-	public Game() {
+	public Game(PApplet p) {
+        deck =  = new Deck(p);
+        pile = new Pile();
     }
 
 	// Determines how many players of each type in Human, CPU to instantiate
