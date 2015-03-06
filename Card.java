@@ -4,6 +4,7 @@ public class Card{
     protected String suit, faces[] = {"Jack", "Queen", "King", "Ace"};
     protected int value, x, y;
     PImage cardFace;
+    PApplet parent;
     
     //Default constructor - DO NOT USE
     public Card(){

@@ -3,14 +3,15 @@ import processing.core.*;
 public class pTest extends PApplet{
 
     int onSelect = 0;
-    static Game daGame = new Game();
+    Game daGame;
     
     public static void main(String[] args)  {
-        new Thread(new GameLogic()).start();
         PApplet.main(new String[] { "--present", "pTest" });
     }
     
     public void setup(){
+        daGame = new Game();
+        new Thread(new GameLogic()).start();
         noStroke();
         size(800,800);
         background(25,77,30);
@@ -35,7 +36,7 @@ public class pTest extends PApplet{
         rect(300,300,200,150);
     }
     
-    static class GameLogic implements Runnable{
+    class GameLogic implements Runnable{
         public void run(){
             daGame.play();
         }
