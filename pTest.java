@@ -10,7 +10,7 @@ public class pTest extends PApplet{
     }
     
     public void setup(){
-        daGame = new Game(this);
+        daGame = new Game((PApplet)this);
         new Thread(new GameLogic()).start();
         noStroke();
         size(800,800);
