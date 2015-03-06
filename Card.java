@@ -5,6 +5,7 @@ public class Card{
     protected int value, x, y;
     PImage cardFace;
     PApplet parent;
+    PVector topLeft
     
     //Default constructor - DO NOT USE
     public Card(){
@@ -41,11 +42,19 @@ public class Card{
     }
     
     public void drawCard(){
-        
+        parent.rect(topLeft.x,topLeft.y,150,200);
     }
     
     public void update(){
         
+    }
+
+    pubilc int xDraw(){
+        return (int)PVector.x;
+    }
+
+    public int yDraw(){
+        return (int)PVector.y;
     }
     
     //returns a copy of the card in question
