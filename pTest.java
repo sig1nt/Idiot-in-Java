@@ -6,6 +6,7 @@ public class pTest extends PApplet{
     Game daGame;
     DrawableCard[] myCards = new DrawableCard[3];
     DrawableCard[] yourCards = new DrawableCard[3];
+    DrawablePile pile;
     
     public static void main(String[] args)  {
         PApplet.main(new String[] { "--present", "pTest" });
@@ -20,6 +21,7 @@ public class pTest extends PApplet{
         for(int i = 0; i < 3; i++){
             yourCards[i]= new DrawableCard(this,100+(225*i),50,"Spades",12,false);
         }
+        pile = new DrawablePile(this,300,300);
         noStroke();
         size(800,800);
         background(25,77,30);
@@ -33,6 +35,7 @@ public class pTest extends PApplet{
         onSelect = (mouseX>100 && mouseX < 250 && mouseY >525 && mouseY < 725)?-20:0;
         stroke(1);
         fill(255);
+        pile.draw();
 
         for(DrawableCard c : myCards){
             c.draw();
@@ -41,8 +44,6 @@ public class pTest extends PApplet{
         for(DrawableCard c : yourCards){
             c.draw();
         }
-
-        rect(300,300,200,150);
     }
     
     /*class GameLogic implements Runnable{
