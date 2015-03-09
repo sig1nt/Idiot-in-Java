@@ -15,6 +15,9 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 * Build IPC into client
 * Build IPC into game
 
+**NOTES**
+* I don't really know the best approach for adding the IPC into game, like what will/should contain an instance of game/client/whatever -Max
+
 *Kent*
 * IDK
 
@@ -22,4 +25,4 @@ Max Zinkus, Nick Gonella, and Kent Kawahara
 * Animations?
 
 *Max*
-* IPC messages (done?)
+* Build IPC into Game

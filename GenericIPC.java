@@ -13,8 +13,9 @@ public class GenericIPC {
 // IPC messages specification
 //
 // CLIENT
-// Extensions: SetName, PlaysCard, InitSwap, Abort
+// Extensions: SetName, Config, PlaysCard, InitSwap, Abort
 // SetName: "name" e.g. "Max"
+// Config: "cpuCount" + "humanCount" e.g. "12"
 // PlaysCard: "index" + "count" e.g. "02"
 // InitSwap: "indexOneToPutInFaceups" + "indexTwoToPutInFaceups" + "indexThreeToPutInFaceups" e.g. "513"
 // Abort: "abort"
