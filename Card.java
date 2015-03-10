@@ -46,7 +46,7 @@ public class Card{
     
     //returns a copy of the card in question
     public Card clone(){
-        return new Card(suit, value, p);
+        return new Card(suit, value);
     }
     
     public boolean equals(Object other){

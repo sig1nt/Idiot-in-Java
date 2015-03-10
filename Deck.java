@@ -49,7 +49,7 @@ public class Deck{
   
   //for testing only
   public static void main(String[]args){
-    Deck myDeck = new Deck(new PApplet());
+    Deck myDeck = new Deck();
     do{
       System.out.println(myDeck.draw());
     }while(!myDeck.isEmpty());
