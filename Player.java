@@ -330,6 +330,7 @@ public class Player{
         hand.clear();
         faceup.clear();
         System.out.println("We got to here");
+        int index;
         for(int i = 0; i < 3; i++){
             String out = "Cards available are:\n";
             for(int j = 0; j < hf.size(); j++){
@@ -337,7 +338,7 @@ public class Player{
             }
             cio.typeln(out);
             do{
-                int index = (int)cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
+                index = (int)cio.in("Enter the index of the card you wish to add to your faceup: ", 0);
             }while(index < 1 || index > hf.size());
             faceup.add(hf.get(index - 1));
             hf.remove(index -1);
