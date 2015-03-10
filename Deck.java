@@ -1,19 +1,18 @@
 import java.util.*;
-import processing.core.*;
 
 public class Deck{
   private Stack<Card> sDeck;
   protected Card oDeck[];
   
   //creates a standard deck of cards
-  public Deck(PApplet p){
+  public Deck(){
     oDeck = new Card[52];
     int cardsInDeck = 0;
     String suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
     int vals[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
     for(int val: vals){
       for(String suit: suits){
-        oDeck[cardsInDeck] = new Card(suit, val, p);
+        oDeck[cardsInDeck] = new Card(suit, val);
         cardsInDeck++;
       }
     }

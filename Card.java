@@ -1,10 +1,6 @@
-import processing.core.*;
-
 public class Card{
     protected String suit, faces[] = {"Jack", "Queen", "King", "Ace"};
     protected int value, x, y;
-    PImage cardFace;
-    PApplet parent;
     
     //Default constructor - DO NOT USE
     public Card(){
@@ -16,11 +12,9 @@ public class Card{
     /*USE THIS NOT DEFAULT
       creates a Card with a suit and a value
     */
-    public Card(String s, int v, PApplet p){
+    public Card(String s, int v){
         suit = s;
         value = v;
-        parent = p;
-        cardFace = parent.createImage("SVG/" + toString().toLowercase().replace(" ", "_") + ".svg");
     }
     
     //Sets the suit of the card

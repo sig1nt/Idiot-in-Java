@@ -1,5 +1,4 @@
 import java.util.*;
-import processing.core.*;
 
 public class Game {
 	
@@ -15,8 +14,8 @@ public class Game {
 	/* Constructor, builds a Deck deck, a Pile pile,
 	 * and an ArrayList<Player> players
 	 */
-	public Game(PApplet p) {
-        deck = new Deck(p);
+	public Game() {
+        deck = new Deck();
         pile = new Pile();
     }
 
