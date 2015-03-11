@@ -3,7 +3,7 @@ import processing.core.*;
 public class pTest extends PApplet{
 
     int onSelect = 0;
-    Game daGame;
+    GameSingleton daGame;
     DrawableCard[] myCards = new DrawableCard[3];
     DrawableCard[] yourCards = new DrawableCard[3];
     DrawablePile pile;
@@ -13,8 +13,8 @@ public class pTest extends PApplet{
     }
     
     public void setup(){
-        //daGame = new Game((PApplet)this);
-        //new Thread(new GameLogic()).start();
+        daGame = new GameSingleton();
+        new Thread(new GameLogic()).start();
         for(int i = 0; i < 3; i++){
             myCards[i]= new DrawableCard(this,100+(225*i),525,"Spades",12,true);
         }
@@ -46,9 +46,9 @@ public class pTest extends PApplet{
         }
     }
     
-    /*class GameLogic implements Runnable{
+    class GameLogic implements Runnable{
         public void run(){
-            daGame.play();
+            daGame.getGame().play();
         }
-    }*/
+    }
 }
