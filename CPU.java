@@ -15,8 +15,6 @@ public class CPU extends Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
-        sort(hand);
-        sort(faceup);
     }
     
     public int move(Pile currP, Deck d){
@@ -123,6 +121,8 @@ public class CPU extends Player{
         faceup.ensureCapacity(3);
         hand.addAll(temp.subList(0, 3));
         faceup.addAll(temp.subList(3, 6));
+        sort(hand);
+        sort(faceup);
     }
     
     public static void main(String[]args){

@@ -44,8 +44,6 @@ public class Player{
             faceup.add(d.draw());
             hand.add(d.draw());
         }
-        sort(hand);
-        sort(faceup);
     }
     
     /*Allows a human to choose their their move, given a certain Pile currP, and then populating the hand up to 3 cards from the deck D
@@ -207,7 +205,7 @@ public class Player{
     }
     
     public int firstMove(Pile currP, Deck d){
-    	cio.typeln("Making First Move from hand: " + hand);
+    	cio.typeln(name + "is making first move");
         Card c = hand.get(0);
         int index = 0;
         for(int i = 0; i < 3; i++){
@@ -349,6 +347,8 @@ public class Player{
             hf.remove(index -1);
         }
         hand.addAll(hf);
+        sort(hand);
+        sort(faceup);
     }
     
     //Returns a String with the name and hand of the player
