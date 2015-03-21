@@ -68,6 +68,11 @@ public class Player{
         boolean chosen = false;
         if(canMove(currP)){
             if(hand.size() != 0 || faceup.size() != 0){
+                String fs = "Faceup Cards:\n";
+                for(Card f: faceup){
+                    fs += f.getShortName() + "\n";
+                }
+                cio.typeln(fs);
                 if(hand.size() != 0){
                     String cinh = "the cards in your hand are:\n";
                     for(int i = 0; i < hand.size(); i++){

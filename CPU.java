@@ -24,6 +24,11 @@ public class CPU extends Player{
             Card c;
             int index, numPlayable = 1;
             if(!hand.isEmpty() || !faceup.isEmpty()){
+                String s = "Faceup Cards:\n";
+                for(Card f: faceup){
+                    s += f.getShortName() + "\n";
+                }
+                cio.typeln(s);
                 c = ai.logical(currP, facedown.size());
                 if(!hand.isEmpty()){
                     index = getIndex(c, hand);

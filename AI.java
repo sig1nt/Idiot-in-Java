@@ -85,9 +85,6 @@ public class AI{
 
 	//this finds the value of the card that we're going to play
 	private int getPlayValue(Pile pile, int fdCount){
-		System.out.println("\nHand I am handed:" + hand);
-		System.out.println("\nPile I'm given:" + pile.seeThree());
-		System.out.println("\nFaceups: " + faceup);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		ArrayList<Card> validReserve = new ArrayList<Card>();
 		for (Card card : reserve){
@@ -96,12 +93,13 @@ public class AI{
 			}
 		}
 		int moveFour = canCompleteFour(validReserve, pile);
-		if(moveFour!=-1){System.out.println("Complete Four");return moveFour;}
+		if(moveFour!=-1){
+            return moveFour;   
+        }
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		for (Card card : validReserve){
 			values.add(new Integer(card.value));
 		}
-		System.out.println("\n Cards in reserve:" + values);
 		Collections.sort(values);
 		if(isWinning(players.get(0))) {
 			//System.out.println("One person is winning");
@@ -146,11 +144,9 @@ public class AI{
 	//takes the value from logic and finds the card in your hand/faceups
 	public Card logical(Pile pilein, int fdCountin){
 		int value = getPlayValue(pilein, fdCountin);
-		System.out.println("Value of Card I will play: " + value);
 		ArrayList<Card> reserve = (hand.isEmpty()||hand.get(0)==null)?faceup:hand;
 		for (Card c : reserve){
 			if(c.value == value){
-				System.out.println("\nCard I am sending: " + c);
 				return c;
 			}
 		}
