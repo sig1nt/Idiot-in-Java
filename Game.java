@@ -22,7 +22,7 @@ public class Game {
 	// Determines how many players of each type in Human, CPU to instantiate
 	private int getPlayerCount(boolean isHuman) {
 		int p;
-		if (isHuman) {
+		if(isHuman) {
 			p = (int) console.in("How many human players? ", 0);
 		} else {
 			p = (int) console.in("How many computer players? ", 0);
@@ -92,7 +92,7 @@ public class Game {
 	 * Iterates through players, wrapping around, and
 	 * finishes when a player.move() returns 2
 	 */
-    public void play() {
+    public synchronized void play() {
         humanCount = getPlayerCount(true);
 		cpuCount = getPlayerCount(false);
 		numPlayers = humanCount+cpuCount;
@@ -113,6 +113,8 @@ public class Game {
 		for (int i=0; i < cpuCount; i++) {
 			players.add(new CPU("CPU-" + (i+1), deck, players));
 		}
+
+
 		int i = goesFirst(players);
 		int moveExitStatus;
 		for (Player p : players) {
